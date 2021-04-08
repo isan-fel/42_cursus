@@ -6,13 +6,13 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 12:18:09 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/03/15 10:47:08 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:39:07 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	if (s1[n] == '\0' && s2[n] == '\0')

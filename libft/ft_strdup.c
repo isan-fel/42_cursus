@@ -6,29 +6,17 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:31:08 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/03/30 19:19:11 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/08 18:42:41 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-int	ft_strlen(char *str)
-{
-	int n;
-
-	n = 0;
-	while (str[n] != '\0')
-	{
-		++n;
-	}
-	return (n);
-}
+#include "libft.h"
 
 char	*ft_strdup(char *src)
 {
 	char	*result;
-	int	src_len;
-	int	i;
+	size_t	src_len;
+	int		i;
 
 	i = 0;
 	src_len = ft_strlen(src);

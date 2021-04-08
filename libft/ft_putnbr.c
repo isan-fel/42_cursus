@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 18:35:36 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/03/02 17:04:09 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:36:47 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_num(int nb)
 
 void	ft_putnbr(int nb)
 {
-	unsigned int nc;
+	unsigned int	nc;
 
 	if (nb < 0)
 	{

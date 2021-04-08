@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 14:16:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/07 13:38:23 by isan-fel         ###   ########.fr       */
+/*   Created: 2021/04/07 11:44:54 by isan-fel          #+#    #+#             */
+/*   Updated: 2021/04/07 13:29:11 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include "libft.h"
 
-char	*ft_strcat(char *dest, char *src)
+void	ft_bzero(void *str, size_t nbyte)
 {
-	int	n;
-	int	i;
-
-	n = 0;
-	while (true)
-	{
-		if (dest[n] == '\0')
-		{
-			i = 0;
-			while (src[i] != '\0')
-			{
-				dest[n] = src[i];
-				++i;
-				++n;
-			}
-			break ;
-		}
-		++n;
-	}
-	dest[n] = '\0';
-	return (dest);
+	ft_memset(str, '\0', nbyte);
 }

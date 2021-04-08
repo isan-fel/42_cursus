@@ -6,18 +6,18 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:49:16 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/03/08 14:11:18 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:43:38 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strlen(char *str)
+#include <stdlib.h>
+
+size_t	ft_strlen(char *str)
 {
-	int n;
+	size_t	n;
 
 	n = 0;
 	while (str[n] != '\0')
-	{
 		++n;
-	}
 	return (n);
 }

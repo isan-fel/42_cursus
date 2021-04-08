@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 14:16:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/07 13:38:23 by isan-fel         ###   ########.fr       */
+/*   Created: 2021/04/07 16:11:16 by isan-fel          #+#    #+#             */
+/*   Updated: 2021/04/08 18:54:02 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include "libft.h"
 
-char	*ft_strcat(char *dest, char *src)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	n;
-	int	i;
+	const char	*src;
+	int i;
 
-	n = 0;
-	while (true)
+	i = 0;
+	src = s;
+	while (n--)
 	{
-		if (dest[n] == '\0')
-		{
-			i = 0;
-			while (src[i] != '\0')
-			{
-				dest[n] = src[i];
-				++i;
-				++n;
-			}
-			break ;
-		}
-		++n;
+		if (src[i] == c)
+			return ((char *) src + i);
+		++i;
 	}
-	dest[n] = '\0';
-	return (dest);
+	return (0);
 }

@@ -6,14 +6,14 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 17:10:55 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/03/11 20:02:48 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:41:36 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strstr(char *str, char *to_find)
 {
-	int n;
-	int i;
+	int	n;
+	int	i;
 
 	n = 0;
 	if (to_find[n] == '\0')

@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 14:16:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/07 13:38:23 by isan-fel         ###   ########.fr       */
+/*   Created: 2021/04/07 15:20:53 by isan-fel          #+#    #+#             */
+/*   Updated: 2021/04/08 18:53:30 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include "libft.h"
 
-char	*ft_strcat(char *dest, char *src)
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	int	n;
-	int	i;
+	char	*d;
+	const char	*s;
 
-	n = 0;
-	while (true)
+	s = src;
+	d = dest;
+	while (n--)
 	{
-		if (dest[n] == '\0')
+		if (n == 0)
 		{
-			i = 0;
-			while (src[i] != '\0')
-			{
-				dest[n] = src[i];
-				++i;
-				++n;
-			}
-			break ;
+			*d++=*s++;	
+			break;
 		}
-		++n;
+		*d++ = *s++;
+		if (*s == c)
+		{
+			*d++ = *s++;
+			break;
+		}
+		
 	}
-	dest[n] = '\0';
 	return (dest);
 }

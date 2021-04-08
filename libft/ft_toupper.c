@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 14:16:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/07 13:38:23 by isan-fel         ###   ########.fr       */
+/*   Created: 2021/04/08 13:21:22 by isan-fel          #+#    #+#             */
+/*   Updated: 2021/04/08 13:25:17 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-
-char	*ft_strcat(char *dest, char *src)
+int	ft_toupper(int c)
 {
-	int	n;
-	int	i;
-
-	n = 0;
-	while (true)
-	{
-		if (dest[n] == '\0')
-		{
-			i = 0;
-			while (src[i] != '\0')
-			{
-				dest[n] = src[i];
-				++i;
-				++n;
-			}
-			break ;
-		}
-		++n;
-	}
-	dest[n] = '\0';
-	return (dest);
+	if (c >= 97 && c <= 122)
+		return(c = c - 32);
+	return (c);
 }

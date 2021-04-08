@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 14:16:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/07 13:38:23 by isan-fel         ###   ########.fr       */
+/*   Created: 2021/04/07 13:42:27 by isan-fel          #+#    #+#             */
+/*   Updated: 2021/04/07 15:20:46 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include <stdio.h>
 
-char	*ft_strcat(char *dest, char *src)
+#include <string.h>
+
+void *ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int	n;
-	int	i;
-
-	n = 0;
-	while (true)
-	{
-		if (dest[n] == '\0')
-		{
-			i = 0;
-			while (src[i] != '\0')
-			{
-				dest[n] = src[i];
-				++i;
-				++n;
-			}
-			break ;
-		}
-		++n;
-	}
-	dest[n] = '\0';
+	char *d;
+	const char *s;
+	
+	d = dest;
+	s = src;
+	while (n--)
+		*d++ = *s++;
 	return (dest);
 }

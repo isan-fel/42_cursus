@@ -6,13 +6,13 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:21:46 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/03/08 15:36:02 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:39:27 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strcpy(char *dest, char *src)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	while (src[n] != '\0')

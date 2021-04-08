@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 14:04:14 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/03/09 14:17:24 by isan-fel         ###   ########.fr       */
+/*   Created: 2021/04/07 16:01:00 by isan-fel          #+#    #+#             */
+/*   Updated: 2021/04/08 18:55:44 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strlowcase(char *str)
-{
-	int n;
+#include "libft.h"
 
-	n = 0;
-	while (str[n] != '\0')
-	{
-		if (str[n] >= 65 && str[n] <= 90)
-			str[n] = str[n] + 32;
-		++n;
-	}
-	return (str);
+void	*ft_memmove(void *dest, const void *src, size_t len)
+{
+	char *d;
+	const char *s;
+
+	d = dest;
+	s = src;
+	while(len--)
+		*d++ = *s++;
+	return (dest);
 }
