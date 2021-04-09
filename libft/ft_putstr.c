@@ -6,16 +6,11 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:11:32 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/07 13:37:55 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/09 21:06:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+#include "libft.h"
 
 void	ft_putstr(char *str)
 {
