@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/08 13:35:11 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/12 13:41:13 by isan-fel         ###   ########.fr       */
+/*   Created: 2021/04/12 12:45:16 by isan-fel          #+#    #+#             */
+/*   Updated: 2021/04/12 12:59:05 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	while (s[i] != '\0')
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	n;
+
+	n = 0;
+	while (s[n] != '\0')
 	{
-		if (s[i] == c)
-			return ((char *) s + i);
-		++i;
+		ft_putchar_fd(s[n], fd);
+		++n;
 	}
-	return ((char *)0);
 }

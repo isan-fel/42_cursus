@@ -6,7 +6,7 @@
 #    By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:36:07 by isan-fel          #+#    #+#              #
-#    Updated: 2021/04/09 22:29:42 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/04/12 12:50:42 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,13 @@ SRCS			=	ft_atoi.c \
 					ft_tolower.c \
 					ft_toupper.c \
 					ft_itoa.c \
-					ft_putchar.c
+					ft_putchar.c \
+					ft_substr.c \
+					ft_strjoin.c \
+					ft_putchar_fd.c \
+					ft_putstr_fd.c \
+					ft_putendl_fd.c \
+					ft_putnbr_fd.c
 
 
 OBJS			= $(SRCS:.c=.o)

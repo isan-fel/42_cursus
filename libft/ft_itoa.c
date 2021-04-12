@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:08:41 by user42            #+#    #+#             */
-/*   Updated: 2021/04/09 22:32:28 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 13:59:51 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_intlen(unsigned int nb)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (nb == 0)
@@ -27,9 +27,8 @@ int	ft_intlen(unsigned int nb)
 	return (len);
 }
 
-char	*ft_writeneg(char *str, int numlen, unsigned int nb)
+char	*ft_write(char *str, int numlen, unsigned int nb, int flag_neg)
 {
-	str[0] = 45;
 	str[numlen] = '\0';
 	--numlen;
 	while (numlen > 0)
@@ -43,53 +42,31 @@ char	*ft_writeneg(char *str, int numlen, unsigned int nb)
 		}
 		--numlen;
 	}
-	return (str);
-}
-
-char	*ft_writepos(char *str, int numlen, int nb)
-{
-	str[numlen] = '\0';
-	--numlen;
-	while (numlen >= 0)
-	{
-		if (nb < 9)
-			str[numlen] = ((nb % 10) + 48);
-		else
-		{
-			str[numlen] = ((nb % 10) + 48);
-			nb = nb / 10;
-		}
-		--numlen;
-	}
+	if (flag_neg == 0)
+		str[numlen] = ((nb % 10) + 48);
 	return (str);
 }
 
 char	*ft_itoa(int n)
 {
-	int numlen;
-	char *str;
+	int				numlen;
+	char			*str;
 	unsigned int	nc;
 
-	str = "r";
 	if (n < 0)
 	{
 		nc = n * -1;
 		numlen = ft_intlen(nc) + 1;
 		str = (char *)malloc(sizeof(char) * numlen);
-		ft_writeneg(str, numlen, nc);
+		str[0] = 45;
+		ft_write(str, numlen, nc, 1);
 	}
 	else
 	{
-		numlen = ft_intlen(n);
+		nc = n;
+		numlen = ft_intlen(nc);
 		str = (char *)malloc(sizeof(char) * numlen);
-		ft_writepos(str, numlen, n);
+		ft_write(str, numlen, nc, 0);
 	}
 	return (str);
-}
-
-int main()
-{
-	int num = 456;
-
-	printf("%s", ft_itoa(num));
 }

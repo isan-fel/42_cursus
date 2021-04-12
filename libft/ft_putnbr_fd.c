@@ -1,37 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 15:20:53 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/12 13:54:56 by isan-fel         ###   ########.fr       */
+/*   Created: 2021/04/12 12:53:28 by isan-fel          #+#    #+#             */
+/*   Updated: 2021/04/12 13:00:05 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+void	ft_num(int nb, int fd)
 {
-	char		*d;
-	const char	*s;
-
-	s = src;
-	d = dest;
-	while (n--)
+	if (nb > 9)
 	{
-		if (n == 0)
+		ft_num(nb / 10, fd);
+		ft_putchar_fd(nb % 10 + 48, fd);
+	}
+	else
+		ft_putchar_fd(nb + 48, fd);
+}
+
+void	ft_putnbr_fd(int nb, int fd)
+{
+	unsigned int	nc;
+
+	if (nb < 0)
+	{
+		nc = nb * (-1);
+		ft_putchar_fd(45, fd);
+		if (nc == 2147483648)
 		{
-			*d++ = *s++;
-			break ;
+			ft_putchar_fd(2 + 48, fd);
+			nb = 147483648;
+			ft_num(nb, fd);
 		}
-		*d++ = *s++;
-		if (*s == c)
+		else
 		{
-			*d++ = *s++;
-			break ;
+			ft_num(nc, fd);
 		}
 	}
-	return (dest);
+	else
+	{
+		if (nb <= 2147483647)
+			ft_num(nb, fd);
+	}
 }
