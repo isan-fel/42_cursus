@@ -6,11 +6,11 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 12:18:09 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/07 13:39:07 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/13 16:31:30 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	n;
 
@@ -19,10 +19,8 @@ int	ft_strcmp(char *s1, char *s2)
 		return (0);
 	while (s1[n] != '\0')
 	{
-		if (s1[n] < s2[n])
-			return (s1[n] - s2[n]);
-		if (s1[n] > s2[n])
-			return (s1[n] - s2[n]);
+		if (s1[n] != s2[n])
+			return ((unsigned char)s1[n] - (unsigned char)s2[n]);
 		++n;
 	}
 	if (s2[n] != '\0')

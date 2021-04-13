@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:07:49 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/12 13:41:30 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/13 18:03:59 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	size_t	i;
+	int	i;
 
 	i = ft_strlen((char *)s);
-	while (i > 0)
+	while (i >= 0)
 	{
 		if (s[i] == c)
 			return ((char *) s + i);

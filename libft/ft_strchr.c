@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 13:35:11 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/12 13:41:13 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/13 12:02:25 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@ char	*ft_strchr(const char *s, int c)
 	int	i;
 
 	i = 0;
+	if (s[i] == '\0')
+		return ((char *) s + i);
 	while (s[i] != '\0')
 	{
 		if (s[i] == c)
 			return ((char *) s + i);
 		++i;
 	}
+	if (s[i] == c)
+		return ((char *) s + i);
 	return ((char *)0);
 }

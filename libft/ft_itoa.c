@@ -6,13 +6,13 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:08:41 by user42            #+#    #+#             */
-/*   Updated: 2021/04/12 13:59:51 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/13 11:43:09 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_intlen(unsigned int nb)
+static int	ft_intlen(unsigned int nb)
 {
 	int	len;
 
@@ -27,7 +27,7 @@ int	ft_intlen(unsigned int nb)
 	return (len);
 }
 
-char	*ft_write(char *str, int numlen, unsigned int nb, int flag_neg)
+static char	*ft_write(char *str, int numlen, unsigned int nb, int flag_neg)
 {
 	str[numlen] = '\0';
 	--numlen;
