@@ -6,7 +6,7 @@
 #    By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:36:07 by isan-fel          #+#    #+#              #
-#    Updated: 2021/04/15 14:00:22 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/04/16 20:53:50 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ OBJS			= $(SRCS:.c=.o)
 
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -I.
+CFLAGS			= -Wall -Wextra -Werror -fPIC
 
 NAME			= libft.a
 
@@ -64,6 +64,10 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 				ar rc $(NAME) $(OBJS)
 				ranlib $(NAME)
+
+so:
+			$(CC) $(CFLAGS) $(SRCS)
+			gcc -shared -o libft.so $(OBJS)
 
 clean:
 				$(RM) $(OBJS)
