@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 11:19:44 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/13 16:36:58 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:46:52 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	*ft_calloc (size_t num, size_t size)
 	str = malloc(size * num);
 	if (!str)
 		return (NULL);
-	ft_bzero(str, num);
+	ft_bzero(str, num * size);
 	return (str);
 }

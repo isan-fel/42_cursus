@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:06:49 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/13 18:26:01 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:39:08 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strnstr(char *str, char *to_find, size_t len)
 	n = 0;
 	if (to_find[n] == '\0')
 		return (str);
+	if (ft_strlen(str) < ft_strlen(to_find))
+		return (0);
 	while (n <= len)
 	{
 		i = 0;
@@ -33,13 +35,3 @@ char	*ft_strnstr(char *str, char *to_find, size_t len)
 	}
 	return (0);
 }
-/*
-#include <string.h>
-int main ()
-{
-	char str[]="lorem ipsum dolor sit amet";
-	char find[]="dolor";
-
-	printf("%s\n", ft_strnstr(str, find, 15));
-	printf("%s\n", strnstr(str, find, 15));
-}*/

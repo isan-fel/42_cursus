@@ -6,7 +6,7 @@
 #    By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:36:07 by isan-fel          #+#    #+#              #
-#    Updated: 2021/04/13 18:20:20 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/04/15 14:00:22 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRCS			=	ft_atoi.c \
 					ft_putendl_fd.c \
 					ft_putnbr_fd.c \
 					ft_calloc.c \
-					ft_strnstr.c
+					ft_strnstr.c \
+					ft_strtrim.c
 
 
 OBJS			= $(SRCS:.c=.o)
@@ -61,7 +62,7 @@ NAME			= libft.a
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+				ar rc $(NAME) $(OBJS)
 				ranlib $(NAME)
 
 clean:

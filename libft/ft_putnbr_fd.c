@@ -6,17 +6,17 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 12:53:28 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/12 13:00:05 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/15 14:06:54 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_num(int nb, int fd)
+void	ft_num_fd(int nb, int fd)
 {
 	if (nb > 9)
 	{
-		ft_num(nb / 10, fd);
+		ft_num_fd(nb / 10, fd);
 		ft_putchar_fd(nb % 10 + 48, fd);
 	}
 	else
@@ -35,16 +35,16 @@ void	ft_putnbr_fd(int nb, int fd)
 		{
 			ft_putchar_fd(2 + 48, fd);
 			nb = 147483648;
-			ft_num(nb, fd);
+			ft_num_fd(nb, fd);
 		}
 		else
 		{
-			ft_num(nc, fd);
+			ft_num_fd(nc, fd);
 		}
 	}
 	else
 	{
 		if (nb <= 2147483647)
-			ft_num(nb, fd);
+			ft_num_fd(nb, fd);
 	}
 }
