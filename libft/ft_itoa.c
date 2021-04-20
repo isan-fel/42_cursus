@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:08:41 by user42            #+#    #+#             */
-/*   Updated: 2021/04/15 17:59:41 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:19:21 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_itoa(int n)
 		numlen = ft_intlen(nc) + 1;
 		str = (char *)malloc(sizeof(char) * numlen + 1);
 		if (!str)
-			return (0);
+			return (NULL);
 		str[0] = 45;
 		ft_write(str, numlen, nc, 1);
 	}
@@ -69,7 +69,7 @@ char	*ft_itoa(int n)
 		numlen = ft_intlen(nc);
 		str = (char *)malloc(sizeof(char) * numlen + 1);
 		if (!str)
-			return (0);
+			return (NULL);
 		ft_write(str, numlen, nc, 0);
 	}
 	return (str);

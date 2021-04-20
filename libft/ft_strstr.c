@@ -6,9 +6,11 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 17:10:55 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/07 13:41:36 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:50:36 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strstr(char *str, char *to_find)
 {
@@ -29,5 +31,5 @@ char	*ft_strstr(char *str, char *to_find)
 		}
 		++n;
 	}
-	return (0);
+	return (NULL);
 }

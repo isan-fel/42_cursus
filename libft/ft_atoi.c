@@ -6,13 +6,13 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:12:03 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/15 17:41:01 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:56:34 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	unsigned long long	num;
 	int					n;

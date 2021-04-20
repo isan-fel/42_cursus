@@ -6,13 +6,13 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:49:16 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/08 15:43:38 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:56:24 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	n;
 

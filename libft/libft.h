@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 13:00:08 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/15 15:49:56 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:56:11 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
-int		ft_atoi(char *str);
+int		ft_atoi(const char *str);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -29,7 +30,9 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
-size_t	ft_strlen(char *str);
+size_t	ft_strlen(const char *str);
+size_t	ft_strlcpy(char *dest, const char *src, size_t destsize);
+size_t	ft_strlcat(char *dest, const char *src, size_t destsize);
 
 void	*ft_memset(void *str, int c, size_t n);
 void	ft_bzero(void *str, size_t nbyte);
@@ -42,7 +45,6 @@ void	*ft_calloc (size_t num, size_t size);
 
 void	ft_putnbr(int nb);
 void	ft_putstr(char *str);
-void	ft_putchar(char c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
@@ -61,5 +63,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strnstr(char *str, char *to_find, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+
+char	**ft_split(char const *s, char c);
 
 #endif

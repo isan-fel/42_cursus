@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:11:16 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/12 13:55:40 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:41:33 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	*ft_memchr(const void *s, int c, size_t n)
 			return ((char *) src + i);
 		++i;
 	}
-	return (0);
+	return (NULL);
 }

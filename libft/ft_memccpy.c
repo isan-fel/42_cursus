@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:20:53 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/13 17:10:06 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:43:53 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 			return (dest + i + 1);
 		++i;
 	}
-	return (0);
+	return (NULL);
 }

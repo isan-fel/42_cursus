@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 12:45:16 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/12 12:59:05 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:11:03 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	int	n;
 
-	n = 0;
-	while (s[n] != '\0')
+	n = -1;
+	if (s)
 	{
-		ft_putchar_fd(s[n], fd);
-		++n;
+		while (s[++n] != '\0')
+			ft_putchar_fd(s[n], fd);
 	}
 }

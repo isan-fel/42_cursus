@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 13:42:27 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/15 15:36:31 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:19:54 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	d = dest;
 	s = src;
 	if (!d && !s)
-		return (0);
+		return (NULL);
 	while (n--)
 		*d++ = *s++;
 	return (dest);
