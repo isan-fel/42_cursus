@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:06:49 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/20 18:41:19 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:50:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strnstr(char *str, char *to_find, size_t len)
 		i = 0;
 		while (str[n + i] == to_find[i])
 		{
-			if (to_find[i] == '\0' && (n + i) <= len)
+			if (to_find[i] == '\0' && (n + 1) <= len)
 				return (str + n);
 			++i;
 		}
@@ -35,8 +35,8 @@ char	*ft_strnstr(char *str, char *to_find, size_t len)
 	}
 	return (NULL);
 }
-
+/*
 int main ()
 {
 	printf("%s\n", ft_strnstr("lorem ipsum dolor sit amet", "ipsumm", 30));
-}
+}*/
