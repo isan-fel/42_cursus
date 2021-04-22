@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:21:15 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/19 19:39:14 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/22 19:30:36 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start >= ft_strlen((char *)s))
-		return ((char *)malloc(sizeof(char) * 0));
-	array = (char *)ft_calloc(sizeof(char) * len + 1, 1);
+	{
+		array = (char *)malloc(sizeof(char));
+		array[0] = '\0';
+		return (array);
+	}
+	array = (char *)ft_calloc(sizeof(char) * (len + 1), sizeof(char));
 	if (!array)
 		return (NULL);
 	while (len--)
@@ -33,3 +37,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	return (array);
 }
+/*
+#include <string.h>
+int main ()
+{
+char *s;
+s = ft_substr("tripouille", 0, 4200);
+printf("%zu\n", ft_strlen(s));
+printf("%zu\n",  ft_strlen("tripouille") + 1);
+}*/

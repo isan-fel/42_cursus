@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 13:00:08 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/20 12:56:11 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/22 13:04:55 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_strstr(char *str, char *to_find);
 char	*ft_itoa(int n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strnstr(char *str, char *to_find, size_t len);
+char	*ft_strnstr(const char *str, const char *to_find, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 

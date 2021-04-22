@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 12:15:18 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/20 12:45:19 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:45:06 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ size_t	ft_strlcat(char *dest, const char *src, size_t destsize)
 	dest_len = ft_strlen(dest);
 	i = dest_len;
 	n = 0;
+	if (destsize == 0)
+		return (src_len);
 	if (destsize < dest_len)
 		return (src_len + destsize);
 	while (src[n] != 0 && i < destsize - 1)

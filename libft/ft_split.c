@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 16:04:18 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/19 19:31:28 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:50:06 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	ft_word_num(char const *s, char c)
 
 	count = 0;
 	n = 0;
+	if (s[n] != c)
+		++count;
 	while (s[++n] != 0)
 	{
 		if (s[n] == c && s[n + 1] != c)
 			++count;
 	}
-	if (count > 0)
-		return (count + 1);
-	return (0);
+	return (count);
 }
 
 int	ft_wordlen(char const *str, char c)
@@ -50,25 +50,25 @@ char	**ft_split(char const *s, char c)
 	char	**table;
 	int		i;
 	int		n;
-	int		x;
 
 	i = 0;
 	n = -1;
-	if (!s)
-		return (NULL);
-	table = malloc(sizeof(char *) * (ft_word_num(s, c) + 1));
+	if (!s || !*s)
+	{
+		table = malloc(sizeof(char *) * 1);
+		table[i] = NULL;
+		return (table);
+	}
+	table = ft_calloc(sizeof(char *) * (ft_word_num(s, c) + 1), 1);
 	if (!table)
 		return (NULL);
 	while (s[++n] != 0)
 	{
 		if (s[n] != c)
 		{
-			x = ft_wordlen(s + n, c);
-			table[i] = ft_substr(s, n, x);
-			++i;
-			n = n + x - 1;
+			table[i++] = ft_substr(s, n, ft_wordlen(s + n, c));
+			n = n + ft_wordlen(s + n, c) - 1;
 		}
 	}
-	table[i] = NULL;
 	return (table);
 }

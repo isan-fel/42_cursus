@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:16:08 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/19 19:35:45 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/04/22 19:15:22 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	i;
 	int		j;
 
-	j = ft_findright(s1, set);
-	i = ft_findleft(s1, set);
 	if (!s1)
 		return (NULL);
+	j = ft_findright(s1, set);
+	i = ft_findleft(s1, set);
 	if (ft_strlen((char *)s1) == i)
 		len = 0;
 	else
 		len = ft_strlen((char *)s1) - i - j;
-	aux = (char *)malloc(sizeof(char) * len);
-	if (!aux)
-		return (NULL);
-	s1 = (char *)s1 + i;
-	aux = ft_substr(s1, 0, len + 1);
+	aux = ft_substr(s1, i, len + 1);
 	return (aux);
 }
