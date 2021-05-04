@@ -48,7 +48,23 @@ void	*ft_calloc (size_t num, size_t size)
 	ft_bzero(str, num * size);
 	return (str);
 }
+/*strchr mod*/
+int    ft_strchr(const char *s, int c)
+{
+        size_t  i;
 
+        i = 0;
+        while (i < ft_strlen(s) + 1)
+        {
+                if (s[i] == (char)c)
+                        return (i);
+                ++i;
+        }
+        return (0);
+}
+
+/*SPLIT*/
+/*
 int	ft_word_num(char const *s, char c)
 {
 	int	count;
@@ -146,4 +162,4 @@ char	**ft_split(char const *s, char c)
 		}
 	}
 	return (table);
-}
+}*/

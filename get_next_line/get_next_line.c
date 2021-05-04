@@ -29,11 +29,28 @@ int get_next_line(int fd, char **line)
 			return (-1);
 		printf("out_read: %d\n", out_read);
 		printf("buffer: %s\n", buf);
-		line = ft_split(buf, '\n');
+		//line = ft_split(buf, '\n');
 	//}
-	printf("%s\n", line[0]);
-	printf("%s\n", line[1]);
+	int n = 1;
+	int i = 0;
+	int x = 0;
+	while (n != 0)
+	{
+		n = ft_strchr(buffer, '\n');
+		if (n != 0)
+		{
+			line[x] = ft_substr();
+			++x;
+		}
+	}
+	while (line)
+	{	
+	printf("%s\n", line[n]);
+	/*printf("%s\n", line[1]);
 	printf("%s\n", line[2]);
 	printf("%s\n", line[3]);
+	*/
+	++n;
+	}
 	return (out_read);
 }
