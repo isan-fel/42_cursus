@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:12:25 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/29 18:19:39 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/05/06 18:41:24 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	*ft_calloc (size_t num, size_t size)
 	ft_bzero(str, num * size);
 	return (str);
 }
-/*strchr mod*/
-int    ft_strchr(const char *s, int c)
+
+int    ft_intchr(const char *s, int c)
 {
         size_t  i;
 
@@ -63,39 +63,19 @@ int    ft_strchr(const char *s, int c)
         return (0);
 }
 
-/*SPLIT*/
-/*
-int	ft_word_num(char const *s, char c)
+/*strchr mod -> add +1 in return to avoid \n for get_next_line*/
+char	*ft_strchr(const char *s, int c)
 {
-	int	count;
-	int	n;
+	size_t	i;
 
-	count = 0;
-	n = 0;
-	if (s[n] != c)
-		++count;
-	while (s[++n] != 0)
+	i = 0;
+	while (i < ft_strlen(s) + 1)
 	{
-		if (s[n] == c && s[n + 1] != c)
-			++count;
+		if (s[i] == (char)c)
+			return ((char *) s + i);
+		++i;
 	}
-	return (count);
-}
-
-int	ft_wordlen(char const *str, char c)
-{
-	int	n;
-	int	count;
-
-	n = -1;
-	count = 0;
-	while (str[++n] != c)
-	{
-		if (str[n] == '\0')
-			break ;
-		++count;
-	}
-	return (count);
+	return (NULL);
 }
 
 size_t	ft_exact_len(char const *s, size_t len)
@@ -136,30 +116,82 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (array);
 }
 
-char	**ft_split(char const *s, char c)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char	**table;
-	int		i;
+	char		*d;
+	const char	*s;
+
+	d = dest;
+	s = src;
+	if (!d && !s)
+		return (NULL);
+	while (n--)
+		*d++ = *s++;
+	return (dest);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
 	int		n;
+	int		i;
+
+	n = 0;
+	if (s1 && s2)
+	{
+		str = ft_calloc(ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1, 1);
+		if (!str)
+			return (NULL);
+		i = 0;
+		while (s1[i] != '\0')
+			str[n++] = s1[i++];
+		i = 0;
+		while (s2[i] != '\0')
+			str[n++] = s2[i++];
+		return (str);
+	}
+	return (NULL);
+}
+
+char	*ft_strrchr(const char *s, int c)
+{
+	int	i;
+
+	i = ft_strlen((char *)s);
+	while (i >= 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *) s + i);
+		--i;
+	}
+	return ((char *) NULL);
+}
+
+void	ft_strdel(char **as)
+{
+	if (!as)
+		;
+	else
+	{
+		free(*as);
+		*as = NULL;
+	}
+}
+
+char	*ft_strdup(char *src)
+{
+	char	*result;
+	int		i;
 
 	i = 0;
-	n = -1;
-	if (!s || !*s)
-	{
-		table = malloc(sizeof(char *) * 1);
-		table[i] = NULL;
-		return (table);
-	}
-	table = ft_calloc(sizeof(char *) * (ft_word_num(s, c) + 1), 1);
-	if (!table)
+	result = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!result)
 		return (NULL);
-	while (s[++n] != 0)
+	while (src[i] != '\0')
 	{
-		if (s[n] != c)
-		{
-			table[i++] = ft_substr(s, n, ft_wordlen(s + n, c));
-			n = n + ft_wordlen(s + n, c) - 1;
-		}
+		result[i] = src[i];
+		++i;
 	}
-	return (table);
-}*/
+	result[i] = '\0';
+	return (result);
+}

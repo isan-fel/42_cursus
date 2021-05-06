@@ -6,13 +6,13 @@
 #    By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:36:07 by isan-fel          #+#    #+#              #
-#    Updated: 2021/04/29 18:18:29 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/05/05 12:10:15 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS			=	main.c \
 					get_next_line.c \
-					get_next_line_utils.c \#
+					get_next_line_utils.c 
 					
 LIB				=	get_next_line.h
 
