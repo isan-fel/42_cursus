@@ -37,8 +37,9 @@ int get_next_line(int fd, char **line)
 {
 	int		out_read;
 	char	buf[BUFFER_SIZE + 1];
-	static char	*stack[OPEN_MAX];
-	//char	*mid_line;
+	/*en linux no se llaman igual las variables de limits.h ; en linux: FOPEN_MAX ; en mac: OPEN_MAX*/
+	//static char	*stack[FOPEN_MAX];
+	static char	*stack[4096];
 	char	*temp;
 
 	out_read = 1;
@@ -47,19 +48,16 @@ int get_next_line(int fd, char **line)
 	while (out_read > 0)
 	{
 		out_read = read(fd, buf, BUFFER_SIZE);
+		printf("out_read: %d\n", out_read);
 		if (out_read < 0)
 			return (-1);
+		//if (out_read == 0)
+		//	return (0);	
 		buf[out_read] = '\0';
 		if (!stack[fd])
 			stack[fd] = ft_calloc(1,1);
 		temp = ft_strjoin(stack[fd], buf);
 		stack[fd] = temp;
-		//mid_line = ft_strchr(stack[fd], '\n');
-		/*while (ft_strchr(stack[fd], '\n')
-		{
-			*line = save_line(stack[fd], fd, line);
-		}*/
-		//if (mid_line = ft_strchr(stack[fd], '\n'))
 		if (ft_strchr(stack[fd], '\n'))
 			break ;
 	}
