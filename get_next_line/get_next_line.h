@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:54:11 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/10 12:13:20 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/05/10 14:06:46 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdbool.h>
 //# include <limits.h>
 
-# define BUFFER_SIZE 10
+//# define BUFFER_SIZE 42
 
 size_t	ft_strlen(const char *str);
 void	*ft_memset(void *str, int c, size_t n);
@@ -35,5 +35,6 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strcat(char *dest, char *src);
+void	ft_strdel(char **clean);
 
 #endif

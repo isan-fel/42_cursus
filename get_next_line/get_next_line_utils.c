@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:12:25 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/06 18:41:24 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:03:22 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,6 @@ void	*ft_calloc (size_t num, size_t size)
 	return (str);
 }
 
-int    ft_intchr(const char *s, int c)
-{
-        size_t  i;
-
-        i = 0;
-        while (i < ft_strlen(s) + 1)
-        {
-                if (s[i] == (char)c)
-                        return (i);
-                ++i;
-        }
-        return (0);
-}
-
-/*strchr mod -> add +1 in return to avoid \n for get_next_line*/
 char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
@@ -76,58 +61,6 @@ char	*ft_strchr(const char *s, int c)
 		++i;
 	}
 	return (NULL);
-}
-
-size_t	ft_exact_len(char const *s, size_t len)
-{
-	size_t	array_len;
-
-	array_len = ft_strlen(s);
-	if (array_len <= len)
-		return (array_len);
-	return (len);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char			*array;
-	unsigned int	i;
-	size_t			exact_len;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen((char *)s))
-	{
-		array = (char *)malloc(sizeof(char));
-		array[0] = '\0';
-		return (array);
-	}
-	exact_len = ft_exact_len(s, len);
-	array = (char *)ft_calloc(sizeof(char) * (exact_len + 1), sizeof(char));
-	if (!array)
-		return (NULL);
-	while (exact_len--)
-	{
-		array[i] = s[start];
-		++start;
-		++i;
-	}
-	return (array);
-}
-
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	char		*d;
-	const char	*s;
-
-	d = dest;
-	s = src;
-	if (!d && !s)
-		return (NULL);
-	while (n--)
-		*d++ = *s++;
-	return (dest);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -167,14 +100,12 @@ char	*ft_strrchr(const char *s, int c)
 	return ((char *) NULL);
 }
 
-void	ft_strdel(char **as)
+void	ft_strdel(char **clean)
 {
-	if (!as)
-		;
-	else
+	if (clean)
 	{
-		free(*as);
-		*as = NULL;
+		free(*clean);
+		*clean = NULL;
 	}
 }
 
