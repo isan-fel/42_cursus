@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 12:08:27 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/06 18:50:28 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/05/10 12:24:25 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,25 @@ int get_next_line(int fd, char **line)
 	while (out_read > 0)
 	{
 		out_read = read(fd, buf, BUFFER_SIZE);
-		printf("out_read: %d\n", out_read);
+		//printf("out_read: %d\n", out_read);
 		if (out_read < 0)
 			return (-1);
-		//if (out_read == 0)
-		//	return (0);	
+		if (out_read == 0)
+		{
+			*line = NULL;
+			return (0);	
+		}
 		buf[out_read] = '\0';
 		if (!stack[fd])
 			stack[fd] = ft_calloc(1,1);
 		temp = ft_strjoin(stack[fd], buf);
 		stack[fd] = temp;
+		//printf("stack: %s\n", stack[fd]);
 		if (ft_strchr(stack[fd], '\n'))
+		{
+			//printf("entra if break\n");
 			break ;
+		}
 	}
 	save_line(stack, fd, line);
 	return (1);

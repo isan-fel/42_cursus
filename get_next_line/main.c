@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 12:05:37 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/06 18:50:31 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/05/10 12:12:01 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main (int argc, char *argv[])
 		if (fd == -1)
 			return (-1);
 		//while (get_next_line(fd, &line))
-		printf("retorno funcion: [%d]  ;  Linea-->>%s\n", get_next_line(fd, &line), line);
 		printf("retorno funcion: [%d]  ;  Linea-->>%s\n", get_next_line(fd, &line), line);
 		printf("retorno funcion: [%d]  ;  Linea-->>%s\n", get_next_line(fd, &line), line);
 		printf("retorno funcion: [%d]  ;  Linea-->>%s\n", get_next_line(fd, &line), line);
