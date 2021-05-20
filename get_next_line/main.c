@@ -52,17 +52,20 @@
 	system("leaks -fullContent  a.out");
 	return (0);
 }*/
-/*
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
 int main(){
     char    *line;
     int     fd;
     int     stat;
-    fd = open("2.txt", O_RDONLY);
+    fd = open("BIBLIA_COMPLETA.txt", O_RDONLY);
     stat = get_next_line(fd, &line);
     while (stat >= 0)
     {
-        //printf("%s\n", line);
-		printf("retorno funcion: [%d]  ;  Linea-->>%s\n", get_next_line(fd, &line), line);
+        printf("%s\n", line);
+		//printf("retorno funcion: [%d]  ;  Linea-->>%s\n", get_next_line(fd, &line), line);
         free(line);
         line = NULL;
         if (stat == 0)
@@ -74,9 +77,9 @@ int main(){
     close(fd);
     system("leaks a.out");
     return (0);
-}*/
+}
 
-#include "get_next_line.h"
+/*#include "get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
@@ -196,4 +199,4 @@ int main(int argc, char **argv)
 		}
 	}
 	return (0);
-}
+}*/
