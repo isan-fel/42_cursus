@@ -6,7 +6,7 @@
 #    By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:36:07 by isan-fel          #+#    #+#              #
-#    Updated: 2021/05/10 16:39:05 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/05/20 12:18:18 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJS			= $(SRCS:.c=.o)
 
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -D BUFFER_SIZE=5
+CFLAGS			= -Wall -Wextra -Werror -D BUFFER_SIZE=42
 
 NAME			= nextline
 
