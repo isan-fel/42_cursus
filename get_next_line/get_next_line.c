@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 12:08:27 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/20 17:33:28 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/05/21 10:28:11 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	get_next_line(int fd, char **line)
 		temp = ft_strjoin(stack[fd], buf);
 		free(stack[fd]);
 		stack[fd] = temp;
-		if (ft_strchr(buf, '\n') || ft_strrchr(stack[fd], '\n'))
+		if (ft_strrchr(stack[fd], '\n'))
 			break ;
 		out_read = read(fd, buf, BUFFER_SIZE);
 	}
