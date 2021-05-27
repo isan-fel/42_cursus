@@ -6,13 +6,14 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/05/24 13:49:27 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/05/27 18:16:53 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= 	libftprintf.a
 
-SRC 	= 	ft_printf.c
+SRC 	= 	ft_printf.c \
+			ft_flags_conditions.c
 
 LIBFT 	= 	libft/libft.a
 
