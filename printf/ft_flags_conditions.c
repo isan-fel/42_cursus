@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:13:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/31 17:12:49 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/05/31 19:21:58 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_write_pos(st_flags flags, int intlen)
     num = flags.arg;
     if(flags.justify == '+' && flags.zero)
     {
-        write(1, &flags.justify, 1);//printf("%c", flags.justify);
+        printf("%c", flags.justify);//write(1, &flags.justify, 1);
         ++n;
     }
     else if(flags.justify == '+' && !flags.zero)
@@ -29,18 +29,18 @@ int	ft_write_pos(st_flags flags, int intlen)
     while(n < (flags.width - intlen))
     {
         if(flags.zero || (flags.justify == '-' && flags.dot))
-            write(1, "0", 1);//printf("0");
+            printf("0");//write(1, "0", 1);
         else
-            write(1, " ", 1);//printf(" ");
+            printf(" ");//write(1, " ", 1);
         ++n;
     }
     //printf("valor n: %d", n);
     n = 0;
     if(flags.justify == '+' && !flags.zero)
-        write(1, &flags.justify, 1);//printf("%c", flags.justify);
+        printf("%c", flags.justify);//write(1, &flags.justify, 1);
     while(n < intlen)
     {
-        write(1, &num[n], 1);//printf("%c", num[n]);
+        printf("%c", num[n]);//write(1, &num[n], 1);
         ++n;
     }
     return (flags.width + 1);
@@ -59,19 +59,19 @@ void	ft_write_int(st_flags flags)
     {
         while(n < intlen)
         {
-            write(1, &num[n], 1);//printf("%c", num[n]);
+            printf("%c", num[n]);//write(1, &num[n], 1);
             ++n;
         }
     }
-    if((flags.justify == '-' && flags.dot) || flags.justify != '-')
+    if(((flags.justify == '-' && flags.dot) || flags.justify != '-') && flags.width)
         n = ft_write_pos(flags, intlen);
     while(n < flags.width && flags.justify == '-')
     {
         if(n < intlen)
-            write(1, &num[n], 1);//printf("%c", num[n]);
+            printf("%c", num[n]);//write(1, &num[n], 1);
         ++n;
         if (n > intlen)
-            write(1, " ", 1);//printf(" ");
+            printf(" ");//write(1, " ", 1);
         //write(1, "", 1);
     }
 }
@@ -87,29 +87,29 @@ void	ft_write_char(st_flags flags)
     strlen = ft_strlen(str);
     if(flags.width == 0)
     {
-        while(n < strlen)
+        while(n + 1 < strlen)
         {
-            write(1, &str[n], 1);//printf("%c", str[n]);
+            printf("%c", str[n]);//write(1, &str[n], 1);
             ++n;
         }
     }
     while(n < flags.width && flags.justify == '-')
     {
         if(n < strlen)
-            write(1, &str[n], 1);//printf("%c", str[n]);
+            printf("%c", str[n]);//write(1, &str[n], 1);
         ++n;
         if (n > strlen)
-            write(1, " ", 1);//printf(" ");
+            printf(" ");//write(1, " ", 1);
     }
     while(n < (flags.width - strlen) && flags.justify != '-')
     {
-        write(1, " ", 1);//printf(" ");
+        printf(" ");//write(1, " ", 1);
         ++n;
     }
     n = 0;
     while(n < strlen && flags.justify != '-')
     {
-        write(1, &str[n], 1);//printf("%c", str[n]);
+        printf("%c", str[n]);//write(1, &str[n], 1);
         ++n;
     }
 }
