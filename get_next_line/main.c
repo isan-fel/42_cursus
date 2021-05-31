@@ -6,7 +6,7 @@
 /*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 12:05:37 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/21 10:38:53 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/05/21 12:05:57 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int main(){
     char    *line;
     int     fd;
     int     stat;
-    //fd = open("BIBLIA_COMPLETA.txt", O_RDONLY);
-    fd = open("lotr.txt", O_RDONLY);
+    fd = open("BIBLIA_COMPLETA.txt", O_RDONLY);
+    //fd = open("lotr.txt", O_RDONLY);
     stat = get_next_line(fd, &line);
     while (stat >= 0)
     {
