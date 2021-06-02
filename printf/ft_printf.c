@@ -89,15 +89,16 @@ void	ft_width(const char *str, int  n, st_flags *flags)
 	char *width;
 	int i;
 	int num;
+	int save_n;
 
 	i = 0;
-	//el fallo esta aqui
-	width = ft_strdup("");
-	while(ft_isdigit(str[n]))
-	{
-		width[i++] = str[n++];
-	}
-	width[i] = '\0';
+	save_n = n;
+	while(ft_isdigit(str[n++]))
+		++i;
+	width = ft_calloc(i + 1, sizeof(char));
+	i = 0;
+	while(save_n < n)
+		width[i++] = str[save_n++];
 	num = ft_atoi(width);
 	flags->width = num;
 	free (width);
@@ -181,10 +182,11 @@ int	ft_printf(const char *str, ...)
 	count = 0;
 	save_count = 0;
 	n = 0;
-	flags = ft_initiate_flags();
+	//flags = ft_initiate_flags();
 	va_start(param, str);
 	while(str[n] != '\0')
 	{
+		flags = ft_initiate_flags();
 		if(str[n] == '%')
 		{
 			++n;
@@ -212,14 +214,14 @@ int	ft_printf(const char *str, ...)
 
 int main()
 {
-	//int num = 300;
-	char c = 'r';
+	int num = 300;
+	//char c = 'r';
 	int n;
 	//ft_printf("esto es una prueba: %d", num);
 	//n = ft_printf("esto es una prueba:%c<-;ahora el num:%d<-\n", c, num);
 	//printf("esto es una prueba:%-5c<-;ahora el num:%-8d<-\n", c, num);
-	n = ft_printf("esto es una prueba:%10c<-\n", c);
-	printf("esto es una prueba:%10c<-\n", c);
+	n = ft_printf("num:%d<-\n", num);
+	printf("num:%d<-\n", num);
 	//printf("return ft_printf: %d\n", n);
 	//system("leaks -fullContent a.out");
 }

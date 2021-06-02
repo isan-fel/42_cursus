@@ -18,7 +18,9 @@ int	ft_write_pos(st_flags flags, int intlen)
     char *num;
     
     n = 0;
-    num = flags.arg;
+    //buscar en todos los flags.arg pq creo que necesito hacer un strdup antes de usarlos o leerlos
+    num = ft_strdup(flags.arg);
+    //num = flags.arg;
     if(flags.justify == '+' && flags.zero)
     {
         printf("%c", flags.justify);//write(1, &flags.justify, 1);
@@ -53,7 +55,8 @@ void	ft_write_int(st_flags flags)
     int intlen;
 
     n = 0;
-    num = flags.arg;
+    //num = flags.arg;
+    num = ft_strdup(flags.arg);
     intlen = ft_strlen(num);
     if(flags.width == 0)
     {
@@ -118,7 +121,7 @@ int ft_count_arglen(st_flags flags)
 {
     int len;
 
-    len = ft_strlen(flags.arg);
+    len = ft_strlen(ft_strdup(flags.arg));
     if (flags.width > len)
         len = flags.width;
     if (flags.justify == '+')

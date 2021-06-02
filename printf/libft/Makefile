@@ -72,9 +72,8 @@ $(NAME):		$(OBJS)
 				ar rc $(NAME) $(OBJS)
 				ranlib $(NAME)
 
-so:
-			$(CC) $(CFLAGS) $(SRCS)
-			gcc -shared -o libft.so $(OBJS)
+so:				$(OBJS)
+				ar -rcs libft.so $(OBJS)
 
 clean:
 				$(RM) $(OBJS) $(OBJSB)

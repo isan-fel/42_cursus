@@ -12,14 +12,14 @@
 
 NAME 	= 	libftprintf.a
 
-SRC 	= 	ft_printf.c \
+SRCS 	= 	ft_printf.c \
 			ft_flags_conditions.c
 
 LIBFT 	= 	libft/libft.a
 
-OBJS 	= 	$(SRC:.c=.o)
+OBJS 	= 	$(SRCS:.c=.o)
 
-CC				= gcc
+CC				= clang
 RM				= rm -f
 CFLAGS			= -Wall -Wextra -Werror -fPIC
 
@@ -36,6 +36,11 @@ $(NAME): 	$(LIBFT) $(OBJS)
 			ar -rcs $(NAME) $(OBJS)
 			echo "$(GREEN)---->> SUSCCESSFULLY COMPILED <<---- $(NO_COLOR)"
 
+so:			$(LIBFT) $(OBJS)
+			cp $(LIBFT) libftprintf.so
+			ar -rcs libftprintf.so $(OBJS)
+			echo "$(GREEN)---->> SUSCCESSFULLY COMPILED <<---- $(NO_COLOR)"
+
 clean:
 			$(RM) $(OBJS)
 			$(MAKE) fclean -C ./libft
@@ -48,3 +53,7 @@ re: 		fclean all
 .SILENT:
 
 .PHONY: 	all clean fclean re
+
+test:		$(NAME)
+			$(CC) -g3 -fsanitize=address $(CFLAGS) $(SRCS) libftprintf.so
+			./a.out
