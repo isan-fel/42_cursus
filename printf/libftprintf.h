@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:14:17 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/31 18:05:36 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/06/03 19:44:35 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ typedef struct flags_struct
     int		zero;
 	int		asterisk;
     int		width;
+	int		prec;
 	char    type;
 	char	*arg;
 }	st_flags;
 
 int		ft_printf(const char *str, ...);
 void	ft_write_int(st_flags flags);
-void	ft_write_char(st_flags flags);
-int 	ft_count_arglen(st_flags flags);
+int		ft_write_char(st_flags flags);
+int 	ft_count_arglen(st_flags flags, int len);
+void	ft_write_string(st_flags flags);
 
 #endif

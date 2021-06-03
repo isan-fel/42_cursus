@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/31 20:24:26 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/06/03 20:30:06 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,11 @@ st_flags	ft_initiate_flags(void)
 	flags.zero = 0;
 	flags.asterisk = 0;
 	flags.width = 0;
+	flags.prec = 0;
 	flags.type = '%';
 	flags.arg = NULL;
 	return (flags);
 }
-
-/*void	ft_putchar(int c)
-{
-	ft_putchar_fd(c, 1);
-	//return (1);
-}*/
 
 static int	ft_intlen(unsigned int nb)
 {
@@ -57,31 +52,22 @@ char	*ft_char(char c_antes)
 	return (str);	
 }
 
-void	ft_justify(char str, st_flags *flags)
+int	ft_justify(char str, st_flags *flags, int n)
 {
 	if(str == '+' || str == '-')
 		flags->justify = str;
 	else
 		flags->justify = 48;
-	//printf("valor de justify: %c<-\n", flags->justify);
+	return(++n);
 }
 
-void	ft_dot(char str, st_flags *flags)
-{
-	if(str == '.')
-		flags->dot = 1;
-	else
-		flags->dot = 0;
-	//printf("valor de dot: %c<-\n", flags->dot);
-}
-
-void	ft_zero(char str, st_flags *flags)
+int	ft_zero(char str, st_flags *flags, int n)
 {
 	if(str == '0')
 		flags->zero = 1;
 	else
 		flags->zero = 0;
-	//printf("valor de zero: %c<-\n", flags->zero);
+	return(++n);
 }
 
 void	ft_width(const char *str, int  n, st_flags *flags)
@@ -104,14 +90,16 @@ void	ft_width(const char *str, int  n, st_flags *flags)
 	free (width);
 }
 
-void	ft_type_arg(va_list param, char str, st_flags *flags)
+int	ft_type_arg(va_list param, char str, st_flags *flags)
 {
 	char *temp;
+	int len = 0;
+	
 	flags->type = str;
-	//printf("valor de type: %c<-\n", flags->type);
 	if(str == 'd' || str == 'i')
 	{
 		temp = ft_itoa(va_arg(param, int));
+		flags->arg = temp;
 		ft_write_int(*flags);
 	}
 	if(str == 'c')
@@ -122,52 +110,131 @@ void	ft_type_arg(va_list param, char str, st_flags *flags)
 	}
 	if(str == 's')
 	{
-		temp = ft_char(va_arg(param, int));
+		temp = ft_strdup(va_arg(param, char *));
 		flags->arg = temp;
-		ft_write_char(*flags);
+		ft_write_string(*flags);
 	}
+	len = ft_strlen(temp);
+	//printf("len:%d\n", len);
 	free(temp);
-	/*else
-		flags->zero = 48;
-	*/
-	//printf("valor de arg: %s<-\n", flags->arg);
+	return (len);
+}
+
+/*int	ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags)
+{
+	while (!ft_isalpha(str[n]))
+	{
+		if(str[n] == '+' || str[n] == '-')
+			n = ft_justify(str[n], flags, n);
+		if(str[n] == '.')
+			n = ft_dot(str[n], flags, n);
+		if(str[n] == '0')
+			n = ft_zero(str[n], flags, n);
+		if(ft_isdigit(str[n]))
+		{
+			ft_width(str, n, flags);
+			n = n + ft_intlen(flags->width);
+			return (n);
+		}
+		if(str[n] == '*')
+		{
+			flags->width = va_arg(param, int);
+			if(flags->width < 0)
+			{
+				flags->width = flags->width * -1;
+				flags->justify = '-';
+			}
+			++n;
+		}
+	}
+	return (n);
+}*/
+
+int ft_asterik(va_list param, int n, st_flags *flags)
+{
+	flags->width = va_arg(param, int);
+	if(flags->width < 0)
+	{
+		flags->width = flags->width * -1;
+		flags->justify = '-';
+	}
+	return(++n);
+}
+
+void	ft_prec(const char *str, int  n, st_flags *flags)
+{
+	char *prec;
+	int i;
+	int num;
+	int save_n;
+
+	i = 0;
+	save_n = n;
+	while(ft_isdigit(str[n++]))
+		++i;
+	prec = ft_calloc(i + 1, sizeof(char));
+	i = 0;
+	while(save_n < n)
+		prec[i++] = str[save_n++];
+	num = ft_atoi(prec);
+	flags->prec = num;
+	free (prec);
+}
+
+int	ft_dot_logic(va_list param, const char *str, st_flags *flags, int n)
+{
+	flags->dot = 1;
+	while(str[n] != '.')
+	{
+		if(str[n] == '*')
+		{
+			n = ft_asterik(param, n, flags);
+			break ;
+		}
+		++n;
+	}
+	while(!ft_isalpha(str[++n]))
+	{
+		if(ft_isdigit(str[n]))
+		{
+			ft_prec(str, n, flags);
+			n = n + ft_intlen(flags->prec);
+			//printf("posicion:%c<-\n", str[n]);
+			return (n);
+		}
+	}
+	//printf("posicion:%c<-\n", str[n]);
+	return(n);
 }
 
 int	ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags)
 {
-	if (ft_isalpha(str[n]))
-	{
-		flags->justify = '0';
-		flags->dot = 0;
-		flags->zero = 0;
-		flags->asterisk = 0;
-		flags->width = 0;
-	}
+	int save_n;
+	
+	if(str[n] == '+' || str[n] == '-')
+		n = ft_justify(str[n], flags, n);
+	save_n = n;	
 	while (!ft_isalpha(str[n]))
 	{
-		if(str[n] == '+' || str[n] == '-')
-		{
-			ft_justify(str[n], flags);
-			++n;
-		}
 		if(str[n] == '.')
 		{
-			ft_dot(str[n], flags);
-			++n;
+			n = ft_dot_logic(param, str, flags, save_n);
+			return(n);
 		}
-		if(str[n] == '0')
-		{
-			ft_zero(str[n], flags);
-			++n;
-		}
-		if(ft_isdigit(str[n]))
-			ft_width(str, n, flags);
-		//printf("valor de width struct: %d<-\n", flags->width);
-		if(str[n] == '*')
-			flags->width = va_arg(param, int);
+		++n;
+	}
+	n = save_n;
+	flags->dot = 0;			
+	if(str[n] == '0')
+		n = ft_zero(str[n], flags, n);
+	if(ft_isdigit(str[n]))
+	{
+		ft_width(str, n, flags);
 		n = n + ft_intlen(flags->width);
 		return (n);
 	}
+	if(str[n] == '*')
+		n = ft_asterik(param, n, flags);
 	return (n);
 }
 
@@ -178,50 +245,33 @@ int	ft_printf(const char *str, ...)
 	int n;
 	int count;
 	int save_count;
+	int len;
 
 	count = 0;
 	save_count = 0;
 	n = 0;
-	//flags = ft_initiate_flags();
 	va_start(param, str);
 	while(str[n] != '\0')
 	{
 		flags = ft_initiate_flags();
+		//printf("\nque valor tengo:%c<-\n", str[n]);
 		if(str[n] == '%')
 		{
 			++n;
 			n = ft_save_every_flag(param, str, n, &flags);
 			//printf("\nque valor tengo: %c\n", str[n]);
-			ft_type_arg(param, str[n], &flags);
-			count = count + ft_count_arglen(flags);
+			len = ft_type_arg(param, str[n], &flags);
+			count = count + ft_count_arglen(flags, len);
+			//printf("count:%d\n", count);
 			++n;
-			//while(flags->width--)
-			if(str[n] == '\0')
-			{
-				//printf("entra al if del break");
-				break ;
-			}
 		}
-		else if(str[n] == '\0')
-			break ;
-		printf("%c", str[n]);//write(1, &str[n], 1);
-		++save_count;
-		++n;
+		else
+		{
+			printf("%c", str[n]);//write(1, &str[n], 1);
+			++n;
+			++save_count;
+		}
 	}
 	va_end(param);
-	return (save_count + count - 1);
-}
-
-int main()
-{
-	int num = 300;
-	//char c = 'r';
-	int n;
-	//ft_printf("esto es una prueba: %d", num);
-	//n = ft_printf("esto es una prueba:%c<-;ahora el num:%d<-\n", c, num);
-	//printf("esto es una prueba:%-5c<-;ahora el num:%-8d<-\n", c, num);
-	n = ft_printf("num:%d<-\n", num);
-	printf("num:%d<-\n", num);
-	//printf("return ft_printf: %d\n", n);
-	//system("leaks -fullContent a.out");
+	return (save_count + count);
 }

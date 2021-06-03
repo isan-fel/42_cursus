@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:13:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/05/31 19:21:58 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/06/03 20:38:43 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ int	ft_write_pos(st_flags flags, int intlen)
     char *num;
     
     n = 0;
-    //buscar en todos los flags.arg pq creo que necesito hacer un strdup antes de usarlos o leerlos
-    num = ft_strdup(flags.arg);
-    //num = flags.arg;
+    num = flags.arg;
     if(flags.justify == '+' && flags.zero)
     {
         printf("%c", flags.justify);//write(1, &flags.justify, 1);
@@ -55,8 +53,7 @@ void	ft_write_int(st_flags flags)
     int intlen;
 
     n = 0;
-    //num = flags.arg;
-    num = ft_strdup(flags.arg);
+    num = flags.arg;
     intlen = ft_strlen(num);
     if(flags.width == 0)
     {
@@ -79,7 +76,7 @@ void	ft_write_int(st_flags flags)
     }
 }
 
-void	ft_write_char(st_flags flags)
+int	ft_write_char(st_flags flags)
 {
     char *str;
     int n;
@@ -95,6 +92,11 @@ void	ft_write_char(st_flags flags)
             printf("%c", str[n]);//write(1, &str[n], 1);
             ++n;
         }
+    }
+    if(str[n] == 0)
+    {
+        printf(" ");//write(1, &str[n], 1);
+        return(1);
     }
     while(n < flags.width && flags.justify == '-')
     {
@@ -115,14 +117,80 @@ void	ft_write_char(st_flags flags)
         printf("%c", str[n]);//write(1, &str[n], 1);
         ++n;
     }
+    return(0);
 }
 
-int ft_count_arglen(st_flags flags)
+void ft_write_string(st_flags flags)
 {
+    char *str;
+    int n;
     int len;
+    int prec;
 
-    len = ft_strlen(ft_strdup(flags.arg));
-    if (flags.width > len)
+    n = 0;
+    str = flags.arg;
+    len = ft_strlen(str);
+    prec = flags.prec;
+    if(flags.dot)
+    {
+        if(prec)
+        {
+            //printf("width:%d\n", flags.width);
+            //printf("prec:%d\n", flags.prec);
+            while((n < (flags.width - prec)) && flags.justify != '-')
+            {
+                printf(" ");//write(1, " ", 1);
+                ++n;
+            } 
+            n = 0;
+            while(prec--)
+            {
+                printf("%c", str[n++]);
+            }
+            while(n < flags.width && flags.justify == '-')
+            {
+                printf(" ");//write(1, " ", 1);
+                ++n;
+            }
+        }
+        else
+            while(n < flags.width)
+            {
+                printf(" ");//write(1, " ", 1);
+                ++n;
+            }
+    }
+    else
+    {
+        while((n < (flags.width - len)) && flags.justify != '-')
+        {
+            printf(" ");//write(1, " ", 1);
+            ++n;
+        } 
+        n = 0;
+        while(str[n] != '\0')
+        {
+            printf("%c", str[n]);
+            ++n;
+        }
+        while(n < flags.width && flags.justify == '-')
+        {
+            printf(" ");//write(1, " ", 1);
+            ++n;
+        }    
+    }
+}
+
+int ft_count_arglen(st_flags flags, int len)
+{
+    if(flags.prec)
+    {
+        if(flags.prec < len)
+            return(flags.prec);
+        else
+            return(len);
+    }
+    if(flags.width > len)
         len = flags.width;
     if (flags.justify == '+')
         ++len;
