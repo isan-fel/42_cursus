@@ -32,8 +32,8 @@ static int	ft_intlen(unsigned int nb)
 	int	len;
 
 	len = 0;
-	/*if (nb == 0)
-		len = 1;*/
+	if (nb == 0)
+		len = 1;
 	while (nb >= 1)
 	{
 		nb = nb / 10;
@@ -120,36 +120,6 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 	return (len);
 }
 
-/*int	ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags)
-{
-	while (!ft_isalpha(str[n]))
-	{
-		if(str[n] == '+' || str[n] == '-')
-			n = ft_justify(str[n], flags, n);
-		if(str[n] == '.')
-			n = ft_dot(str[n], flags, n);
-		if(str[n] == '0')
-			n = ft_zero(str[n], flags, n);
-		if(ft_isdigit(str[n]))
-		{
-			ft_width(str, n, flags);
-			n = n + ft_intlen(flags->width);
-			return (n);
-		}
-		if(str[n] == '*')
-		{
-			flags->width = va_arg(param, int);
-			if(flags->width < 0)
-			{
-				flags->width = flags->width * -1;
-				flags->justify = '-';
-			}
-			++n;
-		}
-	}
-	return (n);
-}*/
-
 int ft_asterik(va_list param, int n, st_flags *flags)
 {
 	flags->width = va_arg(param, int);
@@ -178,6 +148,7 @@ void	ft_prec(const char *str, int  n, st_flags *flags)
 		prec[i++] = str[save_n++];
 	num = ft_atoi(prec);
 	flags->prec = num;
+	//printf("prec:%d<-\n", flags->prec);
 	free (prec);
 }
 
@@ -189,6 +160,12 @@ int	ft_dot_logic(va_list param, const char *str, st_flags *flags, int n)
 		if(str[n] == '*')
 		{
 			n = ft_asterik(param, n, flags);
+			break ;
+		}
+		if(ft_isdigit(str[n]))
+		{
+			ft_width(str, n, flags);
+			n = n + ft_intlen(flags->width);
 			break ;
 		}
 		++n;
@@ -261,6 +238,7 @@ int	ft_printf(const char *str, ...)
 			n = ft_save_every_flag(param, str, n, &flags);
 			//printf("\nque valor tengo: %c\n", str[n]);
 			len = ft_type_arg(param, str[n], &flags);
+			//printf("arglen:%d", ft_count_arglen(flags, len));
 			count = count + ft_count_arglen(flags, len);
 			//printf("count:%d\n", count);
 			++n;

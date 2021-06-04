@@ -56,5 +56,5 @@ re: 		fclean all
 .PHONY: 	all clean fclean re
 
 test:		$(NAME)
-			$(CC) -g3 -fsanitize=address $(CFLAGS) $(SRCS) libftprintf.a
+			$(CC) -g3 -fsanitize=address $(CFLAGS) $(SRCS) libftprintf.so
 			./a.out

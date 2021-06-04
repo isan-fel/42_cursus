@@ -120,77 +120,84 @@ int	ft_write_char(st_flags flags)
     return(0);
 }
 
+void    ft_prec_or_len(st_flags flags, char *str, int len)
+{
+    int n;
+    int prec;
+
+    n = 0;
+    prec = flags.prec;
+    if(prec <= len)
+    {
+        while((n++ < (flags.width - prec)) && flags.justify != '-')
+            printf(" ");//write(1, " ", 1);
+        n = 0;
+        while(prec--)
+            printf("%c", str[n++]);
+    }
+    else
+    {
+        while((n++ <= (flags.width - (prec - len))) && flags.justify != '-')
+            printf(" ");//write(1, " ", 1);
+        n = 0;
+        while(len--)
+            printf("%c", str[n++]);
+    }
+    while(n++ < flags.width && flags.justify == '-')
+        printf(" ");//write(1, " ", 1);
+}
+
 void ft_write_string(st_flags flags)
 {
     char *str;
     int n;
     int len;
-    int prec;
 
     n = 0;
     str = flags.arg;
     len = ft_strlen(str);
-    prec = flags.prec;
     if(flags.dot)
     {
-        if(prec)
+        if(flags.prec)
         {
-            //printf("width:%d\n", flags.width);
-            //printf("prec:%d\n", flags.prec);
-            while((n < (flags.width - prec)) && flags.justify != '-')
-            {
-                printf(" ");//write(1, " ", 1);
-                ++n;
-            } 
-            n = 0;
-            while(prec--)
-            {
-                printf("%c", str[n++]);
-            }
-            while(n < flags.width && flags.justify == '-')
-            {
-                printf(" ");//write(1, " ", 1);
-                ++n;
-            }
+            //printf("entra aqui");
+            ft_prec_or_len(flags, str, len);
         }
         else
-            while(n < flags.width)
+        {
+            //printf("width:%d", flags.width);
+            while(n++ < flags.width)
             {
+                
                 printf(" ");//write(1, " ", 1);
-                ++n;
             }
+        }
     }
     else
     {
-        while((n < (flags.width - len)) && flags.justify != '-')
-        {
+        while((n++ < (flags.width - len)) && flags.justify != '-')
             printf(" ");//write(1, " ", 1);
-            ++n;
-        } 
         n = 0;
         while(str[n] != '\0')
         {
             printf("%c", str[n]);
             ++n;
         }
-        while(n < flags.width && flags.justify == '-')
-        {
-            printf(" ");//write(1, " ", 1);
-            ++n;
-        }    
+        while(n++ < flags.width && flags.justify == '-')
+            printf(" ");//write(1, " ", 1); 
     }
 }
 
 int ft_count_arglen(st_flags flags, int len)
 {
-    if(flags.prec)
+    if(flags.prec && flags.prec >= flags.width)
     {
         if(flags.prec < len)
             return(flags.prec);
         else
             return(len);
     }
-    if(flags.width > len)
+    if(flags.width > len || flags.dot)
         len = flags.width;
     if (flags.justify == '+')
         ++len;
