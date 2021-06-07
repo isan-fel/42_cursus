@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/06/07 18:13:51 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/06/07 19:24:36 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,12 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 	int negative = 1;
 	
 	flags->type = str;
-	if(str == 'd' || str == 'i')
+	if(str == 'd' || str == 'i' || str == 'u')
 	{
 		temp = ft_itoa(va_arg(param, int));
 		if (temp[0] == '-' && (flags->width || flags->prec))
 			negative = -1;
-		if (temp[0] == '0')
+		if (temp[0] == '0' && flags->dot)
 			negative = 0;
 		flags->arg = temp;
 		ft_write_int(*flags);

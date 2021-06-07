@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:13:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/06/07 19:01:59 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/06/07 19:27:20 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ void	ft_write_int(st_flags flags)
         //if(flags.prec)
         if (!flags.prec && !flags.width)
         {
-            //printf("entra");
             while(n++ < (flags.width - intlen))
             { 
                 printf(" ");//write(1, " ", 1);
@@ -180,14 +179,9 @@ void	ft_write_int(st_flags flags)
     }
     else
     {
-        if (flags.width == 0)
-        {
-            while (n < intlen && flags.dot == 0 && flags.prec)
-            {
-                printf("%c", num[n]);//write(1, &num[n], 1);
-                ++n;
-            }
-        }
+        if (!flags.width && !flags.prec)
+            while (n < intlen)
+                printf("%c", num[n++]);//write(1, &num[n], 1);
         if (((flags.justify == '-' && flags.dot) || flags.justify != '-') && flags.width)
             n = ft_write_pos(flags, intlen);
         while (n < flags.width && flags.justify == '-')
@@ -329,7 +323,7 @@ int ft_count_intflag(st_flags flags, int len)
 int ft_count_arglen(st_flags flags, int len)
 {
     //printf("len:%d\n", len);
-    if (flags.type == 'd' || flags.type == 'i')
+    if (flags.type == 'd' || flags.type == 'i' || flags.type == 'u')
         return (ft_count_intflag(flags, len));
     if (len == 0 && flags.type == 'c' && flags.width == 0)
         return(1);
