@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/06/03 20:30:06 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/06/07 18:13:51 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,16 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 {
 	char *temp;
 	int len = 0;
+	int negative = 1;
 	
 	flags->type = str;
 	if(str == 'd' || str == 'i')
 	{
 		temp = ft_itoa(va_arg(param, int));
+		if (temp[0] == '-' && (flags->width || flags->prec))
+			negative = -1;
+		if (temp[0] == '0')
+			negative = 0;
 		flags->arg = temp;
 		ft_write_int(*flags);
 	}
@@ -115,9 +120,10 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 		ft_write_string(*flags);
 	}
 	len = ft_strlen(temp);
+	//printf("temp:%s<-\n", temp);
 	//printf("len:%d\n", len);
 	free(temp);
-	return (len);
+	return (len * negative);
 }
 
 int ft_asterik(va_list param, int n, st_flags *flags)
@@ -237,11 +243,17 @@ int	ft_printf(const char *str, ...)
 			++n;
 			n = ft_save_every_flag(param, str, n, &flags);
 			//printf("\nque valor tengo: %c\n", str[n]);
-			len = ft_type_arg(param, str[n], &flags);
+			len = ft_type_arg(param, str[n++], &flags);
 			//printf("arglen:%d", ft_count_arglen(flags, len));
-			count = count + ft_count_arglen(flags, len);
+			if (len < 0 && flags.width <= flags.prec)
+			{
+				len = len * -1;
+				count = count + ft_count_arglen(flags, len) + 1;
+			}
+			else
+				count = count + ft_count_arglen(flags, len);
 			//printf("count:%d\n", count);
-			++n;
+			//++n;
 		}
 		else
 		{

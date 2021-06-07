@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/06/03 20:20:53 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/06/07 11:14:38 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,5 +56,5 @@ re: 		fclean all
 .PHONY: 	all clean fclean re
 
 test:		$(NAME)
-			$(CC) -g3 -fsanitize=address $(CFLAGS) $(SRCS) libftprintf.so
+			$(CC) -g3 -fsanitize=address $(CFLAGS) $(SRCS) libftprintf.a
 			./a.out
