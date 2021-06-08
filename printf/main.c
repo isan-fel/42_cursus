@@ -5,7 +5,7 @@ int main()
 {
 	//int num = 300;
 	//char c = 'r';
-	int n;
+	int n = 0;
 	int p;
 	
 	//char *pru = ft_uint_itoa(UINT_MAX);
@@ -14,9 +14,9 @@ int main()
 	//n = ft_printf("esto es una prueba:%c<-;ahora el num:%d<-\n", c, num);
 	//printf("esto es una prueba:%-5c<-;ahora el num:%-8d<-\n", c, num);
 	//printf("->%d<-\n", UINT_MAX);
-	printf("->%u<-\n", UINT_MAX);
-	n = ft_printf("%2.2x<-\n", UINT_MAX);
-	p = printf("%2.2x<-\n", UINT_MAX);
+	//printf("->%p<-\n", pru);
+	n = ft_printf("*%-*.*x* *%*.*d*<-\n", 4, 5, 1, 10, 21, -10);
+	p = printf("*%-x* *%*.*d*<-\n", 1, 10, 21, -10);
 	//p = printf("%.d<-\n", 0);
 	//printf("%-u<-\n", INT_MAX);
 	//n = ft_printf("%*.1s<-\n", 10, "123");
@@ -25,4 +25,5 @@ int main()
 	printf("return ft_printf: %d\n", n);
 	printf("return printf: %d\n", p);
 	//system("leaks -fullContent a.out");
+	//free(pru);
 }

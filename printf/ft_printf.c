@@ -6,7 +6,7 @@
 /*   By: isan <isan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/06/08 12:10:44 by isan             ###   ########.fr       */
+/*   Updated: 2021/06/08 18:51:15 by isan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,12 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 		ft_hex(hex, *flags);
 		return (ft_hexlen(hex, *flags));
 	}
+	if(str == 'p')
+	{
+		hex = va_arg(param, unsigned int);
+		printf("num_ptr:%d\n", hex);
+		return (0);
+	}
 	len = ft_strlen(temp);
 	//printf("temp:%s<-\n", temp);
 	//printf("len:%d\n", len);
@@ -139,15 +145,22 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 	return (len * negative);
 }
 
-int ft_asterik(va_list param, int n, st_flags *flags)
+int ft_asterik(va_list param, const char *str, int n, st_flags *flags)
 {
+	if (str[n - 1] == '.')
+	{
+		flags->prec = va_arg(param, int);
+		if(flags->prec < 0)
+			flags->prec = flags->prec * -1;
+		return (++n);
+	}
 	flags->width = va_arg(param, int);
 	if(flags->width < 0)
 	{
 		flags->width = flags->width * -1;
 		flags->justify = '-';
 	}
-	return(++n);
+	return (++n);
 }
 
 void	ft_prec(const char *str, int  n, st_flags *flags)
@@ -178,7 +191,7 @@ int	ft_dot_logic(va_list param, const char *str, st_flags *flags, int n)
 	{
 		if(str[n] == '*')
 		{
-			n = ft_asterik(param, n, flags);
+			n = ft_asterik(param, str, n, flags);
 			break ;
 		}
 		if(ft_isdigit(str[n]))
@@ -191,15 +204,18 @@ int	ft_dot_logic(va_list param, const char *str, st_flags *flags, int n)
 	}
 	while(!ft_isalpha(str[++n]))
 	{
+		if(str[n] == '*')
+		{
+			n = ft_asterik(param, str, n, flags);
+			break ;
+		}
 		if(ft_isdigit(str[n]))
 		{
 			ft_prec(str, n, flags);
 			n = n + ft_intlen(flags->prec);
-			//printf("posicion:%c<-\n", str[n]);
 			return (n);
 		}
 	}
-	//printf("posicion:%c<-\n", str[n]);
 	return(n);
 }
 
@@ -212,6 +228,9 @@ int	ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags)
 	save_n = n;	
 	while (!ft_isalpha(str[n]))
 	{
+		/*if(str[n] == '*' && str[n + 1] == '.')
+			n = ft_asterik(param, n, flags);
+		printf("donde estoy:%c\n", str[n]);*/
 		if(str[n] == '.')
 		{
 			n = ft_dot_logic(param, str, flags, save_n);
@@ -230,7 +249,7 @@ int	ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags)
 		return (n);
 	}
 	if(str[n] == '*')
-		n = ft_asterik(param, n, flags);
+		n = ft_asterik(param, str, n, flags);
 	return (n);
 }
 

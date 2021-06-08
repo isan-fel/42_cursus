@@ -6,7 +6,7 @@
 /*   By: isan <isan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:59:26 by isan              #+#    #+#             */
-/*   Updated: 2021/06/08 12:13:32 by isan             ###   ########.fr       */
+/*   Updated: 2021/06/08 19:21:35 by isan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ void ft_write_hex(unsigned int n, char flag)
     hex = "0123456789abcdef";
     if(flag == 'X')
 		hex = "0123456789ABCDEF";
-	if(n % 16 > 0)
+	if(n / 16 > 0)
 	{
 		ft_write_hex(n / 16, flag);
 		printf("%c", hex[n % 16]);//write(1, &hex[n % 16], 1);
 	}
+    else
+        printf("%c", hex[n]);//write(1, &hex[n % 16], 1);
 }
 
 void	ft_hex(unsigned int n, st_flags flags)
@@ -51,7 +53,7 @@ void	ft_hex(unsigned int n, st_flags flags)
 
     flag = flags.type;
     if(n)
-        ft_write_hex(n, flag);
+        ft_write(n, flag);
     else if (!n && !flags.dot)
         printf("%c", '0');
     
