@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
+#    By: isan <isan@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/06/07 11:14:38 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/06/08 11:37:38 by isan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,12 @@ NAME 	= 	libftprintf.a
 
 SRCS 	= 	main.c \
 			ft_printf.c \
-			ft_flags_conditions.c
+			ft_write_int_flags.c \
+			ft_write_char_flags.c \
+			ft_write_string_flags.c \
+			ft_write_hexa_flags.c \
+			ft_count_arglen.c \
+			ft_uint_itoa.c
 
 LIBFT 	= 	libft/libft.a
 
@@ -56,5 +61,5 @@ re: 		fclean all
 .PHONY: 	all clean fclean re
 
 test:		$(NAME)
-			$(CC) -g3 -fsanitize=address $(CFLAGS) $(SRCS) libftprintf.a
+			$(CC) -g3 -fsanitize=address $(CFLAGS) $(SRCS) libftprintf.so
 			./a.out

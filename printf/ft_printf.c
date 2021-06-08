@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isan <isan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/06/07 19:24:36 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/06/08 12:10:44 by isan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 	char *temp;
 	int len = 0;
 	int negative = 1;
+	int	hex = 0;
 	
 	flags->type = str;
-	if(str == 'd' || str == 'i' || str == 'u')
+	if(str == 'd' || str == 'i')
 	{
 		temp = ft_itoa(va_arg(param, int));
 		if (temp[0] == '-' && (flags->width || flags->prec))
@@ -118,6 +119,18 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 		temp = ft_strdup(va_arg(param, char *));
 		flags->arg = temp;
 		ft_write_string(*flags);
+	}
+	if(str == 'u')
+	{
+		temp = ft_uint_itoa(va_arg(param, unsigned int));
+		flags->arg = temp;
+		ft_write_int(*flags);
+	}
+	if(str == 'x' || str == 'X')
+	{
+		hex = va_arg(param, unsigned int);
+		ft_hex(hex, *flags);
+		return (ft_hexlen(hex, *flags));
 	}
 	len = ft_strlen(temp);
 	//printf("temp:%s<-\n", temp);
