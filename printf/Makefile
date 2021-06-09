@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: isan <isan@student.42.fr>                  +#+  +:+       +#+         #
+#    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/06/08 11:37:38 by isan             ###   ########.fr        #
+#    Updated: 2021/06/09 19:37:53 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,5 +61,5 @@ re: 		fclean all
 .PHONY: 	all clean fclean re
 
 test:		$(NAME)
-			$(CC) -g3 -fsanitize=address $(CFLAGS) $(SRCS) libftprintf.so
+			$(CC) -g3 -fsanitize=address $(CFLAGS) $(SRCS) libftprintf.a
 			./a.out

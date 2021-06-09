@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isan <isan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/06/08 18:51:15 by isan             ###   ########.fr       */
+/*   Updated: 2021/06/09 19:40:09 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 			negative = 0;
 		flags->arg = temp;
 		ft_write_int(*flags);
+		
 	}
 	if(str == 'c')
 	{
@@ -123,25 +124,35 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 	if(str == 'u')
 	{
 		temp = ft_uint_itoa(va_arg(param, unsigned int));
+		if (temp[0] == '-' && (flags->width || flags->prec))
+			negative = -1;
+		if (temp[0] == '0' && flags->dot)
+			negative = 0;
 		flags->arg = temp;
 		ft_write_int(*flags);
 	}
 	if(str == 'x' || str == 'X')
 	{
 		hex = va_arg(param, unsigned int);
-		ft_hex(hex, *flags);
-		return (ft_hexlen(hex, *flags));
+		temp = ft_write_hex(hex, *flags);
+		flags->arg = temp;
+		ft_write_int(*flags);
+		//return (ft_hexlen(hex, *flags));
 	}
 	if(str == 'p')
 	{
-		hex = va_arg(param, unsigned int);
-		printf("num_ptr:%d\n", hex);
-		return (0);
+		hex = va_arg(param, unsigned long);
+		temp = ft_write_hex(hex, *flags);
+		//printf("temp:%s<-\n", temp);
+		flags->arg = temp;
+		ft_write_int(*flags);
 	}
 	len = ft_strlen(temp);
+	free(temp);
+	//len = ft_strlen(temp);
 	//printf("temp:%s<-\n", temp);
 	//printf("len:%d\n", len);
-	free(temp);
+	//free(temp);
 	return (len * negative);
 }
 
@@ -223,14 +234,16 @@ int	ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags)
 {
 	int save_n;
 	
-	if(str[n] == '+' || str[n] == '-')
-		n = ft_justify(str[n], flags, n);
+	while (str[n] == '+' || str[n] == '-' || str[n] == '0')
+	{
+		if(str[n] == '+' || str[n] == '-')
+			n = ft_justify(str[n], flags, n);
+		if(str[n] == '0')
+			n = ft_zero(str[n], flags, n);
+	}
 	save_n = n;	
 	while (!ft_isalpha(str[n]))
 	{
-		/*if(str[n] == '*' && str[n + 1] == '.')
-			n = ft_asterik(param, n, flags);
-		printf("donde estoy:%c\n", str[n]);*/
 		if(str[n] == '.')
 		{
 			n = ft_dot_logic(param, str, flags, save_n);
@@ -238,10 +251,7 @@ int	ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags)
 		}
 		++n;
 	}
-	n = save_n;
-	flags->dot = 0;			
-	if(str[n] == '0')
-		n = ft_zero(str[n], flags, n);
+	n = save_n;		
 	if(ft_isdigit(str[n]))
 	{
 		ft_width(str, n, flags);

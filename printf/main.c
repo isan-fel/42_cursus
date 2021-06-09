@@ -14,12 +14,13 @@ int main()
 	//n = ft_printf("esto es una prueba:%c<-;ahora el num:%d<-\n", c, num);
 	//printf("esto es una prueba:%-5c<-;ahora el num:%-8d<-\n", c, num);
 	//printf("->%d<-\n", UINT_MAX);
-	//printf("->%p<-\n", pru);
-	n = ft_printf("*%-*.*x* *%*.*d*<-\n", 4, 5, 1, 10, 21, -10);
-	p = printf("*%-x* *%*.*d*<-\n", 1, 10, 21, -10);
+	//printf("->%.x<-\n", 0);
+	n = ft_printf("%p<-\n", (void *)UINT_MAX);
+	p = printf("%p<-\n", (void *)UINT_MAX);
 	//p = printf("%.d<-\n", 0);
 	//printf("%-u<-\n", INT_MAX);
-	//n = ft_printf("%*.1s<-\n", 10, "123");
+	//n = ft_printf("%x<-\n", 10);
+	//p = ft_printf("%x<-\n", 10);
 	//p = printf("%*.1s<-\n", 10, "123");
 	//p = printf("%*d", 0, num);
 	printf("return ft_printf: %d\n", n);

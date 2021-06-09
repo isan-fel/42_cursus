@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write_int_flags.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isan <isan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:04:09 by isan              #+#    #+#             */
-/*   Updated: 2021/06/08 18:08:31 by isan             ###   ########.fr       */
+/*   Updated: 2021/06/09 14:38:17 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,10 +179,10 @@ void	ft_write_int(st_flags flags)
     }
     else
     {
-        if (!flags.width && !flags.prec)
+        if ((!flags.width && !flags.prec) || flags.width < intlen)
             while (n < intlen)
                 printf("%c", num[n++]);//write(1, &num[n], 1);
-        if (((flags.justify == '-' && flags.dot) || flags.justify != '-') && flags.width)
+        if (flags.justify != '-' && flags.width)
             n = ft_write_pos(flags, intlen);
         while (n < flags.width && flags.justify == '-')
         {

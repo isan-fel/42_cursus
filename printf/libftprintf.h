@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isan <isan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:14:17 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/06/08 18:50:30 by isan             ###   ########.fr       */
+/*   Updated: 2021/06/09 16:24:21 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	ft_write_string(st_flags flags);
 char	*ft_uint_itoa(unsigned int n);
 void	ft_hex(unsigned int n, st_flags flags);
 int		ft_hexlen(unsigned int n, st_flags flags);
+char 	*ft_write_hex(unsigned int n, st_flags flags);
 
 #endif
