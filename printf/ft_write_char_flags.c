@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write_char_flags.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isan <isan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:06:08 by isan              #+#    #+#             */
-/*   Updated: 2021/06/08 10:12:16 by isan             ###   ########.fr       */
+/*   Updated: 2021/07/01 17:13:00 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,25 @@
 //necesito para nada
 int	ft_write_char(st_flags flags)
 {
-    char *str;
+    char str;
     int n;
-    int strlen;
 
     n = 0;
-    str = flags.arg;
-    strlen = ft_strlen(str);
-    //printf("width:%d\n", flags.width);
-    //printf("strlen:%d\n", strlen);
+    str = flags.arg[0];
     if (flags.width == 0)
-    {
-        if (strlen == 1)
-        {
-        printf("%c", str[n]);//write(1, &str[n], 1);
-        return (1);
-        }
-        while (n < strlen - 1)
-        {
-            printf("%c", str[n]);//write(1, &str[n], 1);
-            ++n;
-        }
-    }
-    if (str[n] == 0)
-        ++n;
+        return(write(1, &str, 1));
     while (n < flags.width && flags.justify == '-')
     {
-        if (n < strlen)
-            printf("%c", str[n]);//write(1, &str[n], 1);
+        if (n < 1)
+            write(1, &str, 1);
         ++n;
-        if (n > strlen)
-            printf(" ");//write(1, " ", 1);
+        if (n > 1)
+            write(1, " ", 1);
     }
-    while (n < (flags.width - strlen) && flags.justify != '-')
-    {
-        printf(" ");//write(1, " ", 1);
-        ++n;
-    }
+    while (n++ < (flags.width - 1) && flags.justify != '-')
+        write(1, " ", 1);
     n = 0;
-    while (n < strlen && flags.justify != '-')
-    {
-        printf("%c", str[n]);//write(1, &str[n], 1);
-        ++n;
-    }
+    while (n++ < 1 && flags.justify != '-')
+        write(1, &str, 1);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/06/09 19:40:09 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/06 16:11:29 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 	int len = 0;
 	int negative = 1;
 	int	hex = 0;
+	unsigned long long point_dir = 0;
 	
 	flags->type = str;
 	if(str == 'd' || str == 'i')
@@ -107,7 +108,6 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 			negative = 0;
 		flags->arg = temp;
 		ft_write_int(*flags);
-		
 	}
 	if(str == 'c')
 	{
@@ -137,22 +137,16 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 		temp = ft_write_hex(hex, *flags);
 		flags->arg = temp;
 		ft_write_int(*flags);
-		//return (ft_hexlen(hex, *flags));
 	}
 	if(str == 'p')
 	{
-		hex = va_arg(param, unsigned long);
-		temp = ft_write_hex(hex, *flags);
-		//printf("temp:%s<-\n", temp);
+		point_dir = (unsigned long long) va_arg(param, void *);
+		temp = ft_write_pointer(point_dir);
 		flags->arg = temp;
 		ft_write_int(*flags);
 	}
 	len = ft_strlen(temp);
 	free(temp);
-	//len = ft_strlen(temp);
-	//printf("temp:%s<-\n", temp);
-	//printf("len:%d\n", len);
-	//free(temp);
 	return (len * negative);
 }
 
@@ -191,7 +185,6 @@ void	ft_prec(const char *str, int  n, st_flags *flags)
 		prec[i++] = str[save_n++];
 	num = ft_atoi(prec);
 	flags->prec = num;
-	//printf("prec:%d<-\n", flags->prec);
 	free (prec);
 }
 
@@ -223,8 +216,7 @@ int	ft_dot_logic(va_list param, const char *str, st_flags *flags, int n)
 		if(ft_isdigit(str[n]))
 		{
 			ft_prec(str, n, flags);
-			n = n + ft_intlen(flags->prec);
-			return (n);
+			return (n + ft_intlen(flags->prec));
 		}
 	}
 	return(n);
@@ -245,18 +237,14 @@ int	ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags)
 	while (!ft_isalpha(str[n]))
 	{
 		if(str[n] == '.')
-		{
-			n = ft_dot_logic(param, str, flags, save_n);
-			return(n);
-		}
+			return(ft_dot_logic(param, str, flags, save_n));
 		++n;
 	}
 	n = save_n;		
 	if(ft_isdigit(str[n]))
 	{
 		ft_width(str, n, flags);
-		n = n + ft_intlen(flags->width);
-		return (n);
+		return (n + ft_intlen(flags->width));
 	}
 	if(str[n] == '*')
 		n = ft_asterik(param, str, n, flags);
@@ -269,41 +257,27 @@ int	ft_printf(const char *str, ...)
 	st_flags flags;
 	int n;
 	int count;
-	int save_count;
 	int len;
 
 	count = 0;
-	save_count = 0;
 	n = 0;
 	va_start(param, str);
 	while(str[n] != '\0')
 	{
 		flags = ft_initiate_flags();
-		//printf("\nque valor tengo:%c<-\n", str[n]);
 		if(str[n] == '%')
 		{
 			++n;
 			n = ft_save_every_flag(param, str, n, &flags);
-			//printf("\nque valor tengo: %c\n", str[n]);
 			len = ft_type_arg(param, str[n++], &flags);
-			//printf("arglen:%d", ft_count_arglen(flags, len));
 			if (len < 0 && flags.width <= flags.prec)
-			{
-				len = len * -1;
-				count = count + ft_count_arglen(flags, len) + 1;
-			}
+				count = count + ft_count_arglen(flags, len * -1) + 1;
 			else
 				count = count + ft_count_arglen(flags, len);
-			//printf("count:%d\n", count);
-			//++n;
 		}
 		else
-		{
-			printf("%c", str[n]);//write(1, &str[n], 1);
-			++n;
-			++save_count;
-		}
+			count = count + write(1, &str[n++], 1);
 	}
 	va_end(param);
-	return (save_count + count);
+	return (count);
 }

@@ -1,5 +1,6 @@
 *.DS_Store
 a.out
+a.out.dSYM
 *.o
 *.txt
 *.gch
@@ -8,3 +9,5 @@ gnlTester
 42cursus_gnl_tests
 .vscode
 printfTester
+pft
+born2beroot

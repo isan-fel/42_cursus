@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:14:17 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/06/09 16:24:21 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/06 16:08:32 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ typedef struct flags_struct
 
 int		ft_printf(const char *str, ...);
 void	ft_write_int(st_flags flags);
+void    ft_int_prec_or_len(st_flags flags, char *num, int intlen);
 int		ft_write_char(st_flags flags);
 int 	ft_count_arglen(st_flags flags, int len);
 void	ft_write_string(st_flags flags);
 char	*ft_uint_itoa(unsigned int n);
-void	ft_hex(unsigned int n, st_flags flags);
-int		ft_hexlen(unsigned int n, st_flags flags);
 char 	*ft_write_hex(unsigned int n, st_flags flags);
+char	*ft_write_pointer(unsigned long long n);
 
 #endif

@@ -6,145 +6,61 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:04:09 by isan              #+#    #+#             */
-/*   Updated: 2021/06/09 14:38:17 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:12:58 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_write_pos(st_flags flags, int intlen)
+void    ft_fill_int_zero_or_space(st_flags flags)
 {
-    int n;
-    char *num;
-    
-    n = 0;
-    num = flags.arg;
-    if(flags.justify == '+' && flags.zero)
-    {
-        printf("%c", flags.justify);//write(1, &flags.justify, 1);
-        ++n;
-    }
+    if(flags.zero)
+        write(1, "0", 1);
+    else
+        write(1, " ", 1);
+}
+
+int	ft_write_pos(st_flags flags, char *num, int intlen)
+{
+	int		n;
+
+	n = 0;
+	if(flags.justify == '+' && flags.zero)
+		n = n + write(1, &flags.justify, 1);
     else if(flags.justify == '+' && !flags.zero)
         ++n;
-    while(n < (flags.width - intlen))
-    {
-        if(flags.zero || (flags.justify == '-' && flags.dot))
-            printf("0");//write(1, "0", 1);
-        else
-            printf(" ");//write(1, " ", 1);
-        ++n;
-    }
-    //printf("valor n: %d", n);
-    n = 0;
+    if(num[0] == '-' && flags.zero)
+		write(1, &num[0], 1);
+    while(n++ < (flags.width - intlen))
+        ft_fill_int_zero_or_space(flags);
+    if(num[0] == '-' && !flags.zero)
+		write(1, &num[0], 1);
+    if (num[0] == '-')
+        n = 1;
+    else
+        n = 0;
     if(flags.justify == '+' && !flags.zero)
-        printf("%c", flags.justify);//write(1, &flags.justify, 1);
+        write(1, &flags.justify, 1);
     while(n < intlen)
-    {
-        printf("%c", num[n]);//write(1, &num[n], 1);
-        ++n;
-    }
+        n = n + write(1, &num[n], 1);
     return (flags.width + 1);
 }
 
-void    ft_int_prec_or_len(st_flags flags, char *num, int intlen)
+void    ft_flags_dot(st_flags flags, char *num, int intlen)
 {
     int n;
-    int prec;
-    int i;
 
     n = 0;
-    i = 0;
-    prec = flags.prec;
-    if (flags.justify == '-')
+    if (!flags.prec && !flags.width)
     {
-        if (num[i] == '-')
-        {
-            printf("%c", '-');
-            --intlen;
-            ++i;
-            
-        }
-            while (n++ < (prec - intlen))
-                printf("%c", '0');
-            while (intlen--)
-            {
-                printf("%c", num[i++]);
-                ++n;
-            }
-            if (num[0] == '-')
-                ++n;
-            while (n++ <= flags.width)
-                printf(" ");
+        while(n++ < (flags.width - intlen))
+            write(1, " ", 1);
+        n = 0;
+        while (intlen-- && num[0] != '0')
+            write(1, &num[n++], 1);
     }
     else
-    {
-            if (prec >= flags.width)
-            {
-                if (num[i] == '-')
-                {
-                    printf("%c", '-');
-                    --intlen;
-                    ++i;
-                }
-                else if (flags.justify == '+')
-                    printf("%c", '+');
-                while (prec-- > intlen)
-                    printf("%c", '0');
-                while (intlen--)
-                {
-                    printf("%c", num[i++]);
-                    ++n;
-                }
-            }
-            else
-            {
-                if (num[i] == '-')
-                {
-                    flags.justify = '!';
-                    --intlen;
-                    ++i;
-                    ++n;
-                }
-                if (prec <= intlen)
-                {
-                    if (flags.justify == '+')
-                        while (n++ < (flags.width - intlen - 1))
-                            printf(" ");//write(1, " ", 1);
-                    else if (num[0] == '0' && !prec)
-                        while (n++ <= (flags.width - intlen))
-                            printf(" ");//write(1, " ", 1);
-                    else
-                        while (n++ < (flags.width - intlen))
-                            printf(" ");//write(1, " ", 1);
-                    if (flags.justify == '!')
-                        printf("%c", '-');
-                    if (flags.justify == '+')
-                        printf("%c", '+');
-                    while (intlen-- && (num[0] != '0' || prec))
-                        printf("%c", num[i++]);
-                }
-                else
-                {
-                    if (flags.justify == '+')
-                        while (n++ < (flags.width - prec - 1))
-                            printf(" ");//write(1, " ", 1);
-                    else
-                        while (n++ < (flags.width - prec))
-                            printf(" ");//write(1, " ", 1);
-                    while (n++ < (flags.width - prec))
-                        printf(" ");//write(1, " ", 1);
-                    if (flags.justify == '!')
-                        printf("%c", '-');
-                    if (flags.justify == '+')
-                        printf("%c", '+');
-                    while (prec-- > intlen)
-                        printf("%c", '0');
-                    while (intlen--)
-                        printf("%c", num[i++]);
-                }
-            }
-    }
-
+        ft_int_prec_or_len(flags, num, intlen);
 }
 
 void	ft_write_int(st_flags flags)
@@ -156,42 +72,22 @@ void	ft_write_int(st_flags flags)
     n = 0;
     num = flags.arg;
     intlen = ft_strlen(num);
-    /*printf("intlen:%d\n", intlen);
-    printf("width:%d\n", flags.width);
-    printf("prec:%d\n", flags.prec);
-    printf("num:%s<-\n", num);
-    printf("dot:%d\n", flags.dot);*/
     if(flags.dot)
-    {
-        //if(flags.prec)
-        if (!flags.prec && !flags.width)
-        {
-            while(n++ < (flags.width - intlen))
-            { 
-                printf(" ");//write(1, " ", 1);
-            }
-            n = 0;
-            while (intlen-- && num[0] != '0')
-                printf("%c", num[n++]);
-        }
-        else
-            ft_int_prec_or_len(flags, num, intlen);
-    }
+        ft_flags_dot(flags, num, intlen);
     else
     {
         if ((!flags.width && !flags.prec) || flags.width < intlen)
             while (n < intlen)
-                printf("%c", num[n++]);//write(1, &num[n], 1);
-        if (flags.justify != '-' && flags.width)
-            n = ft_write_pos(flags, intlen);
+                write(1, &num[n++], 1);
+        if (flags.justify != '-' && flags.width >= intlen)
+            n = ft_write_pos(flags, num, intlen);
         while (n < flags.width && flags.justify == '-')
         {
             if (n < intlen)
-                printf("%c", num[n]);//write(1, &num[n], 1);
+                write(1, &num[n], 1);
             ++n;
             if (n > intlen)
-                printf(" ");//write(1, " ", 1);
-        //write(1, "", 1);
+                write(1, " ", 1);
         }
     }
 }

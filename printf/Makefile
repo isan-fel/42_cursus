@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/06/09 19:37:53 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/07/05 14:59:14 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME 	= 	libftprintf.a
 SRCS 	= 	main.c \
 			ft_printf.c \
 			ft_write_int_flags.c \
+			ft_int_preclen.c \
 			ft_write_char_flags.c \
 			ft_write_string_flags.c \
 			ft_write_hexa_flags.c \
@@ -27,7 +28,7 @@ OBJS 	= 	$(SRCS:.c=.o)
 
 CC				= clang
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -fPIC
+CFLAGS			= -Wall -Werror -Wextra -fPIC
 
 GREEN 			= \033[0;32m
 NO_COLOR 		= \033[0m
