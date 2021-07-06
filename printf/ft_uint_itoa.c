@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_uint_itoa.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isan <isan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:08:41 by user42            #+#    #+#             */
-/*   Updated: 2021/06/08 10:30:41 by isan             ###   ########.fr       */
+/*   Updated: 2021/07/06 16:55:30 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	ft_intlen(long nb)
+static int	ft_intlonglen(long nb)
 {
 	int	len;
 
@@ -56,7 +56,7 @@ char	*ft_uint_itoa(unsigned int n)
 	if (n < 0)
 	{
 		nc = n * -1;
-		numlen = ft_intlen(nc) + 1;
+		numlen = ft_intlonglen(nc) + 1;
 		str = (char *)malloc(sizeof(char) * numlen + 1);
 		if (!str)
 			return (NULL);
@@ -66,7 +66,7 @@ char	*ft_uint_itoa(unsigned int n)
 	else
 	{
 		nc = n;
-		numlen = ft_intlen(nc);
+		numlen = ft_intlonglen(nc);
 		str = (char *)malloc(sizeof(char) * numlen + 1);
 		if (!str)
 			return (NULL);

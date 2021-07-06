@@ -17,8 +17,8 @@ int main()
 	//printf("->%lu<-\n", LONG_MIN);
 	//printf("->%ld<-\n", -ULONG_MAX);
 	//printf("->%.x<-\n", 0);
-	n = ft_printf("%p<-\n", (void *)LONG_MAX);
-	p = printf("%p<-\n", (void *)LONG_MAX);
+	//n = ft_printf("%p<-\n", (void *)LONG_MAX);
+	p = printf("%5%<-\n");
 	//ft_printf("%p<-\n", (void *)344);
 	//printf("%p<-\n", (void *)344);
 	//p = printf("%.d<-\n", 0);

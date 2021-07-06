@@ -6,26 +6,11 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:59:26 by isan              #+#    #+#             */
-/*   Updated: 2021/07/06 16:12:44 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/06 16:56:22 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-static int	ft_intlen(unsigned int nb)
-{
-	int	len;
-
-	len = 0;
-	if (nb == 0)
-		len = 1;
-	while (nb >= 1)
-	{
-		nb = nb / 10;
-		++len;
-	}
-	return (len);
-}
 
 void    ft_strrev(char *str, int i)
 {

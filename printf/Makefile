@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/07/05 14:59:14 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/07/06 16:51:27 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@ NAME 	= 	libftprintf.a
 
 SRCS 	= 	main.c \
 			ft_printf.c \
+			ft_utils.c \
+			ft_save_flags.c \
+			ft_save_flags_2.c \
 			ft_write_int_flags.c \
 			ft_int_preclen.c \
 			ft_write_char_flags.c \
