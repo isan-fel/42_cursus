@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:13:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/01 17:37:58 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/06 19:27:48 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void ft_write_string(st_flags flags)
         free(temp);
     }
     len = ft_strlen(str);
-    if (flags.dot)
+    if (flags.dot && flags.justify != 's')
     {
         if (flags.prec)
             ft_string_prec_or_len(flags, str, len);

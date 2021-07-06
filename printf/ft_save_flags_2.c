@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:43:33 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/06 17:25:36 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/06 18:22:29 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags)
 			n = ft_zero(str[n], flags, n);
 	}
 	save_n = n;	
-	while (!ft_isalpha(str[n]))
+	while (!ft_isalpha(str[n]) && str[n] != '%')
 	{
 		if(str[n] == '.')
 		{	

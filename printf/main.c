@@ -18,15 +18,15 @@ int main()
 	//printf("->%ld<-\n", -ULONG_MAX);
 	//printf("->%.x<-\n", 0);
 	//n = ft_printf("%p<-\n", (void *)LONG_MAX);
-	p = printf("%5%<-\n");
+	//p = printf("%5%<-\n");
 	//ft_printf("%p<-\n", (void *)344);
 	//printf("%p<-\n", (void *)344);
 	//p = printf("%.d<-\n", 0);
 	//printf("%-u<-\n", INT_MAX);
 	//n = ft_printf("%.9s<-\n", NULL);
 	//p = printf("%.9s<-\n", NULL);
-	//n = ft_printf("->%p;%p<-\n", (void *)LONG_MIN, (void *)LONG_MAX);
-	//p = printf("->%p;%p<-\n", (void *)LONG_MIN, (void *)LONG_MAX);
+	n = ft_printf("->%-.*s<-\n", -3, "hello");
+	p = printf("->%-.*s<-\n", -3, "hello");
 	printf("return ft_printf: %d\n", n);
 	printf("return printf: %d\n", p);
 	//system("leaks -fullContent a.out");

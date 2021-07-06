@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/06 17:49:56 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/06 18:54:25 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ char	*ft_save_char_array_arg(va_list param, char str, st_flags *flags)
 {
 	char *temp;
 
-	if(str == 'c')
+	if(str != 's')
 	{
-		temp = ft_char(va_arg(param, int));
+		if (str == 'c')
+			temp = ft_char(va_arg(param, int));
+		else
+			temp = ft_char(str);
 		flags->arg = temp;
 		ft_write_char(*flags);
 	}
@@ -85,7 +88,7 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 	int negative = 1;
 	
 	flags->type = str;
-	if(str == 'c' || str == 's')
+	if(str == 'c' || str == 's' || str == '%')
 		temp = ft_save_char_array_arg(param, str, flags);
 	if(str == 'd' || str == 'i' || str == 'u')
 	{
