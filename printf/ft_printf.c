@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/08 13:45:59 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 19:28:14 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ char	*ft_save_hexa_pointer_arg(va_list param, char str, st_flags *flags)
 
 int ft_int_negative(char str, st_flags *flags)
 {
-	if (str == '-' && (flags->width || flags->prec))
+	//if (str == '-' && (flags->width || flags->prec))
+	if (str == '-')
 		return (-1);
 	if (str == '0' && flags->dot)
 		return (0);
@@ -126,10 +127,27 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 
 int	ft_continue_count(st_flags flags, int len, int count)
 {
-	if (len < 0 && flags.width <= flags.prec)
+	/*if (len < 0 && flags.width <= flags.prec && flags.width && flags.prec)
 		return (count + ft_count_arglen(flags, len * -1) + 1);
+	if (len < 0)	
+		return (count + ft_count_arglen(flags, len * -1));
 	else
-		return (count + ft_count_arglen(flags, len));
+		return (count + ft_count_arglen(flags, len));*/
+	if (len < 0)
+	{
+		len = len * -1;
+		//printf("func:%d", ft_count_arglen(flags, len));
+		if (flags.width <= flags.prec && ((flags.width && flags.prec) || flags.dot))
+		{
+			if (len < flags.width || len < flags.prec)
+				return (count + ft_count_arglen(flags, len) + 1);
+			else
+				return (count + ft_count_arglen(flags, len));
+		}
+		else
+			return (count + ft_count_arglen(flags, len));
+	}
+	return (count + ft_count_arglen(flags, len));
 }
 
 int	ft_printf(const char *str, ...)

@@ -25,10 +25,16 @@ int main()
 	//printf("%-u<-\n", INT_MAX);
 	//n = ft_printf("%.9s<-\n", NULL);
 	//p = printf("%.9s<-\n", NULL);
-	n = ft_printf("->%.*s<-\n", -2, NULL);
-	p = printf("->%.*s<-\n", -2, NULL);
+	int		a = -3;
+	int		l = 0;
+	n = ft_printf("%.*d<-\n", a, l);
+	p = printf("%.*d<-\n", a, l);
 	printf("return ft_printf: %d\n", n);
 	printf("return printf: %d\n", p);
+	/*n = ft_printf("%1.1d<-\n", -12);
+	p = printf("%1.1d<-\n", -12);
+	printf("return ft_printf: %d\n", n);
+	printf("return printf: %d\n", p);*/
 	//system("leaks -fullContent a.out");
 	//free(pru);
 }

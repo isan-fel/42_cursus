@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:04:09 by isan              #+#    #+#             */
-/*   Updated: 2021/07/08 15:31:42 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 16:13:05 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	ft_write_int(st_flags flags)
     n = 0;
     num = flags.arg;
     intlen = ft_strlen(num);
+    //printf("len:%d", intlen);
     if(flags.dot)
         ft_flags_dot(flags, num, intlen);
     else

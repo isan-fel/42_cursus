@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:06:57 by isan              #+#    #+#             */
-/*   Updated: 2021/07/08 15:51:20 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 20:02:35 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ int ft_count_intflag(st_flags flags, int len)
     if ((flags.type == 'x' || flags.type == 'X') && flags.prec == 0 && flags.width == 0 && flags.dot == 1 && flags.arg[0] == '0')
         return (0);
     if (flags.prec >= flags.width && flags.prec > len)
-        return (flags.prec);
+    { 
+        if (flags.neg_prec)
+            return (len);
+        else
+            return (flags.prec);
+    }
     if (flags.width > len)
         return (flags.width);
     if (flags.justify == '+' && flags.width < len)
