@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:57:40 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/06 15:42:02 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:36:34 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void    ft_prec_morethan_width(st_flags flags, char *num, int intlen, int prec)
 
     n = 0;
     i = 0;
-    /*printf("entra");
-    printf("prec:%d\n", prec);
+    //printf("entra");
+    /*printf("prec:%d\n", prec);
     printf("intlen:%d\n", intlen);*/
     if (num[i] == '-')
     {
@@ -57,7 +57,7 @@ void    ft_prec_morethan_width(st_flags flags, char *num, int intlen, int prec)
     }
     else if (flags.justify == '+')
         write(1, "+", 1);
-    while (prec-- > intlen)
+    while (prec-- > intlen && !flags.neg_prec)
         write(1, "0", 1);
     while (intlen--)
     {
@@ -99,7 +99,7 @@ void    ft_prec_mthan_widthlen(st_flags flags, char *num, int intlen, int prec, 
         write(1, "-", 1);
     if (flags.justify == '+')
         write(1, "+", 1);
-    while (prec-- > intlen)
+    while (prec-- > intlen && !flags.neg_prec)
         write(1, "0", 1);
     while (intlen--)
         write(1, &num[i++], 1);

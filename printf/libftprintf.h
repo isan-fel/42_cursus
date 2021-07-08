@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:14:17 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/08 14:03:56 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:33:33 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct flags_struct
 	int		prec;
 	char    type;
 	char	*arg;
-	int		neg_prec_s;
+	int		neg_prec;
 }	st_flags;
 
 

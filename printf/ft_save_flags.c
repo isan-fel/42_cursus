@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:41:22 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/08 14:29:24 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:33:28 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int ft_asterik(va_list param, const char *str, int n, st_flags *flags)
 		{
 			flags->prec = flags->prec * -1;
 			flags->justify = 's';
-			//flags->neg_prec_s = 1;
+			flags->neg_prec = 1;
 		}
 		return (++n);
 	}

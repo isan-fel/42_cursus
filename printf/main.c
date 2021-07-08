@@ -19,14 +19,14 @@ int main()
 	//printf("->%.x<-\n", 0);
 	//n = ft_printf("%.03d<-\n", 234);
 	//p = printf("%.03d<-\n");
-	//ft_printf("%p<-\n", (void *)344);
-	//printf("%p<-\n", (void *)344);
+	//n = ft_printf("%p<-\n", (void *)344);
+	//p = printf("%p<-\n", (void *)344);
 	//p = printf("%.d<-\n", 0);
 	//printf("%-u<-\n", INT_MAX);
 	//n = ft_printf("%.9s<-\n", NULL);
 	//p = printf("%.9s<-\n", NULL);
-	n = ft_printf("->%.*d<-\n", -10, 12345);
-	p = printf("->%.*d<-\n", -10, 12345);
+	n = ft_printf("->%% *.5i 42 == |%.*d|<-\n", -4, 42);
+	p = printf("->%% *.5i 42 == |%.*d|<-\n", -4, 42);
 	printf("return ft_printf: %d\n", n);
 	printf("return printf: %d\n", p);
 	//system("leaks -fullContent a.out");
