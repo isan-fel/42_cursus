@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:13:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/08 14:28:58 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:47:17 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void ft_write_string(st_flags flags)
     str = flags.arg;
     len = ft_strlen(str);
     //printf("len:%d\n", len);
-    if (flags.dot && flags.justify != 's')
+    if (flags.dot && !flags.neg_prec)
     {
         if (flags.prec)
             ft_string_prec_or_len(flags, str, len);
