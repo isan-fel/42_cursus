@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:43:33 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/06 18:22:29 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 12:24:30 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ int ft_save_width(const char *str, st_flags *flags, int n)
 {
     ft_width(str, n, flags);
 	return (n + ft_intlen(flags->width));
-}
-
-int ft_dot_prec(const char *str, st_flags *flags, int n)
-{
-    ft_prec(str, n, flags);
-	return (n + ft_intlen(flags->prec));
 }
 
 int	ft_dot_logic(va_list param, const char *str, st_flags *flags, int n)
@@ -48,7 +42,7 @@ int	ft_dot_logic(va_list param, const char *str, st_flags *flags, int n)
 			break ;
 		}
 		if(ft_isdigit(str[n]))
-            return (ft_dot_prec(str, flags, n));
+            return (n + ft_prec(str, n, flags));
 	}
 	return(n);
 }

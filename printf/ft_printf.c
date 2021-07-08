@@ -6,11 +6,31 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/06 18:54:25 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 13:45:59 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+char	*ft_strdup_string_printf(char *src)
+{
+	char	*result;
+	int		i;
+
+	i = 0;
+	if (!src)
+		src = "(null)";
+	result = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!result)
+		return (NULL);
+	while (src[i] != '\0')
+	{
+		result[i] = src[i];
+		++i;
+	}
+	result[i] = '\0';
+	return (result);
+}
 
 char	*ft_save_char_array_arg(va_list param, char str, st_flags *flags)
 {
@@ -27,7 +47,7 @@ char	*ft_save_char_array_arg(va_list param, char str, st_flags *flags)
 	}
 	if(str == 's')
 	{
-		temp = ft_strdup(va_arg(param, char *));
+		temp = ft_strdup_string_printf(va_arg(param, char *));
 		flags->arg = temp;
 		ft_write_string(*flags);
 	}
@@ -88,6 +108,7 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 	int negative = 1;
 	
 	flags->type = str;
+	//printf("type:%c\n", str);
 	if(str == 'c' || str == 's' || str == '%')
 		temp = ft_save_char_array_arg(param, str, flags);
 	if(str == 'd' || str == 'i' || str == 'u')
@@ -97,6 +118,7 @@ int	ft_type_arg(va_list param, char str, st_flags *flags)
 	}
 	if(str == 'x' || str == 'X' || str == 'p')
 		temp = ft_save_hexa_pointer_arg(param, str, flags);
+	//printf("temp:%s", temp);
 	len = ft_strlen(temp);
 	free(temp);
 	return (len * negative);

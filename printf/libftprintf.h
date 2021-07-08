@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:14:17 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/06 17:24:18 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 14:03:56 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct flags_struct
 	int		prec;
 	char    type;
 	char	*arg;
+	int		neg_prec_s;
 }	st_flags;
 
 
@@ -40,7 +41,7 @@ int			ft_justify(char str, st_flags *flags, int n);
 int			ft_zero(char str, st_flags *flags, int n);
 void		ft_width(const char *str, int  n, st_flags *flags);
 int			ft_asterik(va_list param, const char *str, int n, st_flags *flags);
-void		ft_prec(const char *str, int  n, st_flags *flags);
+int			ft_prec(const char *str, int  n, st_flags *flags);
 int			ft_dot_logic(va_list param, const char *str, st_flags *flags, int n);
 int			ft_save_every_flag(va_list param, const char *str, int n, st_flags *flags);
 void		ft_write_int(st_flags flags);

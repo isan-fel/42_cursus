@@ -8,7 +8,7 @@ int main()
 	int n = 0;
 	int p = 0;
 	//static char	*a01;
-	
+	//static char *s_hidden = "hi low\0 don't print me lol\0";
 	//char *pru = ft_uint_itoa(UINT_MAX);
 	//printf("pru:%s", pru);
 	//ft_printf("esto es una prueba: %d", num);
@@ -17,16 +17,16 @@ int main()
 	//printf("->%lu<-\n", LONG_MIN);
 	//printf("->%ld<-\n", -ULONG_MAX);
 	//printf("->%.x<-\n", 0);
-	//n = ft_printf("%p<-\n", (void *)LONG_MAX);
-	//p = printf("%5%<-\n");
+	//n = ft_printf("%.03d<-\n", 234);
+	//p = printf("%.03d<-\n");
 	//ft_printf("%p<-\n", (void *)344);
 	//printf("%p<-\n", (void *)344);
 	//p = printf("%.d<-\n", 0);
 	//printf("%-u<-\n", INT_MAX);
 	//n = ft_printf("%.9s<-\n", NULL);
 	//p = printf("%.9s<-\n", NULL);
-	n = ft_printf("->%-.*s<-\n", -3, "hello");
-	p = printf("->%-.*s<-\n", -3, "hello");
+	n = ft_printf("->%.*d<-\n", -10, 12345);
+	p = printf("->%.*d<-\n", -10, 12345);
 	printf("return ft_printf: %d\n", n);
 	printf("return printf: %d\n", p);
 	//system("leaks -fullContent a.out");

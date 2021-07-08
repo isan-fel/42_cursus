@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:41:22 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/06 19:26:35 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/08 14:29:24 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int ft_asterik(va_list param, const char *str, int n, st_flags *flags)
 		{
 			flags->prec = flags->prec * -1;
 			flags->justify = 's';
+			//flags->neg_prec_s = 1;
 		}
 		return (++n);
 	}
@@ -71,7 +72,7 @@ int ft_asterik(va_list param, const char *str, int n, st_flags *flags)
 	return (++n);
 }
 
-void	ft_prec(const char *str, int  n, st_flags *flags)
+int	ft_prec(const char *str, int  n, st_flags *flags)
 {
 	char *prec;
 	int i;
@@ -80,8 +81,11 @@ void	ft_prec(const char *str, int  n, st_flags *flags)
 
 	i = 0;
 	save_n = n;
-	while(ft_isdigit(str[n++]))
+	while(ft_isdigit(str[n]))
+	{
+		++n;
 		++i;
+	}
 	prec = ft_calloc(i + 1, sizeof(char));
 	i = 0;
 	while(save_n < n)
@@ -89,4 +93,5 @@ void	ft_prec(const char *str, int  n, st_flags *flags)
 	num = ft_atoi(prec);
 	flags->prec = num;
 	free (prec);
+	return (i);
 }
