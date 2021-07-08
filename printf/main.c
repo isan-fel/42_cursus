@@ -25,8 +25,8 @@ int main()
 	//printf("%-u<-\n", INT_MAX);
 	//n = ft_printf("%.9s<-\n", NULL);
 	//p = printf("%.9s<-\n", NULL);
-	n = ft_printf("->%-*.*s<-\n", -7, -3, "yolo");
-	p = printf("->%-*.*s<-\n", -7, -3, "yolo");
+	n = ft_printf("->%.*s<-\n", -2, NULL);
+	p = printf("->%.*s<-\n", -2, NULL);
 	printf("return ft_printf: %d\n", n);
 	printf("return printf: %d\n", p);
 	//system("leaks -fullContent a.out");
