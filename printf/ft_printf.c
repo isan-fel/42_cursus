@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/08 19:28:14 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/12 13:14:33 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ char	*ft_save_char_array_arg(va_list param, char str, st_flags *flags)
 		else
 			temp = ft_char(str);
 		flags->arg = temp;
-		ft_write_char(*flags);
+		ft_write_char(flags);
 	}
+	//printf("count:%d\n", flags->len);
 	if(str == 's')
 	{
 		temp = ft_strdup_string_printf(va_arg(param, char *));
 		flags->arg = temp;
-		ft_write_string(*flags);
+		ft_write_string(flags);
 	}
 	return(temp);
 }
@@ -67,14 +68,14 @@ char	*ft_save_hexa_pointer_arg(va_list param, char str, st_flags *flags)
 		hex = va_arg(param, unsigned int);
 		temp = ft_write_hex(hex, *flags);
 		flags->arg = temp;
-		ft_write_int(*flags);
+		ft_write_int(flags);
 	}
 	if(str == 'p')
 	{
 		point_dir = (unsigned long long) va_arg(param, void *);
 		temp = ft_write_pointer(point_dir);
 		flags->arg = temp;
-		ft_write_int(*flags);
+		ft_write_int(flags);
 	}
 	return(temp);
 }
@@ -98,7 +99,7 @@ char	*ft_save_int_arg(va_list param, char str, st_flags *flags)
 	if(str == 'u')
 		temp = ft_uint_itoa(va_arg(param, unsigned int));
 	flags->arg = temp;
-	ft_write_int(*flags);
+	ft_write_int(flags);
 	return (temp);
 }
 
@@ -155,25 +156,29 @@ int	ft_printf(const char *str, ...)
 	va_list	param;
 	st_flags flags;
 	int n;
-	int count;
+	//int count;
 	int len;
 
-	count = 0;
+	//count = 0;
 	n = 0;
 	va_start(param, str);
+	flags.len = 0;
 	while(str[n] != '\0')
 	{
-		flags = ft_initiate_flags();
+		ft_initiate_flags(&flags);
 		if(str[n] == '%')
 		{
 			++n;
 			n = ft_save_every_flag(param, str, n, &flags);
 			len = ft_type_arg(param, str[n++], &flags);
-			count = ft_continue_count(flags, len, count);
+			//count = ft_continue_count(flags, len, count)
+			//printf("suma:%d + %d\n", count, flags.len);
 		}
 		else
-			count = count + write(1, &str[n++], 1);
+			flags.len += write(1, &str[n++], 1);
+	//printf("suma:%d + %d\n", count, flags.len);
 	}
+	//printf("suma:%d + %d\n", count, flags.len);
 	va_end(param);
-	return (count);
+	return (flags.len);
 }

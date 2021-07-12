@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:49:15 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/08 15:33:41 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/12 13:18:02 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ char	*ft_char(char c_antes)
 	return (str);
 }
 
-st_flags	ft_initiate_flags(void)
+st_flags	*ft_initiate_flags(st_flags *flags)
 {
-	st_flags	flags;
+	//st_flags	flags;
 
-	flags.justify = '0';
-	flags.dot = 0;
-	flags.zero = 0;
-	flags.asterisk = 0;
-	flags.width = 0;
-	flags.prec = 0;
-	flags.type = '%';
-	flags.arg = NULL;
-	flags.neg_prec = 0;
+	flags->justify = '0';
+	flags->dot = 0;
+	flags->zero = 0;
+	flags->asterisk = 0;
+	flags->width = 0;
+	flags->prec = 0;
+	flags->type = '%';
+	flags->arg = NULL;
+	flags->neg_prec = 0;
 	return (flags);
 }
