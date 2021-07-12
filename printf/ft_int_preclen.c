@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:57:40 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/12 13:33:39 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/12 17:03:41 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,24 @@ void    ft_prec_morethan_width(st_flags *flags, char *num, int intlen, int prec)
     }
     else if (flags->justify == '+')
         flags->len += write(1, "+", 1);
-    while (prec-- > intlen && !flags->neg_prec)
-        flags->len += write(1, "0", 1);
+    if (flags->neg_prec)
+    {
+        if (flags->zero)
+        {
+            while (flags->width-- > intlen)
+            flags->len += write(1, "0", 1);
+        }
+        else
+        {
+            while (flags->width-- > intlen)
+                flags->len += write(1, " ", 1);
+        }
+    }
+    else
+    {
+        while (prec-- > intlen)
+            flags->len += write(1, "0", 1);
+    }
     while (intlen--)
     {
         flags->len += write(1, &num[i++], 1);
@@ -70,6 +86,32 @@ void    ft_prec_morethan_width(st_flags *flags, char *num, int intlen, int prec)
 
 void    ft_prec_lessthan_len(st_flags *flags, char *num, int intlen, int prec, int n, int i)
 {
+    if (flags->neg_prec)
+    {
+        if (flags->justify == '+')
+        while (n++ < (flags->width - intlen - 1))
+            flags->len += write(1, " ", 1);
+    else if (num[0] == '0' && !prec)
+        while (n++ <= (flags->width - intlen))
+            flags->len += write(1, " ", 1);
+    else if (flags->zero && flags->neg_prec && flags->justify !='!')
+        while (flags->width-- > intlen)
+            flags->len += write(1, "0", 1);
+    else if (!flags->zero)
+        while (n++ < (flags->width - intlen))
+            flags->len += write(1, " ", 1);
+    if (flags->justify == '!')
+        flags->len += write(1, "-", 1);
+    if (flags->justify == '+')
+        flags->len += write(1, "+", 1);
+    if (flags->zero && flags->neg_prec && flags->justify =='!')
+        while (flags->width-- > intlen + 1)
+            flags->len += write(1, "0", 1);
+    while (intlen-- && (num[0] != '0' || prec))
+        flags->len += write(1, &num[i++], 1);
+    }
+    else
+    {
     if (flags->justify == '+')
         while (n++ < (flags->width - intlen - 1))
             flags->len += write(1, " ", 1);
@@ -85,16 +127,35 @@ void    ft_prec_lessthan_len(st_flags *flags, char *num, int intlen, int prec, i
         flags->len += write(1, "+", 1);
     while (intlen-- && (num[0] != '0' || prec))
         flags->len += write(1, &num[i++], 1);
+    }
 }
 
 void    ft_prec_mthan_widthlen(st_flags *flags, char *num, int intlen, int prec, int n, int i)
 {
-    if (flags->justify == '+')
+    /*if (flags->justify == '+')
         while (n++ < (flags->width - prec - 1))
-            flags->len += write(1, " ", 1);
+            flags->len += write(1, " ", 1);*/
+    if (flags->neg_prec)
+        {
+            if (flags->zero)
+            {
+                while (n++ < (flags->width - intlen))
+                    flags->len += write(1, "0", 1);
+            }
+            else
+            {
+                while (n++ < (flags->width - intlen))
+                    flags->len += write(1, " ", 1);
+            }
+                if (flags->justify == '!')
+                    flags->len += write(1, "-", 1);
+                if (flags->justify == '+')
+                    flags->len += write(1, "+", 1);
+                while (intlen--)
+                    flags->len += write(1, &num[i++], 1);
+        }
     else
-        while (n++ < (flags->width - prec))
-            flags->len += write(1, " ", 1);
+    {
     while (n++ < (flags->width - prec))
         flags->len += write(1, " ", 1);
     if (flags->justify == '!')
@@ -105,7 +166,14 @@ void    ft_prec_mthan_widthlen(st_flags *flags, char *num, int intlen, int prec,
         flags->len += write(1, "0", 1);
     while (intlen--)
         flags->len += write(1, &num[i++], 1);
+    }
 }
+
+/*void ft_obviate_prec(st_flags *flags, char *num, int intlen, int n, int i)
+{
+    while(n++ < (flags->width - prec))
+
+}*/
 
 void    ft_int_prec_or_len(st_flags *flags, char *num, int intlen)
 {
@@ -128,6 +196,8 @@ void    ft_int_prec_or_len(st_flags *flags, char *num, int intlen)
                 ++i;
             }
             n = i;
+            /*if (flags->neg_prec)
+                ft_obviate_prec(flags, num, intlen, n, i);*/
             if (flags->prec <= intlen)
                 ft_prec_lessthan_len(flags, num, intlen, flags->prec, n, i);
             else
