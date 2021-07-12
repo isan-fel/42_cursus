@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 13:00:08 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/27 13:26:41 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/12 19:20:33 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,13 @@ void	*ft_memmove(void *dest, const void *src, size_t len);
 void	*ft_memset(void *str, int c, size_t n);
 void	*ft_calloc (size_t num, size_t size);
 
-//void	ft_putnbr(int nb);
-//void	ft_putstr(char *str);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
-//char	*ft_strcat(char *dest, char *src);
 char	*ft_strchr(const char *s, int c);
-//char	*ft_strcpy(char *dest, char *src);
 char	*ft_strdup(char *src);
-//char	*ft_strncat(char *dest, char *src, unsigned int nb);
-//char	*ft_strncpy(char *dest, char *src, unsigned int n);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strstr(char *str, char *to_find);
 char	*ft_itoa(int n);

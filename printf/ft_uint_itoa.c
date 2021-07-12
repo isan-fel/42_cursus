@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:08:41 by user42            #+#    #+#             */
-/*   Updated: 2021/07/06 16:55:30 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/12 18:56:12 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static char	*ft_write(char *str, int numlen, long nb, int flag_neg)
 
 char	*ft_uint_itoa(unsigned int n)
 {
-	int				numlen;
-	char			*str;
+	int		numlen;
+	char	*str;
 	long	nc;
 
 	if (n < 0)

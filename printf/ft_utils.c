@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:49:15 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/12 13:18:02 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/12 19:24:45 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ char	*ft_char(char c_antes)
 	return (str);
 }
 
-st_flags	*ft_initiate_flags(st_flags *flags)
+t_flags	*ft_initiate_flags(t_flags *flags)
 {
-	//st_flags	flags;
-
 	flags->justify = '0';
 	flags->dot = 0;
 	flags->zero = 0;
@@ -51,4 +49,24 @@ st_flags	*ft_initiate_flags(st_flags *flags)
 	flags->arg = NULL;
 	flags->neg_prec = 0;
 	return (flags);
+}
+
+char	*ft_strdup_string_printf(char *src)
+{
+	char	*result;
+	int		i;
+
+	i = 0;
+	if (!src)
+		src = "(null)";
+	result = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!result)
+		return (NULL);
+	while (src[i] != '\0')
+	{
+		result[i] = src[i];
+		++i;
+	}
+	result[i] = '\0';
+	return (result);
 }

@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/07/12 13:51:44 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/07/12 17:27:35 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS 	= 	main.c \
 			ft_save_flags_2.c \
 			ft_write_int_flags.c \
 			ft_int_preclen.c \
+			ft_neg_prec_int.c \
 			ft_write_char_flags.c \
 			ft_write_string_flags.c \
 			ft_write_hexa_flags.c \
