@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/07/08 14:31:45 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/07/12 13:51:44 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ SRCS 	= 	main.c \
 			ft_write_char_flags.c \
 			ft_write_string_flags.c \
 			ft_write_hexa_flags.c \
-			ft_count_arglen.c \
 			ft_uint_itoa.c
 
 LIBFT 	= 	libft/libft.a
