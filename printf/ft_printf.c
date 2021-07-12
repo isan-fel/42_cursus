@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/12 19:33:13 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/12 19:53:39 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_type_arg(va_list param, char str, t_flags *flags)
 int	ft_printf(const char *str, ...)
 {
 	va_list		param;
-	t_flags	flags;
+	t_flags		flags;
 	int			n;
 
 	n = 0;
