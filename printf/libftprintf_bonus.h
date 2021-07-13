@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   libftprintf_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:14:17 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/13 15:56:18 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/13 16:12:28 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef LIBFTPRINTF_BONUS_H
+# define LIBFTPRINTF_BONUS_H
 
 # include <stdlib.h>
 # include <stdio.h>
