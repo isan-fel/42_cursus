@@ -6,11 +6,11 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:04:09 by isan              #+#    #+#             */
-/*   Updated: 2021/07/13 16:13:39 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/13 16:19:45 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libftprintf_bonus.h"
+#include "../libftprintf_bonus.h"
 
 void	ft_fill_int_zero_or_space(t_flags *flags)
 {

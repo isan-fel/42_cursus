@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/07/13 16:01:41 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/07/13 16:17:49 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ RM			= 	rm -f
 CFLAGS		= 	-Wall -fPIC
 
 GREEN 		= 	\033[0;32m
+YELLOW		=	\033[0;33m
 NO_COLOR 	= 	\033[0m
 
 all: 		$(NAME)
@@ -80,6 +81,7 @@ clean:
 
 fclean: 	clean
 			$(RM) $(NAME)
+			echo "$(YELLOW)---->> SUSCCESSFULLY CLEAN <<---- $(NO_COLOR)"
 
 re: 		fclean all
 

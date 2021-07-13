@@ -6,11 +6,11 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:13:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/13 16:13:45 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/13 16:19:45 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libftprintf_bonus.h"
+#include "../libftprintf_bonus.h"
 
 void	ft_string_prec_or_len(t_flags *flags, char *str, int len)
 {

@@ -6,11 +6,11 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:57:40 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/13 16:12:38 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/13 16:19:45 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libftprintf_bonus.h"
+#include "../libftprintf_bonus.h"
 
 void	ft_preclen_justify(t_flags *flags, char *num, int intlen, int prec)
 {

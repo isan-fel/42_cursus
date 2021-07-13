@@ -6,11 +6,11 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:41:22 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/13 16:13:08 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/13 16:19:45 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libftprintf_bonus.h"
+#include "../libftprintf_bonus.h"
 
 int	ft_justify(char str, t_flags *flags)
 {
