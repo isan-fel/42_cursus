@@ -1,4 +1,4 @@
-#include "libftprintf.h"
+#include "../libftprintf.h"
 #include <limits.h>
 
 int main()
@@ -35,8 +35,6 @@ int main()
 	printf("return ft_printf: %d\n", ft_printf("%0*.*d<-\n", 3, -2, 'c'));
 	printf("return printf: %d\n", printf("%0*.*d<-\n", 3, -2, 'c'));
 	*/
-	printf("return ft_printf: %d\n", ft_printf("%% *.5i 42 == |% *.5i|<-\n", 4, 42));
-	printf("return printf: %d\n", printf("%% *.5i 42 == |% *.5i|<-\n", 4, 42));
 	/*printf("width > prec\n");
 	printf("width > 0 y prec > 0:\n");
 	printf("return ft_printf: %d\n", ft_printf("%*.*d<-\n", 4, 2, 8));

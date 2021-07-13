@@ -6,28 +6,28 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:41:22 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/12 19:25:10 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/13 15:56:04 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "../libftprintf.h"
 
-int	ft_justify(char str, t_flags *flags, int n)
+int	ft_justify(char str, t_flags *flags)
 {
 	if (str == '+' || str == '-')
 		flags->justify = str;
 	else
 		flags->justify = 48;
-	return (++n);
+	return (1);
 }
 
-int	ft_zero(char str, t_flags *flags, int n)
+int	ft_zero(char str, t_flags *flags)
 {
 	if (str == '0')
 		flags->zero = 1;
 	else
 		flags->zero = 0;
-	return (++n);
+	return (1);
 }
 
 void	ft_width(const char *str, int n, t_flags *flags)

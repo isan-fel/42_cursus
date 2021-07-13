@@ -6,11 +6,11 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:59:26 by isan              #+#    #+#             */
-/*   Updated: 2021/07/12 19:27:02 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/13 13:41:00 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "../libftprintf.h"
 
 void	ft_strrev(char *str, int i)
 {

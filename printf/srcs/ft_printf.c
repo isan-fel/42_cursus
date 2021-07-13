@@ -6,11 +6,11 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:41:10 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/07/12 19:53:39 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/07/13 15:45:20 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "../libftprintf.h"
 
 char	*ft_save_char_array_arg(va_list param, char str, t_flags *flags)
 {
@@ -72,11 +72,13 @@ char	*ft_save_int_arg(va_list param, char str, t_flags *flags)
 	return (temp);
 }
 
-void	ft_type_arg(va_list param, char str, t_flags *flags)
+int	ft_type_arg(va_list param, char str, t_flags *flags)
 {
 	char	*temp;
 
 	flags->type = str;
+	while (!ft_strchr(FLAGS, str))
+		return (0);
 	if (str == 'c' || str == 's' || str == '%')
 		temp = ft_save_char_array_arg(param, str, flags);
 	if (str == 'd' || str == 'i' || str == 'u')
@@ -84,6 +86,7 @@ void	ft_type_arg(va_list param, char str, t_flags *flags)
 	if (str == 'x' || str == 'X' || str == 'p')
 		temp = ft_save_hexa_pointer_arg(param, str, flags);
 	free(temp);
+	return (1);
 }
 
 int	ft_printf(const char *str, ...)
@@ -100,8 +103,11 @@ int	ft_printf(const char *str, ...)
 		ft_initiate_flags(&flags);
 		if (str[n] == '%')
 		{
-			++n;
+			if (str[++n] == '\0')
+				return (flags.len);
 			n = save_every_flag(param, str, n, &flags);
+			if (str[n] == '\0')
+				return (flags.len);
 			ft_type_arg(param, str[n++], &flags);
 		}
 		else
