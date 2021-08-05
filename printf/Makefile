@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/07/13 16:17:49 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/08/05 11:36:14 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,11 +63,6 @@ $(LIBFT):
 $(NAME): 	$(OBJS) $(LIBFT)
 			cp $(LIBFT) $(NAME)
 			ar -rcs $(NAME) $(OBJS)
-			echo "$(GREEN)---->> SUSCCESSFULLY COMPILED <<---- $(NO_COLOR)"
-
-bonus:		$(LIBFT) $(OBJSB)
-			cp $(LIBFT) $(NAME)
-			ar -rcs $(NAME) $(OBJSB)
 			echo "$(GREEN)---->> SUSCCESSFULLY COMPILED <<---- $(NO_COLOR)"
 
 so:			$(LIBFT) $(OBJS)
