@@ -6,58 +6,54 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/08/05 17:57:23 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/09/09 18:32:29 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= 	fdf
 
-SOURCES 	= 	main.c \
-				window.c \
-				image.c \
-				color.c \
-				hooks.c
-
-DIR_S 		= 	srcs
-
-SRCS 		= 	$(addprefix $(DIR_S)/, $(SOURCES))
+SRCS 	= 	main.c \
+			get_next_line.c \
+			window.c \
+			reader.c \
+			map.c
 
 OBJS 		= 	$(SRCS:.c=.o)
 
-CC			= 	gcc
 RM			= 	rm -f
-CFLAGS		= 	-Wall -Werror -Wextra -fPIC
+FLAGS		= 	-Wall -Werror -Wextra
+DEBUG		=	-g3 -fsanitize=address
+LINKS 		=	-lmlx -framework OpenGL -framework AppKit
 
-LINKS 		= -lmlx -framework OpenGL -framework AppKit
+NONE='\033[0m'
+GREEN='\033[32m'
+GRAY='\033[2;37m'
+CURSIVE='\033[3m'
 
-GREEN 		= 	\033[0;32m
-YELLOW		=	\033[0;33m
-NO_COLOR 	= 	\033[0m
+all: $(NAME)
 
-all: 		$(NAME)
+$(NAME): $(OBJS)
+	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
+	@gcc $(FLAGS) $(OBJS) $(DEBUG) libft/libft.a $(LINKS) -o $(NAME)
+	@echo $(GREEN)"- Compiled -"
+	@rm $(OBJS)
+	@echo $(CURSIVE)$(GRAY) "     Deleted object files" $(NONE)
 
-$(NAME): 	$(OBJS)
-			gcc $(CFLAGS) $(OBJ) $(LINKS) -o $(NAME)
-			echo "$(GREEN)---->> SUSCCESSFULLY COMPILED <<---- $(NO_COLOR)"
+$(OBJS): $(SRCS)
+	@echo $(CURSIVE)$(GRAY) "     - Making object files..." $(NONE)
+	@gcc $(FLAGS) -c $(SRCS)
 
-so:			$(OBJS)
-			gcc $(CFLAGS) $(OBJ) $(LINKS) -o $(NAME)
-			echo "$(GREEN)---->> SUSCCESSFULLY COMPILED <<---- $(NO_COLOR)"
+test: all
+	@echo "     - Executing $(NAME)... \n"
+	@./$(NAME) 42.fdf
+	@echo "\n     - Done -"
 
 clean:
-			$(RM) $(OBJS)
+	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)
+	@rm -rf $(OBJS)
 
-fclean: 	clean
-			$(RM) $(NAME)
-			echo "$(YELLOW)---->> SUSCCESSFULLY CLEAN <<---- $(NO_COLOR)"
+fclean: clean
+	@echo $(CURSIVE)$(GRAY) "     - Removing $(NAME)..." $(NONE)
+	@rm -rf $(NAME)
 
-re: 		fclean all
-
-.SILENT:
-
-.PHONY: 	all clean fclean re
-
-exe: 	all
-		@echo "     - Executing $(NAME)... \n"
-		@./$(NAME)
-		@echo "\n     - Done -"
+re: fclean all
