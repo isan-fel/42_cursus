@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <math.h>
 
 # define BUFFER_SIZE 20
 
@@ -29,12 +30,13 @@ typedef struct s_map
 	int		**map;
 	int		x_count;
 	int		y_count;
+	int		zoom;
 }	t_map;
 
 int		get_next_line(int fd, char **line);
 void	ft_map(int fd, char *argv, t_map *map);
 int		err_ctrl(char *reason, int fd);
-void    ft_show_map(t_map *map);
+
 
 /* vector with an x and y */
 typedef struct	s_vector
@@ -44,10 +46,10 @@ typedef struct	s_vector
 }				t_vector;
 
 /* A pointer to the window and its size */
-typedef struct	s_window {
+/*typedef struct	s_window {
 	void		*reference;
 	t_vector	size;
-}				t_window;
+}				t_window;*/
 
 /* all info needed for an image */
 typedef struct	s_image {
@@ -69,12 +71,13 @@ typedef struct s_color {
 
 typedef struct	s_program {
 	void		*mlx;
-	t_window	window;
+	void		*window;
+	//t_window	window;
 	t_image		sprite;
 	t_vector	sprite_position;
 }				t_program;
 
-t_window	ft_new_window(void *mlx, int widht, int height, char *name);
+//t_window	ft_new_window(void *mlx, int widht, int height, char *name);
 t_image		ft_new_sprite(void *mlx, char *path);
 
 t_color		new_color(int r, int g, int b, int a);
@@ -82,5 +85,7 @@ void		turn_img_to_color(t_image *image, t_color color);
 
 int			ft_input(int key, void *program);
 int			ft_update (void *param);
+
+void ft_trace_pixel(t_program *program, t_map *map);
 
 # endif

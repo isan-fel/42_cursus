@@ -14,16 +14,18 @@ NAME 	= 	fdf
 
 SRCS 	= 	main.c \
 			get_next_line.c \
-			window.c \
 			reader.c \
 			map.c
 
 OBJS 		= 	$(SRCS:.c=.o)
 
 RM			= 	rm -f
-FLAGS		= 	-Wall -Werror -Wextra
-DEBUG		=	-g3 -fsanitize=address
+#FLAGS		= 	-Wall -Werror -Wextra
+#DEBUG		=	-g3 -fsanitize=address
+#Links for compile minilibx on MACOS
 LINKS 		=	-lmlx -framework OpenGL -framework AppKit
+#Links for compile minilibx on Linux
+LINKS_so		=	-lmlx -lXext -lX11
 
 NONE='\033[0m'
 GREEN='\033[32m'
@@ -38,6 +40,14 @@ $(NAME): $(OBJS)
 	@echo $(GREEN)"- Compiled -"
 	@rm $(OBJS)
 	@echo $(CURSIVE)$(GRAY) "     Deleted object files" $(NONE)
+
+so: $(OBJS)
+	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
+	@gcc $(FLAGS) $(OBJS) $(DEBUG) libft/libft.so $(LINKS_so) -o $(NAME)
+	@echo $(GREEN)"- Compiled -"
+	@rm $(OBJS)
+	@echo $(CURSIVE)$(GRAY) "     Deleted object files" $(NONE)
+
 
 $(OBJS): $(SRCS)
 	@echo $(CURSIVE)$(GRAY) "     - Making object files..." $(NONE)

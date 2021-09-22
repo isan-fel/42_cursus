@@ -51,7 +51,7 @@ void    ft_parse_aux_map(int fd, t_map *map)
 	while (ret >= 0)
 	{
 		map->aux_map[i++] = ft_strdup(line);
-		printf("%s\n", map->aux_map[i -1]);
+		//printf("%s\n", map->aux_map[i -1]);
         free(line);
 		line = NULL;
 		if (ret == 0)
@@ -69,23 +69,31 @@ void ft_map(int fd, char *argv, t_map *map)
     int     n;
     
     n = -1;
-	ret = get_next_line(fd, &line);
-    map->y_count += 1;
+    ret = get_next_line(fd, &line);
+    /*for linux*/
+    map->y_count = 0;
+    map->x_count = 0;
+    map->y_count = map->y_count + 1;
+    /*for mac*/
+    //map->y_count += 1;
     if (!line)
         err_ctrl("error: empty file", fd);
     while (line[++n])
     {
         if (line[n] != ' ' && !ft_isalpha(line[n + 1]))
-            map->x_count += 1;
+            /*for linux*/
+            map->x_count = map->x_count + 1;
+            /*for mac*/
+            //map->y_count += 1;
     }
-	while (ret >= 0)
+    while (ret >= 0)
     {
         free(line);
 		line = NULL;
         if (ret == 0)
 			break ;
         ret = get_next_line(fd, &line);
-        map->y_count += 1;
+        map->y_count = map->y_count + 1;
     }
     printf("x_len:%d\n", map->x_count);
     printf("y_len:%d\n", map->y_count);

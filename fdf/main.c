@@ -18,12 +18,18 @@ int		err_ctrl(char *reason, int fd)
 	return (1);
 }
 
+int ft_deal_key(int key, void *program)
+{
+    printf("%d", key);
+    return(0);
+}
+
 int		main(int argc, char **argv)
 {
 	int fd;
 	t_map map;
 	// Struct with all the info that I need to run the program (mlx_sample.h)
-	//t_program program;
+	t_program program;
 	
 	if (argc == 2)
 	{
@@ -34,7 +40,16 @@ int		main(int argc, char **argv)
 		//parsing the map
 		ft_map(fd, argv[1], &map);
 		//initialiting windows
-		ft_show_map(&map);
+		// mlx function that initialize the mlx and returns a pointer to it.
+		program.mlx = mlx_init();
+		// Open a window (window.c whitin this project)
+		program.window = mlx_new_window(program.mlx, 1000, 1000, "FDF");
+   		// hook the input() (hooks.c) function to the the key pressed event
+    	ft_trace_pixel(&program, &map);
+    	// hook a function to the loop (it would be called each frame)
+    	mlx_key_hook(program.window, ft_deal_key, NULL);
+		// mlx constant loop that keeps the detects the events
+		mlx_loop(program.mlx);
 	}
 	else
 		return (err_ctrl("error: more than 1 argument", 0));
