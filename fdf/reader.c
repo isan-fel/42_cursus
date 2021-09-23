@@ -6,63 +6,63 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:44:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/09/09 17:35:26 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/09/23 20:10:26 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void    ft_parse_map(t_map *map)
+void    ft_parse_map(t_program *program)
 {
     int     i;
     int     j;
     char    **aux;
 
     i = -1;
-    map->map = malloc(sizeof(int *) * (map->y_count + 1));
-    if (!map->map)
+    program->map.map = malloc(sizeof(int *) * (program->map.y_count + 1));
+    if (!program->map.map)
         err_ctrl("Error: Allocating memory error\n", 3);
-    while (++i < map->y_count)
+    while (++i < program->map.y_count)
     {
-        aux = ft_split(map->aux_map[i], ' ');
-        map->map[i] = malloc(sizeof(int) * (map->x_count + 1));
-        if (!map->map[i])
+        aux = ft_split(program->map.aux_map[i], ' ');
+        free (program->map.aux_map[i]);
+        program->map.map[i] = malloc(sizeof(int) * (program->map.x_count + 1));
+        if (!program->map.map[i])
             err_ctrl("Error: Allocating memory error\n", 3);
         j = -1;
-        while (++j < map->x_count)
+        while (++j < program->map.x_count)
         {
-            map->map[i][j] = atoi(aux[j]);
-            printf("%3d", map->map[i][j]);
+            program->map.map[i][j] = atoi(aux[j]);
+            //printf("%3d", program->map.map[i][j]);
         }
-        printf("\n");
+        //printf("\n");
         free(aux);
     }
 }
 
-void    ft_parse_aux_map(int fd, t_map *map)
+void    ft_parse_aux_map(int fd, t_program *program)
 {
     char	*line;
 	int		ret;
     int     i;
 
     i = 0;
-    map->aux_map = malloc(sizeof(char *) * (map->y_count + 1));
+    program->map.aux_map = malloc(sizeof(char *) * (program->map.y_count + 1));
     ret = get_next_line(fd, &line);
 	while (ret >= 0)
 	{
-		map->aux_map[i++] = ft_strdup(line);
-		//printf("%s\n", map->aux_map[i -1]);
+		program->map.aux_map[i++] = ft_strdup(line);
         free(line);
 		line = NULL;
 		if (ret == 0)
 			break ;
 		ret = get_next_line(fd, &line);
 	}
-    map->aux_map[i] = NULL;
+    program->map.aux_map[i] = NULL;
     close(fd);
 }
 
-void ft_map(int fd, char *argv, t_map *map)
+void ft_map(int fd, char *argv, t_program *program)
 {
     char	*line;
 	int		ret;
@@ -71,20 +71,19 @@ void ft_map(int fd, char *argv, t_map *map)
     n = -1;
     ret = get_next_line(fd, &line);
     /*for linux*/
-    map->y_count = 0;
-    map->x_count = 0;
-    map->y_count = map->y_count + 1;
+    program->map.y_count = 0;
+    program->map.x_count = 0;
+    program->map.y_count = program->map.y_count + 1;
     /*for mac*/
-    //map->y_count += 1;
+    //program->map.y_count += 1;
     if (!line)
         err_ctrl("error: empty file", fd);
     while (line[++n])
     {
-        if (line[n] != ' ' && !ft_isalpha(line[n + 1]))
-            /*for linux*/
-            map->x_count = map->x_count + 1;
+        if (line[n] != ' ' && line[n] != '-' && !ft_isdigit(line[n + 1]))
+            program->map.x_count = program->map.x_count + 1;
             /*for mac*/
-            //map->y_count += 1;
+            //program->map.y_count += 1;
     }
     while (ret >= 0)
     {
@@ -93,11 +92,11 @@ void ft_map(int fd, char *argv, t_map *map)
         if (ret == 0)
 			break ;
         ret = get_next_line(fd, &line);
-        map->y_count = map->y_count + 1;
+        program->map.y_count = program->map.y_count + 1;
     }
-    printf("x_len:%d\n", map->x_count);
-    printf("y_len:%d\n", map->y_count);
+    printf("x_len:%d\n", program->map.x_count);
+    printf("y_len:%d\n", program->map.y_count);
     close(fd);
-    ft_parse_aux_map(open(argv, O_RDONLY), map);
-    ft_parse_map(map);
+    ft_parse_aux_map(open(argv, O_RDONLY), program);
+    ft_parse_map(program);
 }

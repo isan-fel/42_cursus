@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/09/09 18:32:29 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/09/23 20:12:00 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ $(OBJS): $(SRCS)
 
 test: all
 	@echo "     - Executing $(NAME)... \n"
-	@./$(NAME) 42.fdf
+	@./$(NAME) maps/test_maps/pentenegpos.fdf 
 	@echo "\n     - Done -"
 
 clean:
