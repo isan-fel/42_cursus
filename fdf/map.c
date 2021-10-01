@@ -34,7 +34,7 @@ void	my_mlx_pixel_put(t_program *program, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void ft_draw_line(float x, float y, float x1, float y1, t_program *program)
+void ft_draw_line(float x, float y, float x1, float y1, t_program *program, int reset)
 {
     float x_next;
     float y_next;
@@ -42,9 +42,17 @@ void ft_draw_line(float x, float y, float x1, float y1, t_program *program)
     int z1;
     int color;
     
+    //ft_window_oversize_control(program);
     //printf("coor z:%d ; %d", (int)y, (int)x);
     z = program->map.map[(int)y][(int)x];
     z1 = program->map.map[(int)y1][(int)x1];
+    /*color condition*/
+    if (z || z1)
+        color = 0x008f39;
+    else
+        color = 0xffffff;
+    if (reset)
+        color = 0x000000;    
     /*change altitude scale*/
     z *= program->map.alt_zoom;
     z1 *= program->map.alt_zoom;
@@ -60,28 +68,23 @@ void ft_draw_line(float x, float y, float x1, float y1, t_program *program)
     y1 = (x1 + y1) * sin(0.8) - z1;
     /*shift to avoid cut with edge*/
     x += program->map.shift;
-    y += program->map.shift;
+    y += program->map.shift/3;
     x1 += program->map.shift;
-    y1 += program->map.shift; 
+    y1 += program->map.shift/3; 
     x_next = (x1 - x) / ft_max_int(ft_mod_int(x1 - x), ft_mod_int(y1 - y));
     y_next = (y1 - y) / ft_max_int(ft_mod_int(x1 - x), ft_mod_int(y1 - y));
     //printf("x_next:%f ; %f", x_next, y_next);
     while ((int)(x - x1) || (int)(y - y1))
     {
-        //mlx_pixel_put(program->mlx, program->window, x, y, color);
-        if (z || z1)
-            my_mlx_pixel_put(program, x, y, 0x008f39);
-            //mlx_pixel_put(program->mlx, program->window, x, y, 0x008f39);
-        else
-            my_mlx_pixel_put(program, x, y, 0xffffff);
-            //mlx_pixel_put(program->mlx, program->window, x, y, 0xffffff);
+        if ((x > 0 && x < program->window_x_size) && (y > 0 && y < program->window_y_size))
+            my_mlx_pixel_put(program, x, y, color);
         x += x_next;
         y += y_next;
     }
 
 }
 
-void ft_trace_pixel(t_program *program)
+void ft_trace_pixel(t_program *program, int reset)
 {
     int x;
     int y;
@@ -93,9 +96,9 @@ void ft_trace_pixel(t_program *program)
         while (x < program->map.x_count)
         {
             if (x < program->map.x_count - 1)
-                ft_draw_line(x, y, x + 1, y, program);
+                ft_draw_line(x, y, x + 1, y, program, reset);
             if (y < program->map.y_count - 1)
-                ft_draw_line(x, y, x, y + 1, program);
+                ft_draw_line(x, y, x, y + 1, program, reset);
             ++x;
         }
         ++y;

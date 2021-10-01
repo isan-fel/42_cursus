@@ -56,7 +56,36 @@ int ft_key_pressed(int key, t_program *program)
 	if (key == 78)
 		program->map.alt_zoom -= 2;
 	mlx_clear_window(program->mlx, program->window);
-	ft_trace_pixel(program);
+	ft_trace_pixel(program, 0);
+	mlx_put_image_to_window(program->mlx, program->window, program->img.image, 0, 0);
+    return(0);
+}
+
+int ft_key_linux_pressed(int key, t_program *program)
+{
+    printf("%d\n", key);
+	//reset pixel to black
+	ft_trace_pixel(program, 1);
+	mlx_put_image_to_window(program->mlx, program->window, program->img.image, 0, 0);
+	//ESC key
+	if (key == 65307)
+		return(ft_close(program));
+	//right row key
+	if (key == 65363)
+		program->map.shift += 10;
+	//change zoom
+	if (key == 65362)
+		program->map.zoom += 2;
+	if (key == 65364)
+		program->map.zoom -= 2;
+	//altitude zoom
+	if (key == 43)
+		program->map.alt_zoom += 2;
+	if (key == 45)
+		program->map.alt_zoom -= 2;
+	//mlx_clear_window(program->mlx, program->window);
+	//put new image
+	ft_trace_pixel(program, 0);
 	mlx_put_image_to_window(program->mlx, program->window, program->img.image, 0, 0);
     return(0);
 }
@@ -66,6 +95,40 @@ int ft_key_pressed(int key, t_program *program)
 	system("leaks fdf");
 }*/
 
+float ft_min_int(float i, float j)
+{
+    if (i < j)
+        return(i);
+    return(j);
+}
+
+void	ft_rescaling_size(t_program *program)
+{
+	program->map.alt_zoom = 1;
+	//program->map.zoom = ft_min_int((int) program->window_x_size/program->map.x_count, (int)program->window_y_size/program->map.y_count);
+	//printf("zoom:%d\n", program->map.zoom);
+	if (program->map.x_count <= 30)
+	{
+		program->map.zoom = 40;
+		program->map.shift = 800;
+	}
+	else if (program->map.x_count > 30 && program->map.x_count <= 100)
+	{
+		program->map.zoom = 20;
+		program->map.shift = 800;
+	}
+	else if (program->map.x_count > 100 && program->map.x_count < 300)
+	{
+		program->map.zoom = 20;
+		program->map.shift = 700;
+	}
+	else
+	{
+		program->map.zoom = 2;
+		program->map.shift = 520;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	int fd;
@@ -74,9 +137,8 @@ int		main(int argc, char **argv)
 	t_program program;
 
 	//atexit(leak);
-	program.map.zoom = 40;
-	program.map.shift = 350;
-	program.map.alt_zoom = 1;
+	program.window_x_size = 2048;
+	program.window_y_size = 1080;
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
@@ -89,15 +151,18 @@ int		main(int argc, char **argv)
 		// mlx function that initialize the mlx and returns a pointer to it.
 		program.mlx = mlx_init();
 		// Open a window (window.c whitin this project)
-		program.window = mlx_new_window(program.mlx, 2048, 1080, "FDF");
+		program.window = mlx_new_window(program.mlx, program.window_x_size, program.window_y_size, "FDF");
    		//initialize the image
-		program.img.image = mlx_new_image(program.mlx, 2048, 1080);
+		program.img.image = mlx_new_image(program.mlx, program.window_x_size, program.window_y_size);
 		program.img.pixels = mlx_get_data_addr(program.img.image, &program.img.bits_per_pixel, &program.img.line_size, &program.img.endian);
-		// hook the input() (hooks.c) function to the the key pressed event
-    	ft_trace_pixel(&program);
+		//initiate zoom and shift taking into account map size
+    	ft_rescaling_size(&program);
+		//create map image
+		ft_trace_pixel(&program, 0);
 		mlx_put_image_to_window(program.mlx, program.window, program.img.image, 0, 0);
 		// hook the input() (hooks.c) function to the the key pressed event
-    	mlx_key_hook(program.window, ft_key_pressed, &program);
+    	//mlx_key_hook(program.window, ft_key_pressed, &program);
+		mlx_key_hook(program.window, ft_key_linux_pressed, &program);
 		// mlx constant loop that keeps the detects the events
 		mlx_loop(program.mlx);
 		//system("leaks fdf");

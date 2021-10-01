@@ -68,6 +68,8 @@ typedef struct	s_image {
 typedef struct	s_program {
 	void		*mlx;
 	void		*window;
+	int			window_x_size;
+	int			window_y_size;
 	t_image		img;
 	t_map		map;
 }				t_program;
@@ -84,6 +86,7 @@ int			ft_update (void *param);
 int		get_next_line(int fd, char **line);
 void	ft_map(int fd, char *argv, t_program *program);
 int		err_ctrl(char *reason, int fd);
-void 	ft_trace_pixel(t_program *program);
+void 	ft_trace_pixel(t_program *program, int reset);
+int		ft_close(t_program *program);
 
 # endif
