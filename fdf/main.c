@@ -18,22 +18,22 @@ int		err_ctrl(char *reason, int fd)
 	return (1);
 }
 
+void	ft_free_map(t_program *program)
+{
+	int	i;
+
+	i = -1;
+	while (++i <= program->map.y_count)
+		free(program->map.map[i]);
+	free(program->map.map);
+}
+
 int	ft_close(t_program *program)
 {
-	int i;
-	int j;
-
-	/*i = -1;
-	while (++i < program->map.y_count)
-	{
-		j = -1;
-		while (++j < program->map.x_count)
-			free (program->map.map[i][j]);
-	}*/
-	//free (program->map.map);
+	ft_free_map(program);
 	mlx_destroy_window(program->mlx, program->window);
 	exit(0);
-	//return(1);
+	return(1);
 }
 
 int ft_key_pressed(int key, t_program *program)
@@ -90,10 +90,6 @@ int ft_key_linux_pressed(int key, t_program *program)
     return(0);
 }
 
-/*void	leak(void)
-{
-	system("leaks fdf");
-}*/
 
 float ft_min_int(float i, float j)
 {
@@ -128,6 +124,11 @@ void	ft_rescaling_size(t_program *program)
 		program->map.shift = 520;
 	}
 }
+
+/*void	leak(void)
+{
+	system("leaks fdf");
+}*/
 
 int		main(int argc, char **argv)
 {

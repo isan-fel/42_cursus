@@ -26,6 +26,7 @@ RM			= 	rm -f
 LINKS 		=	-lmlx -framework OpenGL -framework AppKit
 #Links for compile minilibx on Linux
 LINKS_so		=	-lmlx -lXext -lX11
+LEAKS 			=  valgrind --leak-check=full --show-leak-kinds=all -s -q
 
 NONE='\033[0m'
 GREEN='\033[32m'
@@ -56,6 +57,11 @@ $(OBJS): $(SRCS)
 test: all
 	@echo "     - Executing $(NAME)... \n"
 	@./$(NAME) maps/test_maps/pentenegpos.fdf 
+	@echo "\n     - Done -"
+
+testso: so
+	@echo "     - Executing $(NAME)... \n"
+	$(LEAKS) ./$(NAME) 42.fdf 
 	@echo "\n     - Done -"
 
 clean:

@@ -92,6 +92,8 @@ void ft_map(int fd, char *argv, t_program *program)
         if (ret == 0)
 			break ;
         ret = get_next_line(fd, &line);
+        if (line[0] == '\n' || line[0] == '\0')
+			break ;
         program->map.y_count = program->map.y_count + 1;
     }
     printf("x_len:%d\n", program->map.x_count);
