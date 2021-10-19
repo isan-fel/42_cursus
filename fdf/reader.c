@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:44:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/09/23 20:10:26 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:26:18 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void    ft_parse_map(t_program *program)
     char    **aux;
 
     i = -1;
+    program->map.z_max = 0;
+    program->map.z_min = 0;
     program->map.map = malloc(sizeof(int *) * (program->map.y_count + 1));
     if (!program->map.map)
         err_ctrl("Error: Allocating memory error\n", 3);
@@ -33,11 +35,17 @@ void    ft_parse_map(t_program *program)
         while (++j < program->map.x_count)
         {
             program->map.map[i][j] = atoi(aux[j]);
+            program->map.z_max = (int) ft_max_int((float)program->map.z_max, (float)program->map.map[i][j]);
+            program->map.z_min = (int) ft_min_int((float)program->map.z_min, (float)program->map.map[i][j]);
             //printf("%3d", program->map.map[i][j]);
+            free(aux[j]);
         }
         //printf("\n");
+        free(aux[j]);
         free(aux);
     }
+    free (program->map.aux_map[i]);
+    free (program->map.aux_map);
 }
 
 void    ft_parse_aux_map(int fd, t_program *program)
@@ -93,7 +101,10 @@ void ft_map(int fd, char *argv, t_program *program)
 			break ;
         ret = get_next_line(fd, &line);
         if (line[0] == '\n' || line[0] == '\0')
-			break ;
+			{
+                free(line);
+                break ;
+            }
         program->map.y_count = program->map.y_count + 1;
     }
     printf("x_len:%d\n", program->map.x_count);

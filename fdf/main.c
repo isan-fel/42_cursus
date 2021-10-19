@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 11:26:38 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/09/23 20:13:08 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/19 16:48:10 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int	ft_close(t_program *program)
 int ft_key_pressed(int key, t_program *program)
 {
     printf("%d\n", key);
+	//reset pixel to black
+	ft_trace_pixel(program, 1);
+	mlx_put_image_to_window(program->mlx, program->window, program->img.image, 0, 0);
 	//ESC key
 	if (key == 53)
 		return(ft_close(program));
@@ -55,7 +58,6 @@ int ft_key_pressed(int key, t_program *program)
 		program->map.alt_zoom += 2;
 	if (key == 78)
 		program->map.alt_zoom -= 2;
-	mlx_clear_window(program->mlx, program->window);
 	ft_trace_pixel(program, 0);
 	mlx_put_image_to_window(program->mlx, program->window, program->img.image, 0, 0);
     return(0);
@@ -125,10 +127,10 @@ void	ft_rescaling_size(t_program *program)
 	}
 }
 
-/*void	leak(void)
+void	leak(void)
 {
 	system("leaks fdf");
-}*/
+}
 
 int		main(int argc, char **argv)
 {
@@ -137,7 +139,7 @@ int		main(int argc, char **argv)
 	// Struct with all the info that I need to run the program (mlx_sample.h)
 	t_program program;
 
-	//atexit(leak);
+	atexit(leak);
 	program.window_x_size = 2048;
 	program.window_y_size = 1080;
 	if (argc == 2)
@@ -163,7 +165,7 @@ int		main(int argc, char **argv)
 		mlx_put_image_to_window(program.mlx, program.window, program.img.image, 0, 0);
 		// hook the input() (hooks.c) function to the the key pressed event
     	//mlx_key_hook(program.window, ft_key_pressed, &program);
-		mlx_key_hook(program.window, ft_key_linux_pressed, &program);
+		mlx_key_hook(program.window, ft_key_pressed, &program);
 		// mlx constant loop that keeps the detects the events
 		mlx_loop(program.mlx);
 		//system("leaks fdf");

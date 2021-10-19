@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/09/23 20:12:00 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/10/19 15:22:01 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME 	= 	fdf
 SRCS 	= 	main.c \
 			get_next_line.c \
 			reader.c \
-			map.c
+			map.c \
+			gradient_color.c
 
 OBJS 		= 	$(SRCS:.c=.o)
 
@@ -56,7 +57,7 @@ $(OBJS): $(SRCS)
 
 test: all
 	@echo "     - Executing $(NAME)... \n"
-	@./$(NAME) maps/test_maps/pentenegpos.fdf 
+	@./$(NAME) maps/test_maps/42.fdf 
 	@echo "\n     - Done -"
 
 testso: so
