@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdarg.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 # define READ_END 0
 # define WRITE_END 1
@@ -29,6 +30,7 @@ typedef struct s_program
     int  pipe[2];
     int  fd_in;
     int  fd_out;
+    char    *path_cmd;
 } t_program;
 
 void	ft_putendl_fd(char *s, int fd);

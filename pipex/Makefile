@@ -24,7 +24,7 @@ SRCS_UTILS 		= 	$(addprefix $(DIR_UTILS_S)/, $(UTILS_SOURCES))
 OBJS 			= 	$(SRCS:.c=.o)
 OBJS_UTILS		= 	$(SRCS_UTILS:.c=.o)
 
-CC			= 	clang
+CC			= 	gcc
 RM			= 	rm -f
 CFLAGS		= 	-Wall -Werror -Wextra
 DEBUG		=	-g3 -fsanitize=address
@@ -47,8 +47,8 @@ so:			$(OBJS) $(OBJS_UTILS)
 
 test:		all
 			@echo "$(GREY) **** Running test Pipex **** $(NO_COLOR)"
-			@echo "$(GREY) **** ./pipex file1 "ls -l" "wc -l" file2 **** $(NO_COLOR)"
-			@./pipex file1 "ls -l" "wc -l" file2
+			@echo "$(GREY) **** ./pipex pru "cat -e" "grep hello" out **** $(NO_COLOR)"
+			@./pipex pru "cat -e" "grep hello" out
 
 clean:
 			$(RM) $(OBJS) $(OBJS_UTILS)
