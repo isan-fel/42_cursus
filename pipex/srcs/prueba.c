@@ -36,7 +36,7 @@ void    div_path (t_program *program, char **envp)
     }
     if (!find_path)
         err_ctrl("Error: couldn't find path", 1);
-    //printf("%s\n", program->path);
+    printf("%s\n", program->path);
     program->div_path = ft_split(program->path, ':');
     free(program->path);
 }
@@ -64,90 +64,48 @@ void    parse_exists_cmd_path(t_program *program)
     {
         aux_path = ft_strjoin(program->div_path[n], "/");
         path_cmd = ft_strjoin(aux_path, program->command[0]);
-        /*we need to know if the file contain in the path_cmd exists to execute them*/
+        /*we need to know if the file contain en the path_cmd exists to execute them*/
         /*for this, we need to use de access command. These are de access command options*/
         /*F_OK:Test if file exists; R_OK:file can be read; W_OK:file can be write; X_OK:file can be execute*/
-        if (!access(path_cmd, F_OK))
+        perror("Error");
+        if (access(path_cmd, F_OK) == 0)
             {program->path_cmd = ft_strdup(path_cmd);
-            break ;}
+            break ;
+            }
     }
     free (aux_path);
-    free (path_cmd);
-    //printf("ok path:%s\n", program->path_cmd);
+        free (path_cmd);
+        printf("ok path:%s\n", program->path_cmd);
 }
 
-void    child_process(t_program *program, char **envp)
+void	pipex(t_program *program, char **envp)
 {
-    if (dup2(program->fd_in, STDIN_FILENO) == -1)
-        err_ctrl("Error: dup2 c command failed", 1);
-    close(program->fd_in);
-     /*se queda después de esto y no se porque*/
-    if (dup2(program->pipe[WRITE_END], STDOUT_FILENO) == -1)
-        err_ctrl("Error: dup2 c command failed", 1);
-    /*get path and execute with (execve)*/
-    perror("Error");
-    parse_exists_cmd_path(program);
-    /*now execute the command. The execve only return if there is an error*/
-    /*exceve has 3 arguments: path, argv, envp. argv and envp are the same as in main*/
-    /*path contain de route path, and the file associate to the command*/
-    if (execve(program->path_cmd, program->command, envp) == -1)
-    {
-        perror("Error");
-        free (program->path_cmd);
-        err_ctrl("Error: couldn't execute the command", 1);
-    }
-    perror("Error");
-    /*if child process end, must close the write pipe for parent process can execute*/
-    close(program->pipe[WRITE_END]);
-}
 
-void    parent_process(t_program *program, char **argv, char **envp)
-{
-    if (dup2(program->pipe[READ_END], STDIN_FILENO) == -1)
-    err_ctrl("Error: dup2 c command failed", 1);
-    close(program->pipe[READ_END]);
-	if (dup2(program->fd_out, STDOUT_FILENO) == -1)
-        err_ctrl("Error: dup2 c command failed", 1);
-    close(program->fd_out);
-    program->command = ft_split(argv[3], ' ');
-    parse_exists_cmd_path(program);
-    if (execve(program->path_cmd, program->command, envp) == -1)
-    {
-        free (program->path_cmd);
-         err_ctrl("Error: couldn't execute the command", 1);
-    }
-}
-
-void	pipex(t_program *program, char **argv, char **envp)
-{
-    pid_t	pid;
-
-    if (pipe(program->pipe) == -1)
-        err_ctrl("Error: Something went wrong with pipe(2)", 1);
-    pid = fork();
-    /*fork options*/
-    if (pid < 0)
-    {
-        close(STDIN_FILENO);
-		close(program->pipe[READ_END]);
-		close(program->pipe[WRITE_END]);
-        err_ctrl("Error: fork not work, couldn't create a child process", 1);
-    }
-    if (pid == 0)
-    {
+  //waitpid(pid, NULL, 0);
         /*close de read, because the begin of pipe is only write*/
-        close(program->pipe[READ_END]);
-        /*execute child process*/
-        child_process(program, envp);
-    }
-    /*now could execute parent process*/
-    //waitpid(pid, NULL, 0);
-    //pid = fork();
-	perror("Error");
-    close(program->pipe[WRITE_END]);
-    perror("Error");
-    parent_process(program, argv, envp);
-        
+                /*execute child process*/
+        /*if (dup2(program->fd_in, STDIN_FILENO) == -1)
+            printf("error dup2\n");
+        close(program->fd_in);*/
+     /*se queda después de esto y no se porque*/
+        /*if (dup2(program->fd_out, STDOUT_FILENO) == -1)
+            printf("error dup2\n");
+        close(program->fd_out);*/
+        //parse_exists_cmd_path(program);
+        perror("Error");
+        program->path_cmd = ft_strdup("/usr/bin/ls");
+        printf("ok path:%s\n", program->path_cmd);
+        printf("f_OK:%d\n", access(program->path_cmd, F_OK));
+        perror("Error");
+        printf("r_OK:%d\n", access(program->path_cmd, R_OK));
+        perror("Error");
+        if (execve(program->path_cmd, program->command, envp) == -1)
+         {
+        free (program->path_cmd);
+        perror("Error");
+        //err_ctrl("Error: couldn't execute the command", 1);
+        }      
+        perror("Error");
 
 }
 
@@ -168,7 +126,7 @@ int main(int argc, char **argv, char **envp)
     {
         div_path(&program, envp);
         split_argv(&program, argv);
-        pipex(&program, argv, envp);
+        pipex(&program, envp);
     }
     return  (0);
 }
