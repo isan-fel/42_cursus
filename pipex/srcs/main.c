@@ -170,5 +170,6 @@ int main(int argc, char **argv, char **envp)
         split_argv(&program, argv);
         pipex(&program, argv, envp);
     }
+    //system ("leaks pipex");
     return  (0);
 }

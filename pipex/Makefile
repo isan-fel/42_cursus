@@ -48,9 +48,9 @@ so:			$(OBJS) $(OBJS_UTILS)
 test:		all
 			@echo "$(GREY) **** Running test Pipex **** $(NO_COLOR)"
 			@echo "$(GREY) **** ./pipex pru "ls -l" "wc -l" out **** $(NO_COLOR)"
-			@./pipex pru "ls -l" "wc -l" out
+			@./$(NAME) pru "ls -l" "wc -l" out
 			@echo "$(GREY) **** ./pipex pru "cat -e" "grep hello" out **** $(NO_COLOR)"
-			@./pipex pru "cat -e" "grep hello" out2
+			@./$(NAME) pru "cat -e" "grep hello" out2
 
 clean:
 			$(RM) $(OBJS) $(OBJS_UTILS)
