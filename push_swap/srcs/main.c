@@ -51,6 +51,7 @@ int main(int argc, char **argv)
     while (++n < argc)
     {
         parse_numbers(argv[n]);
+        /*con los numeros en una lista, ver si estan ordenados*/
     }
     return  (0);
 }
