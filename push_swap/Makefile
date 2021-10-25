@@ -6,13 +6,13 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/08/05 17:49:57 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/10/25 19:04:42 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= 	push_swap
 
-SOURCES 	= 	main.c
+SOURCES 	= 	main.c utils.c
 
 DIR_S 		= 	srcs
 
@@ -24,7 +24,7 @@ OBJS 		= 	$(SRCS:.c=.o)
 
 CC			= 	gcc
 RM			= 	rm -f
-CFLAGS		= 	-Wall -Werror -Wextra -fPIC
+#CFLAGS		= 	-Wall -Werror -Wextra -fPIC
 
 GREEN 		= 	\033[0;32m
 YELLOW		=	\033[0;33m
@@ -44,7 +44,7 @@ so:			$(OBJS) $(LIBFT)
 			echo "$(GREEN)---->> SUSCCESSFULLY COMPILED <<---- $(NO_COLOR)"
 
 test:		so
-			./push_swap 2 3
+			./push_swap 4 3 5
 
 clean:
 			$(RM) $(OBJS)

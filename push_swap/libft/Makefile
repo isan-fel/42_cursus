@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:36:07 by isan-fel          #+#    #+#              #
-#    Updated: 2021/04/27 13:25:56 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/10/25 14:46:07 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,8 @@ SRCS			=	ft_atoi.c \
 					ft_strnstr.c \
 					ft_strtrim.c \
 					ft_strmapi.c \
-					ft_split.c
-
-SRCSB =				ft_lstnew.c \
+					ft_split.c \
+					ft_lstnew.c \
 					ft_lstadd_front.c \
 					ft_lstsize.c \
 					ft_lstlast.c \
@@ -53,8 +52,7 @@ SRCSB =				ft_lstnew.c \
 					ft_lstdelone.c \
 					ft_lstclear.c \
 					ft_lstiter.c \
-					ft_lstmap.c \
-					$(SRCS)
+					ft_lstmap.c
 
 OBJS			= $(SRCS:.c=.o)
 
@@ -82,9 +80,5 @@ fclean:			clean
 				$(RM) $(NAME)
 
 re:				fclean $(NAME)
-
-bonus:			$(OBJSB)
-				ar rc $(NAME) $(OBJSB)
-				ranlib $(NAME)
 
 .PHONY:			all clean fclean re bonus

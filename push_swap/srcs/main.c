@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:54:42 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/19 20:15:37 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/25 18:35:37 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		err_ctrl(char *reason, int fd)
 
 void    add_end_list(int num, t_list **a)
 {
-    t_list aux_stack;
+    t_list *aux_stack;
 
     aux_stack = *a;
     while (aux_stack)
@@ -30,7 +30,7 @@ void    add_end_list(int num, t_list **a)
 			err_ctrl("Error: repeated number in the stack", 1);
 		aux_stack = aux_stack->next;
 	}
-	ft_lstadd_back(a, ft_lstnew_struct((void *)&num, sizeof(int)));
+	ft_lstadd_back(a, ft_lstnew_stack((void *)&num, sizeof(int)));
 }
 
 void    parse_numbers(char *argv, t_list **a)
@@ -48,7 +48,7 @@ void    parse_numbers(char *argv, t_list **a)
             err_ctrl("Error: wrong number in the stack", 1);
         num = ft_atoi(aux_num[i]);
         printf("num:%ld\n", num);
-        if (n >= INT_MAX || n <= INT_MIN)
+        if (num >= INT_MAX || num <= INT_MIN)
             err_ctrl("Error: number is over Max o Min INT", 1);
         /*add the correct number at the of the stack a list*/
         add_end_list((int)num, a);
@@ -56,11 +56,61 @@ void    parse_numbers(char *argv, t_list **a)
     free (aux_num);
 }
 
-void    push_swap(t_list **a, t_list **b)
+int ft_sorted_stack(t_list **a, int len)
+{
+    t_list  *aux;
+
+    aux = *a;
+    --len;/*to avoid compare with null in list*/
+    while (len--)
+    {
+        /*importante! para recoger el valor del content en la lista hay que llamarlo como lo llamo aqui*/
+        if (*(int *)aux->content > *(int *)aux->next->content)
+            return (0);
+        aux = aux->next;
+    }
+    return (1);
+}
+
+void    swap(t_list **swap, char c)
+{
+    char *aux_swap;
+
+    aux_swap = (*swap)->content;
+    /*importante! para dar valor a elementos de la lista hay que hacer así*/
+    (*swap) = (*swap)->next->content;
+    (*swap)->next = aux_swap;
+    if (c == 'a')
+        write(1, "sa\n", 3);
+}
+
+void swap_three(t_list **a, t_list **b)
+{
+    /*With this case we have 5 posibilities*/
+    int	n1;
+	int	n2;
+	int	n3;
+
+	n1 = *(int *)(*a)->content;
+	n2 = *(int *)(*a)->next->content;
+	n3 = *(int *)(*a)->next->next->content;
+    /*3 posibilities with 1 move*/
+    if (n1 > n2 && n1 < n3)
+        swap(a, 'a');
+    /*2 posobilities with 2 moves*/
+}
+
+void    push_swap(t_list **a, t_list **b, int len)
 {
     /*first: comprove if stack a is order*/
-    /*second: see the len of list*/
+    if (ft_sorted_stack(a, len))
+        err_ctrl("Error: stack is order", 1);
     /*if list_len == 2*/
+    printf("len:%d\n", len);
+    if (len == 2)
+        swap(a, 'a');
+    if (len == 3)
+        swap_three(a, b);
     /*if list_len == 3*/
     /*if list_len == 5*/
     /*if list_len == 100*/
@@ -84,6 +134,6 @@ int main(int argc, char **argv)
         parse_numbers(argv[n], &a);
         /*con los numeros en una lista, ver si estan ordenados*/
     }
-    push_swap(&a, &b);
+    push_swap(&a, &b, ft_lstsize(a));
     return  (0);
 }
