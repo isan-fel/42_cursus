@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/10/19 15:22:01 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/10/25 16:53:51 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ $(OBJS): $(SRCS)
 
 test: all
 	@echo "     - Executing $(NAME)... \n"
-	@./$(NAME) maps/test_maps/42.fdf 
+	@./$(NAME) maps/test_maps/42.fdf
 	@echo "\n     - Done -"
 
 testso: so
