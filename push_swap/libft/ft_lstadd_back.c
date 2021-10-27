@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstladd_back.c                                  :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isan-fel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 16:02:03 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/04/27 12:33:30 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/26 19:30:26 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
+	printf("lst:%d\n", (int *)(*lst)->content);
 	if (*lst)
 	{
 		last = ft_lstlast(*lst);

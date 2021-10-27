@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:54:42 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/25 18:35:37 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:47:24 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,47 +72,17 @@ int ft_sorted_stack(t_list **a, int len)
     return (1);
 }
 
-void    swap(t_list **swap, char c)
-{
-    char *aux_swap;
-
-    aux_swap = (*swap)->content;
-    /*importante! para dar valor a elementos de la lista hay que hacer así*/
-    (*swap) = (*swap)->next->content;
-    (*swap)->next = aux_swap;
-    if (c == 'a')
-        write(1, "sa\n", 3);
-}
-
-void swap_three(t_list **a, t_list **b)
-{
-    /*With this case we have 5 posibilities*/
-    int	n1;
-	int	n2;
-	int	n3;
-
-	n1 = *(int *)(*a)->content;
-	n2 = *(int *)(*a)->next->content;
-	n3 = *(int *)(*a)->next->next->content;
-    /*3 posibilities with 1 move*/
-    if (n1 > n2 && n1 < n3)
-        swap(a, 'a');
-    /*2 posobilities with 2 moves*/
-}
-
 void    push_swap(t_list **a, t_list **b, int len)
 {
     /*first: comprove if stack a is order*/
     if (ft_sorted_stack(a, len))
         err_ctrl("Error: stack is order", 1);
-    /*if list_len == 2*/
-    printf("len:%d\n", len);
     if (len == 2)
         swap(a, 'a');
     if (len == 3)
         swap_three(a, b);
-    /*if list_len == 3*/
-    /*if list_len == 5*/
+    if (len > 3 && len <= 5)
+        swap_five(a, b, len);
     /*if list_len == 100*/
 }
 
@@ -130,10 +100,7 @@ int main(int argc, char **argv)
     if (argc < 2)
         return (err_ctrl("Error: more than valid arguments ; try like: ./push_swap list_of_number", 1));
     while (++n < argc)
-    {
         parse_numbers(argv[n], &a);
-        /*con los numeros en una lista, ver si estan ordenados*/
-    }
     push_swap(&a, &b, ft_lstsize(a));
     return  (0);
 }

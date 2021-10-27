@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 14:40:35 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/25 14:43:29 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/27 11:09:29 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,18 @@ t_list	*ft_lstnew_stack(void *content, size_t size)
 		stack = NULL;
 	}
 	ft_memcpy(aux, content, size);
+	//printf("lst:%d\n", (int)aux);
 	stack->content = aux;
 	stack->next = NULL;
 	return (stack);
+}
+
+void	ft_del_lstfirst(t_list **src)
+{
+	t_list	*aux;
+
+	aux = *src;
+	*src = aux->next;
+	free(aux->content);
+	free(aux);
 }
