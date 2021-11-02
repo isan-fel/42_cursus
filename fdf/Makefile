@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/11/02 18:01:56 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/11/02 19:54:29 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,12 @@ $(OBJS): $(SRCS)
 
 test: all
 	@echo "     - Executing $(NAME)... \n"
-	@./$(NAME) maps/test_maps/prueba2.fdf
+	@echo "$(GREEN)------------------------------------------[MAPS]------------------------------------------$(NONE)"
+	@ls ./maps/test_maps | cut -d "." -f 1 | column -c 100
+	@echo "$(GREEN)------------------------------------------------------------------------------------------$(NONE)"
+	@echo "$(CURSIVE)[Reading map..]$(NONE)"
+	@read -p "Select map name: " map; \
+	./fdf ./maps/test_maps/$${map}.fdf
 	@echo "\n     - Done -"
 
 testso: so

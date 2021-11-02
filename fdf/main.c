@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 11:26:38 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/02 17:51:39 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/02 19:49:46 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,20 +110,20 @@ void	ft_rescaling_size(t_program *program)
 		program->map.zoom = 40;
 		program->map.shift = 800;
 	}
-	else if (program->map.x_count > 30 && program->map.x_count <= 100)
+	else if (program->map.x_count > 30 && program->map.x_count < 100)
 	{
 		program->map.zoom = 20;
 		program->map.shift = 800;
 	}
-	else if (program->map.x_count > 100 && program->map.x_count < 300)
+	else if (program->map.x_count >= 100 && program->map.x_count < 300)
 	{
-		program->map.zoom = 20;
-		program->map.shift = 700;
+		program->map.zoom = 10;
+		program->map.shift = 750;
 	}
 	else
 	{
 		program->map.zoom = 2;
-		program->map.shift = 520;
+		program->map.shift = 700;
 	}
 }
 

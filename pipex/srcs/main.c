@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:54:42 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/02 13:55:52 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/02 20:27:24 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ void    child_process(t_program *program, char **envp)
         free (program->path_cmd);
         err_ctrl("Error: couldn't execute the command", 1);
     }
-    /*if child process end, must close the write pipe for parent process can execute*/
-    close(program->pipe[WRITE_END]);
 }
 
 void    parent_process(t_program *program, char **argv, char **envp)
@@ -111,9 +109,9 @@ void    parent_process(t_program *program, char **argv, char **envp)
     close(program->pipe[READ_END]);
     if (dup2(program->fd_out, STDOUT_FILENO) == -1)
         err_ctrl("Error: dup2 c command failed", 1);
-    //system("leaks pipex");
     close(program->fd_out);
     program->command = ft_split(argv[3], ' ');
+    //system("leaks pipex");
     parse_exists_cmd_path(program);
     if (execve(program->path_cmd, program->command, envp) == -1)
     {
@@ -143,11 +141,11 @@ void	pipex(t_program *program, char **argv, char **envp)
         close(program->pipe[READ_END]);
         /*execute child process*/
         child_process(program, envp);
+        /*if child process end, must close the write pipe for parent process can execute*/
+        
     }
     /*now could execute parent process*/
-    //waitpid(pid, NULL, 0);
-    //pid = fork();
-	close(program->pipe[WRITE_END]);
+    close(program->pipe[WRITE_END]);
     parent_process(program, argv, envp);
 }
 
@@ -157,6 +155,7 @@ int main(int argc, char **argv, char **envp)
     t_program program;
     
     int n = -1;
+    atexit(leaks);
     while (argv[++n])
         ++n;
     /*printf("%s\n", argv[n]);
@@ -169,9 +168,7 @@ int main(int argc, char **argv, char **envp)
     {
         div_path(&program, envp);
         split_argv(&program, argv);
-        //atexit(leaks);
         pipex(&program, argv, envp);
     }
-    while(1);
     return  (0);
 }

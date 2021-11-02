@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:44:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/02 17:50:24 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/02 20:06:42 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void    ft_parse_map(t_program *program)
         aux = ft_split(program->map.aux_map[i], ' ');
         free (program->map.aux_map[i]);
         program->map.map[i] = malloc(sizeof(int) * (program->map.x_count + 1));
-        program->map.map_color[i] = malloc(sizeof(float) * (program->map.y_count + 1));
+        program->map.map_color[i] = malloc(sizeof(float) * (program->map.x_count + 1));
         if (!program->map.map[i])
             err_ctrl("Error: Allocating memory error\n", 3);
         j = -1;
@@ -46,13 +46,13 @@ void    ft_parse_map(t_program *program)
                 hex_color = ft_strdup(ft_strchr(aux[j], ',') + 1);
                 program->map.map_color[i][j] = ft_set_color(hex_color);
                 free(hex_color);
-                printf("%3x  ", program->map.map_color[i][j]);
+                //printf("%3x  ", program->map.map_color[i][j]);
                 }
             program->map.z_max = (int) ft_max_int((float)program->map.z_max, (float)program->map.map[i][j]);
             program->map.z_min = (int) ft_min_int((float)program->map.z_min, (float)program->map.map[i][j]);
             free(aux[j]);
         }
-        printf("\n");
+        //printf("\n");
         free(aux[j]);
         free(aux);
     }

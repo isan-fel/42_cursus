@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 15:39:03 by isan-fel          #+#    #+#              #
-#    Updated: 2021/11/02 13:14:26 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/11/02 20:24:13 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ NO_COLOR 	=	\033[0m
 all: 		$(NAME)
 
 $(NAME): 	$(OBJS) $(OBJS_UTILS)
-			$(CC) $(FLAGS) $(DEBUG) $(OBJS) $(OBJS_UTILS) -o $(NAME)
+			@$(CC) $(FLAGS) $(DEBUG) $(OBJS) $(OBJS_UTILS) -o $(NAME)
 			echo "$(GREEN)---->> SUSCCESSFULLY COMPILED <<---- $(NO_COLOR)"
 
 so:			$(OBJS) $(OBJS_UTILS)
