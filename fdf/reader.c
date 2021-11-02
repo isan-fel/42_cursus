@@ -6,22 +6,26 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:44:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/19 15:26:18 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:50:24 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+
 
 void    ft_parse_map(t_program *program)
 {
     int     i;
     int     j;
     char    **aux;
+    char    *hex_color;
 
     i = -1;
     program->map.z_max = 0;
     program->map.z_min = 0;
     program->map.map = malloc(sizeof(int *) * (program->map.y_count + 1));
+    program->map.map_color = malloc(sizeof(int *) * (program->map.y_count + 1));
     if (!program->map.map)
         err_ctrl("Error: Allocating memory error\n", 3);
     while (++i < program->map.y_count)
@@ -29,18 +33,26 @@ void    ft_parse_map(t_program *program)
         aux = ft_split(program->map.aux_map[i], ' ');
         free (program->map.aux_map[i]);
         program->map.map[i] = malloc(sizeof(int) * (program->map.x_count + 1));
+        program->map.map_color[i] = malloc(sizeof(float) * (program->map.y_count + 1));
         if (!program->map.map[i])
             err_ctrl("Error: Allocating memory error\n", 3);
         j = -1;
         while (++j < program->map.x_count)
         {
             program->map.map[i][j] = atoi(aux[j]);
+            //printf("%3d", program->map.map[i][j]);
+            if (program->map.own_color)
+                {
+                hex_color = ft_strdup(ft_strchr(aux[j], ',') + 1);
+                program->map.map_color[i][j] = ft_set_color(hex_color);
+                free(hex_color);
+                printf("%3x  ", program->map.map_color[i][j]);
+                }
             program->map.z_max = (int) ft_max_int((float)program->map.z_max, (float)program->map.map[i][j]);
             program->map.z_min = (int) ft_min_int((float)program->map.z_min, (float)program->map.map[i][j]);
-            //printf("%3d", program->map.map[i][j]);
             free(aux[j]);
         }
-        //printf("\n");
+        printf("\n");
         free(aux[j]);
         free(aux);
     }
@@ -88,8 +100,14 @@ void ft_map(int fd, char *argv, t_program *program)
         err_ctrl("error: empty file", fd);
     while (line[++n])
     {
-        if (line[n] != ' ' && line[n] != '-' && !ft_isdigit(line[n + 1]))
-            program->map.x_count = program->map.x_count + 1;
+        if (line[n] == ',')
+            program->map.own_color = 1;
+    }
+    n = -1;
+    while (line[++n])
+    {
+        if (line[n] != ' ' && (line[n + 1] == '\n' || line[n + 1] == '\0' || line[n + 1] == ' '))
+                program->map.x_count = program->map.x_count + 1;
             /*for mac*/
             //program->map.y_count += 1;
     }

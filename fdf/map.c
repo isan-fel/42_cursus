@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 18:14:02 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/19 13:17:54 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:52:01 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,15 @@ void ft_draw_line(float x, float y, float x1, float y1, t_program *program, int 
     z = program->map.map[(int)y][(int)x];
     z1 = program->map.map[(int)y1][(int)x1];
     /*color condition*/
-    if (z || z1)
-        color = get_color(z, program);
+    if (program->map.own_color)
+        color = program->map.map_color[(int)y][(int)x];
+    else if (z || z1)
+        color = get_color(z, z1, program);
     else
         color = 0xdcfffc;
     if (reset)
         color = 0x000000;
+    //printf("color:%x\n", color);
     /*change altitude scale*/
     z *= program->map.alt_zoom;
     z1 *= program->map.alt_zoom;

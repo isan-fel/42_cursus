@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 11:23:06 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/19 13:10:23 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:03:19 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_map
 	int		alt_zoom;
 	int 	z_max;
 	int		z_min;
+	int		own_color;
+	int		**map_color;
 }	t_map;
 
 /* vector with an x and y */
@@ -90,8 +92,9 @@ void	ft_map(int fd, char *argv, t_program *program);
 int		err_ctrl(char *reason, int fd);
 void 	ft_trace_pixel(t_program *program, int reset);
 int		ft_close(t_program *program);
-int		get_color(int z, t_program *program);
+int		get_color(int z, int z1, t_program *program);
 float	ft_max_int(float i, float j);
 float	ft_min_int(float i, float j);
+int		ft_set_color(char *str);
 
 # endif

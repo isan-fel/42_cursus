@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 15:39:03 by isan-fel          #+#    #+#              #
-#    Updated: 2021/10/19 18:36:41 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/11/02 13:14:26 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJS_UTILS		= 	$(SRCS_UTILS:.c=.o)
 CC			= 	gcc
 RM			= 	rm -f
 CFLAGS		= 	-Wall -Werror -Wextra
-DEBUG		=	-g3 -fsanitize=address
+#DEBUG		=	-g3 -fsanitize=address
 
 GREEN 		= 	\033[0;32m
 YELLOW		=	\033[0;33m
@@ -49,7 +49,7 @@ test:		all
 			@echo "$(GREY) **** Running test Pipex **** $(NO_COLOR)"
 			@echo "$(GREY) **** ./pipex pru "ls -l" "wc -l" out **** $(NO_COLOR)"
 			@./$(NAME) pru "ls -l" "wc -l" out
-			@echo "$(GREY) **** ./pipex pru "cat -e" "grep hello" out **** $(NO_COLOR)"
+			@echo "$(GREY) **** ./pipex pru "cat -e" "grep hello" out2 **** $(NO_COLOR)"
 			@./$(NAME) pru "cat -e" "grep hello" out2
 
 clean:

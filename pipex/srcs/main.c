@@ -6,11 +6,17 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:54:42 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/19 20:15:37 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/02 13:55:52 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+void	leaks(void)
+{
+	system("leaks pipex");
+}
+
 
 int		err_ctrl(char *reason, int fd)
 {
@@ -85,18 +91,15 @@ void    child_process(t_program *program, char **envp)
     if (dup2(program->pipe[WRITE_END], STDOUT_FILENO) == -1)
         err_ctrl("Error: dup2 c command failed", 1);
     /*get path and execute with (execve)*/
-    perror("Error");
     parse_exists_cmd_path(program);
     /*now execute the command. The execve only return if there is an error*/
     /*exceve has 3 arguments: path, argv, envp. argv and envp are the same as in main*/
     /*path contain de route path, and the file associate to the command*/
     if (execve(program->path_cmd, program->command, envp) == -1)
     {
-        perror("Error");
         free (program->path_cmd);
         err_ctrl("Error: couldn't execute the command", 1);
     }
-    perror("Error");
     /*if child process end, must close the write pipe for parent process can execute*/
     close(program->pipe[WRITE_END]);
 }
@@ -104,17 +107,18 @@ void    child_process(t_program *program, char **envp)
 void    parent_process(t_program *program, char **argv, char **envp)
 {
     if (dup2(program->pipe[READ_END], STDIN_FILENO) == -1)
-    err_ctrl("Error: dup2 c command failed", 1);
-    close(program->pipe[READ_END]);
-	if (dup2(program->fd_out, STDOUT_FILENO) == -1)
         err_ctrl("Error: dup2 c command failed", 1);
+    close(program->pipe[READ_END]);
+    if (dup2(program->fd_out, STDOUT_FILENO) == -1)
+        err_ctrl("Error: dup2 c command failed", 1);
+    //system("leaks pipex");
     close(program->fd_out);
     program->command = ft_split(argv[3], ' ');
     parse_exists_cmd_path(program);
     if (execve(program->path_cmd, program->command, envp) == -1)
     {
         free (program->path_cmd);
-         err_ctrl("Error: couldn't execute the command", 1);
+        err_ctrl("Error: couldn't execute the command", 1);
     }
 }
 
@@ -143,16 +147,13 @@ void	pipex(t_program *program, char **argv, char **envp)
     /*now could execute parent process*/
     //waitpid(pid, NULL, 0);
     //pid = fork();
-	perror("Error");
-    close(program->pipe[WRITE_END]);
-    perror("Error");
+	close(program->pipe[WRITE_END]);
     parent_process(program, argv, envp);
-        
-
 }
 
+
 int main(int argc, char **argv, char **envp)
-{
+{  
     t_program program;
     
     int n = -1;
@@ -168,8 +169,9 @@ int main(int argc, char **argv, char **envp)
     {
         div_path(&program, envp);
         split_argv(&program, argv);
+        //atexit(leaks);
         pipex(&program, argv, envp);
     }
-    //system ("leaks pipex");
+    while(1);
     return  (0);
 }

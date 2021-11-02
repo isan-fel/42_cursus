@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 11:26:38 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/25 16:53:44 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:51:39 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_free_map(t_program *program)
 	int	i;
 
 	i = -1;
-	while (++i <= program->map.y_count)
+	while (++i < program->map.y_count)
 		free(program->map.map[i]);
 	free(program->map.map);
 }
@@ -139,7 +139,7 @@ int		main(int argc, char **argv)
 	// Struct with all the info that I need to run the program (mlx_sample.h)
 	t_program program;
 
-	atexit(leak);
+	//atexit(leak);
 	program.window_x_size = 2048;
 	program.window_y_size = 1080;
 	if (argc == 2)
@@ -168,7 +168,6 @@ int		main(int argc, char **argv)
 		mlx_key_hook(program.window, ft_key_pressed, &program);
 		// mlx constant loop that keeps the detects the events
 		mlx_loop(program.mlx);
-		//system("leaks fdf");
 		return(0);
 	}
 	else
