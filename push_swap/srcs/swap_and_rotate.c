@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:19:15 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/27 10:19:43 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/27 21:36:51 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ void    rev_rotate(t_list **lst, char c)
     t_list *aux;
 
     aux = *lst;
-    aux = ft_lstlast(aux);
-    //while (aux->next)
-      //  aux = aux->next;
-    /*put last element the fisrt of list*/
+    aux = ft_lstlast(aux);  
+    /*put last element the first of list*/
     ft_lstadd_front(lst, ft_lstnew_stack(aux->content, sizeof(int)));
     free(aux->content);
 	free(aux->next);
@@ -52,3 +50,4 @@ void    rev_rotate(t_list **lst, char c)
 	if (c == 'a')
 		write(1, "rra\n", 4);
 }
+

@@ -75,3 +75,4 @@ void	ft_reverse_rotate(t_list **src, char rr)
 	else if (rr == 'b')
 		write(1, "rrb\n", 4);
 }
+

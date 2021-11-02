@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/10/27 10:56:01 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/10/27 21:36:42 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ so:			$(OBJS) $(LIBFT)
 			echo "$(GREEN)---->> SUSCCESSFULLY COMPILED <<---- $(NO_COLOR)"
 
 test:		so
-			./push_swap 1 5 2 4 3
+			./push_swap "1 5 3 4 2"
 
 clean:
 			$(RM) $(OBJS)

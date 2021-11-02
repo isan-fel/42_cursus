@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:54:42 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/27 10:47:24 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/27 20:09:23 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,6 @@ void    parse_numbers(char *argv, t_list **a)
         add_end_list((int)num, a);
     }
     free (aux_num);
-}
-
-int ft_sorted_stack(t_list **a, int len)
-{
-    t_list  *aux;
-
-    aux = *a;
-    --len;/*to avoid compare with null in list*/
-    while (len--)
-    {
-        /*importante! para recoger el valor del content en la lista hay que llamarlo como lo llamo aqui*/
-        if (*(int *)aux->content > *(int *)aux->next->content)
-            return (0);
-        aux = aux->next;
-    }
-    return (1);
 }
 
 void    push_swap(t_list **a, t_list **b, int len)

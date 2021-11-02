@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:20:59 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/27 11:10:49 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/27 21:09:53 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,40 @@ void    push(t_list **src, t_list **dst, char c)
         write(1, "pb\n", 3);
 }
 
-void swap_five(t_list **a, t_list **b, int len)
+void    iter_five_order(t_list **a, t_list **b, int len)
 {
     /*we need to pass the top two numbers of a to b*/
+    printf("len_a:%d\n", ft_lstsize(*a));
     while (len-- > 3)
         push(a, b, 'b');
     /*with this we can sort stack a like with 3 numbers*/
     swap_three(a, b);
+    push(b, a, 'a');
+}
+
+void swap_five(t_list **a, t_list **b, int len)
+{
+    t_list *aux;
+    iter_five_order(a, b, len);
     /*now we nedd to pass the numbers in b to a*/
+    //len = ft_lstsize(*b);
+    len = ft_lstsize(*a);
+    printf("len_a:%d\n", len);
+    while (!ft_sorted_stack(a, len))
+    {
+        rotate(a, 'a');
+        if (ft_sorted_stack(a, len))
+            break ;
+        iter_five_order(a, b, len);
+    }
     len = ft_lstsize(*b);
     printf("len_b:%d\n", len);
     while (len--)
-        push(a, b, 'a');
+        push(b, a, 'a');
+    //if (!ft_sorted_stack(a, ft_lstsize(*a)))
+      //  rotate(a, 'a');
+    /*aux = *a;
+    while (aux)
+    {printf("lst:%d\n", aux->content);
+    aux = aux->next;}*/
 }

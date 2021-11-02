@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 14:40:35 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/27 11:09:29 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/10/27 20:07:32 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,20 @@ void	ft_del_lstfirst(t_list **src)
 	*src = aux->next;
 	free(aux->content);
 	free(aux);
+}
+
+int ft_sorted_stack(t_list **a, int len)
+{
+    t_list  *aux;
+
+    aux = *a;
+    --len;/*to avoid compare with null in list*/
+    while (len--)
+    {
+        /*importante! para recoger el valor del content en la lista hay que llamarlo como lo llamo aqui*/
+        if (*(int *)aux->content > *(int *)aux->next->content)
+            return (0);
+        aux = aux->next;
+    }
+    return (1);
 }
