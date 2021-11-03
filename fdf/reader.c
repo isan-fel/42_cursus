@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:44:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/02 20:06:42 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/03 10:26:06 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ void    ft_parse_map(t_program *program)
     i = -1;
     program->map.z_max = 0;
     program->map.z_min = 0;
-    program->map.map = malloc(sizeof(int *) * (program->map.y_count + 1));
-    program->map.map_color = malloc(sizeof(int *) * (program->map.y_count + 1));
+    program->map.map = malloc(sizeof(int *) * (program->map.y_count));
+    program->map.map_color = malloc(sizeof(int *) * (program->map.y_count));
     if (!program->map.map)
         err_ctrl("Error: Allocating memory error\n", 3);
     while (++i < program->map.y_count)
     {
         aux = ft_split(program->map.aux_map[i], ' ');
         free (program->map.aux_map[i]);
-        program->map.map[i] = malloc(sizeof(int) * (program->map.x_count + 1));
-        program->map.map_color[i] = malloc(sizeof(float) * (program->map.x_count + 1));
+        program->map.map[i] = malloc(sizeof(int) * (program->map.x_count));
+        program->map.map_color[i] = malloc(sizeof(int) * (program->map.x_count));
         if (!program->map.map[i])
             err_ctrl("Error: Allocating memory error\n", 3);
         j = -1;
@@ -67,18 +67,19 @@ void    ft_parse_aux_map(int fd, t_program *program)
     int     i;
 
     i = 0;
-    program->map.aux_map = malloc(sizeof(char *) * (program->map.y_count + 1));
+    program->map.aux_map = ft_calloc(program->map.y_count + 1, sizeof(char *));
     ret = get_next_line(fd, &line);
 	while (ret >= 0)
 	{
 		program->map.aux_map[i++] = ft_strdup(line);
+        //printf("%s\n", program->map.aux_map[i-1]);
         free(line);
 		line = NULL;
 		if (ret == 0)
 			break ;
 		ret = get_next_line(fd, &line);
 	}
-    program->map.aux_map[i] = NULL;
+    //program->map.aux_map[i] = NULL;
     close(fd);
 }
 

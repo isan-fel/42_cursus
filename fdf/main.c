@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 11:26:38 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/02 19:49:46 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/03 10:05:39 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ void	leak(void)
 int		main(int argc, char **argv)
 {
 	int fd;
-	t_map map;
 	// Struct with all the info that I need to run the program (mlx_sample.h)
 	t_program program;
 
@@ -165,7 +164,7 @@ int		main(int argc, char **argv)
 		mlx_put_image_to_window(program.mlx, program.window, program.img.image, 0, 0);
 		// hook the input() (hooks.c) function to the the key pressed event
     	//mlx_key_hook(program.window, ft_key_pressed, &program);
-		mlx_key_hook(program.window, ft_key_pressed, &program);
+		mlx_key_hook(program.window, ft_key_linux_pressed, &program);
 		// mlx constant loop that keeps the detects the events
 		mlx_loop(program.mlx);
 		return(0);

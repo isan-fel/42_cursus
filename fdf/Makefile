@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/11/02 19:54:29 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/11/03 10:47:33 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ SRCS 	= 	main.c \
 OBJS 		= 	$(SRCS:.c=.o)
 
 RM			= 	rm -f
-#FLAGS		= 	-Wall -Werror -Wextra
-DEBUG		=	-g3 -fsanitize=address
+FLAGS		= 	-Wall -Werror -Wextra
+#DEBUG		=	-g3 -fsanitize=address
 #Links for compile minilibx on MACOS
 LINKS 		=	-lmlx -framework OpenGL -framework AppKit
 #Links for compile minilibx on Linux
 LINKS_so		=	-lmlx -lXext -lX11
-LEAKS 			=  valgrind --leak-check=full --show-leak-kinds=all -s -q
+LEAKS 			=  valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all -s -q
 
 NONE='\033[0m'
 GREEN='\033[32m'
@@ -45,7 +45,7 @@ $(NAME): $(OBJS)
 
 so: $(OBJS)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
-	@gcc $(FLAGS) $(OBJS) $(DEBUG) libft/libft.so $(LINKS_so) -o $(NAME)
+	@clang $(FLAGS) $(OBJS) $(DEBUG) libft/libft.so $(LINKS_so) -o $(NAME)
 	@echo $(GREEN)"- Compiled -"
 	@rm $(OBJS)
 	@echo $(CURSIVE)$(GRAY) "     Deleted object files" $(NONE)
@@ -67,7 +67,7 @@ test: all
 
 testso: so
 	@echo "     - Executing $(NAME)... \n"
-	$(LEAKS) ./$(NAME) 42.fdf 
+	$(LEAKS) ./$(NAME) maps/test_maps/prueba2.fdf 
 	@echo "\n     - Done -"
 
 clean:
