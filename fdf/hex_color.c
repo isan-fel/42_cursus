@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:51:11 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/11 12:20:19 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/11 16:16:42 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,22 @@ int	ft_set_color(char *str)
 	if ((str[0] != '0' || str[1] != 'x') || (
 			(str[0] == '0' && str[1] == 'x') && (str[2] == '\0')))
 		err_ctrl("Error: wrong color format\n", 3);
-	r = ft_convert_hexa(str[2], str[3]);
+	
 	if (ft_strlen(str) == 4)
 	{
+		r = ft_convert_hexa('0', '0');
 		g = ft_convert_hexa('0', '0');
-		b = ft_convert_hexa('0', '0');
+		b = ft_convert_hexa(str[2], str[3]);
 	}
 	else if (ft_strlen(str) == 6)
 	{
-		g = ft_convert_hexa(str[4], str[5]);
-		b = ft_convert_hexa('0', '0');
+		r = ft_convert_hexa('0', '0');
+		g = ft_convert_hexa(str[2], str[3]);
+		b = ft_convert_hexa(str[4], str[5]);
 	}
 	else
 	{
+		r = ft_convert_hexa(str[2], str[3]);
 		g = ft_convert_hexa(str[4], str[5]);
 		b = ft_convert_hexa(str[6], str[7]);
 	}
