@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 11:23:06 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/11 16:46:12 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/11 18:26:48 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ typedef struct s_map
 	int		own_color;
 	int		**map_color;
 	int		reset;
+	float	x1;
+	float	y1;
+	int		color;
+	//int		z;
 }	t_map;
 
 /* vector with an x and y */
