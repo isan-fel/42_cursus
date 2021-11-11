@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 11:26:38 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/03 10:05:39 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/11 12:17:13 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ void	ft_free_map(t_program *program)
 
 	i = -1;
 	while (++i < program->map.y_count)
+		{
 		free(program->map.map[i]);
+		free(program->map.map_color[i]);
+		}
 	free(program->map.map);
+	free(program->map.map_color);
 }
 
 int	ft_close(t_program *program)
@@ -105,20 +109,17 @@ void	ft_rescaling_size(t_program *program)
 	program->map.alt_zoom = 1;
 	//program->map.zoom = ft_min_int((int) program->window_x_size/program->map.x_count, (int)program->window_y_size/program->map.y_count);
 	//printf("zoom:%d\n", program->map.zoom);
+	program->map.shift = 800;
 	if (program->map.x_count <= 30)
-	{
 		program->map.zoom = 40;
-		program->map.shift = 800;
-	}
 	else if (program->map.x_count > 30 && program->map.x_count < 100)
-	{
 		program->map.zoom = 20;
-		program->map.shift = 800;
-	}
-	else if (program->map.x_count >= 100 && program->map.x_count < 300)
-	{
+	else if (program->map.x_count >= 100 && program->map.x_count < 200)
 		program->map.zoom = 10;
-		program->map.shift = 750;
+	else if (program->map.x_count >= 200 && program->map.x_count < 300)
+	{
+		program->map.zoom = 6;
+		program->map.shift = 900;
 	}
 	else
 	{
@@ -138,7 +139,7 @@ int		main(int argc, char **argv)
 	// Struct with all the info that I need to run the program (mlx_sample.h)
 	t_program program;
 
-	//atexit(leak);
+	atexit(leak);
 	program.window_x_size = 2048;
 	program.window_y_size = 1080;
 	if (argc == 2)
@@ -164,7 +165,7 @@ int		main(int argc, char **argv)
 		mlx_put_image_to_window(program.mlx, program.window, program.img.image, 0, 0);
 		// hook the input() (hooks.c) function to the the key pressed event
     	//mlx_key_hook(program.window, ft_key_pressed, &program);
-		mlx_key_hook(program.window, ft_key_linux_pressed, &program);
+		mlx_key_hook(program.window, ft_key_pressed, &program);
 		// mlx constant loop that keeps the detects the events
 		mlx_loop(program.mlx);
 		return(0);

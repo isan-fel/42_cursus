@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:54:42 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/02 20:27:24 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/11 11:09:28 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,5 +170,5 @@ int main(int argc, char **argv, char **envp)
         split_argv(&program, argv);
         pipex(&program, argv, envp);
     }
-    return  (0);
+    return (0);
 }

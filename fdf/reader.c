@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:44:12 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/03 10:26:06 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/11 12:03:51 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    ft_parse_map(t_program *program)
             free(aux[j]);
         }
         //printf("\n");
-        free(aux[j]);
+        //free(aux[j]);
         free(aux);
     }
     free (program->map.aux_map[i]);

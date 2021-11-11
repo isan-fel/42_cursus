@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gradient_color.c                                   :+:      :+:    :+:   */
+/*   hex_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:51:11 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/02 20:06:48 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/11 12:20:19 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,38 +65,4 @@ int	ft_set_color(char *str)
 		b = ft_convert_hexa(str[6], str[7]);
 	}
 	return (r << 16 | g << 8 | b);
-}
-
-double	percent(int start, int end, int current)
-{
-	double	placement;
-	double	distance;
-
-	placement = current - start;
-	distance = end - start;
-	if (distance == 0)
-        return(1.0);
-    return (placement / distance);
-}
-
-/*
-** Get color from default palette. Color depends on altitude
-*/
-
-int	get_color(int z, int z1, t_program *program)
-{
-	double	percentage;
-
-    if (z)
-		percentage = percent(program->map.z_min, program->map.z_max, z);
-	else if (z1)
-		percentage = percent(program->map.z_min, program->map.z_max, z1);
-	if (percentage < 0.2)
-		return (0xc5e3be);
-	else if (percentage < 0.5)
-		return (0xe3ff00);
-	else if (percentage < 0.8)
-		return (0xffcc78);
-	else
-		return (0xfff8eb);
 }
