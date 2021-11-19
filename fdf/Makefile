@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 12:43:00 by isan-fel          #+#    #+#              #
-#    Updated: 2021/11/11 19:56:29 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/11/19 15:17:17 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS 	= 	main.c \
 			get_next_line.c \
 			utils.c \
 			reader.c \
+			parse_map.c \
 			map.c \
 			hex_color.c
 
@@ -28,7 +29,7 @@ FLAGS		= 	-Wall -Werror -Wextra
 LINKS 		=	-lmlx -framework OpenGL -framework AppKit
 #Links for compile minilibx on Linux
 LINKS_so		=	-lmlx -lXext -lX11
-LEAKS 			=  valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all -s -q
+#LEAKS 			=  valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all -s -q
 
 NONE='\033[0m'
 GREEN='\033[32m'
@@ -63,7 +64,7 @@ test: all
 
 testso: so
 	@echo "     - Executing $(NAME)... \n"
-	$(LEAKS) ./$(NAME) maps/test_maps/prueba2.fdf 
+	$(LEAKS) ./$(NAME) maps/test_maps/t2.fdf 
 	@echo "\n     - Done -"
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:51:11 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/11 16:16:42 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/19 14:48:25 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,12 @@ int	ft_convert_hexa(char a, char b)
 	return (result);
 }
 
-int	ft_set_color(char *str)
+int	ft_rgb(char *str)
 {
 	int	r;
 	int	g;
 	int	b;
 
-	if ((str[0] != '0' || str[1] != 'x') || (
-			(str[0] == '0' && str[1] == 'x') && (str[2] == '\0')))
-		err_ctrl("Error: wrong color format\n", 3);
-	
 	if (ft_strlen(str) == 4)
 	{
 		r = ft_convert_hexa('0', '0');
@@ -68,4 +64,12 @@ int	ft_set_color(char *str)
 		b = ft_convert_hexa(str[6], str[7]);
 	}
 	return (r << 16 | g << 8 | b);
+}
+
+int	ft_set_color(char *str)
+{
+	if ((str[0] != '0' || str[1] != 'x') || (
+			(str[0] == '0' && str[1] == 'x') && (str[2] == '\0')))
+		err_ctrl("Error: wrong color format\n", 3);
+	return (ft_rgb(str));
 }

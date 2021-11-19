@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 11:26:38 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/11 20:22:48 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/19 15:02:51 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int		main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		if (fd != 3)
 			return (err_ctrl("error: invalid file", fd));
-		ft_map(fd, argv[1], &p);
+		ft_reader(fd, argv[1], &p);
 		p.mlx = mlx_init();
 		p.window = mlx_new_window(p.mlx, p.win_x_size, p.win_y_size, "FDF");
 		p.i.img = mlx_new_image(p.mlx, p.win_x_size, p.win_y_size);
@@ -143,7 +143,7 @@ int		main(int argc, char **argv)
     	ft_rescaling_size(&p);
 		ft_trace_pixel(&p, 0);
 		mlx_put_image_to_window(p.mlx, p.window, p.i.img, 0, 0);
-		mlx_key_hook(p.window, ft_key_pressed, &p);
+		mlx_key_hook(p.window, ft_key_linux_pressed, &p);
 		mlx_loop(p.mlx);
 		return(0);
 	}
