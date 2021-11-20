@@ -6,7 +6,7 @@
 #    By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 15:39:03 by isan-fel          #+#    #+#              #
-#    Updated: 2021/11/02 20:24:13 by isan-fel         ###   ########.fr        #
+#    Updated: 2021/11/20 12:55:46 by isan-fel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ CC			= 	gcc
 RM			= 	rm -f
 CFLAGS		= 	-Wall -Werror -Wextra
 #DEBUG		=	-g3 -fsanitize=address
+LEAKS		=	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes -s -q
 
 GREEN 		= 	\033[0;32m
 YELLOW		=	\033[0;33m

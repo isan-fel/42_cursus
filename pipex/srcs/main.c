@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:54:42 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/11/11 11:09:28 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/11/20 13:02:15 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void    parent_process(t_program *program, char **argv, char **envp)
         free (program->path_cmd);
         err_ctrl("Error: couldn't execute the command", 1);
     }
+    close(STDIN_FILENO);
 }
 
 void	pipex(t_program *program, char **argv, char **envp)
@@ -144,6 +145,7 @@ void	pipex(t_program *program, char **argv, char **envp)
         /*if child process end, must close the write pipe for parent process can execute*/
         
     }
+    waitpid(pid, NULL, 0);
     /*now could execute parent process*/
     close(program->pipe[WRITE_END]);
     parent_process(program, argv, envp);
