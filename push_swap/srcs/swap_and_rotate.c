@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:19:15 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/12/01 19:18:22 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:46:03 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void    swap(t_list **swap, char c)
     (*swap)->next->content = aux_swap;
     if (c == 'a')
         write(1, "sa\n", 3);
+    if (c == 'b')
+        write(1, "sb\n", 3);
 }
 
 void    rotate(t_list **lst, char c)
@@ -33,6 +35,8 @@ void    rotate(t_list **lst, char c)
     ft_del_lstfirst(lst);
     if (c == 'a')
         write(1, "ra\n", 3);
+    if (c == 'b')
+        write(1, "rb\n", 3);
 }
 
 void    rev_rotate(t_list **lst, char c)
@@ -51,5 +55,7 @@ void    rev_rotate(t_list **lst, char c)
 	aux->next = NULL;
 	if (c == 'a')
 		write(1, "rra\n", 4);
+	if (c == 'b')
+		write(1, "rrb\n", 4);
 }
 

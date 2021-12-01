@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:54:42 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/12/01 19:22:08 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:40:14 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void    parse_numbers(char *argv, t_list **a)
             err_ctrl("Error: number is over Max o Min INT", 1);
         /*add the correct number at the of the stack a list*/
         add_end_list((int)num, a);
+        free (aux_num[i]);
     }
     free (aux_num);
 }
@@ -70,7 +71,7 @@ void    push_swap(t_list **a, t_list **b, int len)
     /*if list_len == 100*/
 }
 
-void	print_stack(t_list *a, t_list *b)
+/*void	print_stack(t_list *a, t_list *b)
 {
 	t_element	*element_a;
 	t_element	*element_b;
@@ -97,7 +98,7 @@ void	print_stack(t_list *a, t_list *b)
 	printf("_\t\t\t_\n");
 	printf("a\t\t\tb\n");
 	printf("**************************\n");
-}
+}*/
 
 int main(int argc, char **argv)
 {
@@ -115,6 +116,9 @@ int main(int argc, char **argv)
     while (++n < argc)
         parse_numbers(argv[n], &a);
     push_swap(&a, &b, ft_lstsize(a));
-    print_stack(t_list *a, t_list *b)
+    //print_stack(t_list *a, t_list *b)
+    ft_lstclear(&a, free);
+	ft_lstclear(&b, free);
+    exit(0);
     return  (0);
 }

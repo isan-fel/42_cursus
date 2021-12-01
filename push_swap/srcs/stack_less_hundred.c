@@ -6,13 +6,13 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:20:59 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/12/01 19:08:50 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:47:32 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void swap_three(t_list **a, t_list **b)
+int swap_three(t_list **a, t_list **b)
 {
     /*With this case we have 5 posibilities*/
     int	n1;
@@ -22,23 +22,28 @@ void swap_three(t_list **a, t_list **b)
 	n1 = *(int *)(*a)->content;
 	n2 = *(int *)(*a)->next->content;
 	n3 = *(int *)(*a)->next->next->content;
-    /*3 posibilities with 1 move*/
     if (n1 > n2 && n1 < n3)
+    {
         swap(a, 'a');
+        return(0);
+    }
     if (n1 > n2 && n1 > n3 && n2 < n3)
-        rotate(a, 'a');
+        {rotate(a, 'a');
+        return (0);}
     if (n1 < n2 && n1 > n3)
-        rev_rotate(a, 'a');
-    /*2 posibilities with 2 moves*/
+        {rev_rotate(a, 'a');
+        return (0);}
     if (n1 < n2 && n1 < n3 && n2 > n3)
     {
         swap(a, 'a');
         rotate(a, 'a');
+        return (0);
     }
     if (n1 > n2 && n2 > n3)
     {
         swap(a, 'a');
         rev_rotate(a, 'a');
+        return (0);
     }  
 }
 
