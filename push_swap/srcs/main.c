@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:54:42 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/27 20:09:23 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:22:08 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,35 @@ void    push_swap(t_list **a, t_list **b, int len)
     /*if list_len == 100*/
 }
 
+void	print_stack(t_list *a, t_list *b)
+{
+	t_element	*element_a;
+	t_element	*element_b;
+	element_a = a->first;
+	element_b = b->first;
+	printf("_\t\t\t_\n");
+	while (element_a || element_b)
+	{
+		if (!element_a)
+			printf(" ");
+		else
+		{
+			printf("%d", element_a->num);
+			element_a = element_a->next;
+		}
+		if (!element_b)
+			printf("\t\t\t\n");
+		else
+		{
+			printf("\t\t\t%d\n", element_b->num);
+			element_b = element_b->next;
+		}
+	}
+	printf("_\t\t\t_\n");
+	printf("a\t\t\tb\n");
+	printf("**************************\n");
+}
+
 int main(int argc, char **argv)
 {
     /*lists are useful here to change numbers order in stack instead of an array*/
@@ -86,5 +115,6 @@ int main(int argc, char **argv)
     while (++n < argc)
         parse_numbers(argv[n], &a);
     push_swap(&a, &b, ft_lstsize(a));
+    print_stack(t_list *a, t_list *b)
     return  (0);
 }

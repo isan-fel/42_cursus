@@ -6,7 +6,7 @@
 /*   By: isan-fel <isan-fel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:50:43 by isan-fel          #+#    #+#             */
-/*   Updated: 2021/10/27 21:06:04 by isan-fel         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:19:51 by isan-fel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <stdio.h>
 # include <limits.h>
 # include <stdlib.h>
+
+typedef struct s_element {
+	int					num;
+	struct s_element	*next;
+	struct s_element	*prev;
+}	t_element;
 
 t_list	*ft_lstnew_stack(void *content, size_t size);
 void	ft_del_lstfirst(t_list **lst);
